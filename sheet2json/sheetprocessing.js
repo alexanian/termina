@@ -1,6 +1,7 @@
 "use strict";
 var gapi = require('./googleapi');
 var config = require('./config');
+var globalData = require('./globaldata');
 
 
 function _pullSingleTabFromSheet(successCallback, tabId) {
@@ -48,8 +49,73 @@ function _convertLongCopyRow(rawRow){
     return [type, rowJson];
 }
 
+var tempPrintOut = function(rows){
+    if (rows.length == 0) {
+            console.log('No data found.');
+        } else {
+            console.log('1st column, 2nd column');
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                // Print columns A and B, which correspond to indices 0 and 1.
+                console.log('%s, %s', row[0], row[1]);
+            }
+        }
+};
+
+function _pullAndStoreLongCopy(){
+    _pullLongCopy(
+        (response) => {
+            console.log("--- Pulled Long Text Copy ---");
+            var rows = response.values;
+            tempPrintOut(rows);
+            globalData.optionCopy = _convertLongCopyToJson(rows);
+        }
+    );
+};
+
+
 function _pullProcedureOptions(successCallback) {
     _pullSingleTabFromSheet(successCallback, config.gapi.tabs.procedureOptions)
+}
+
+function _pullAndStoreProcedureOptions() {
+    _pullProcedureOptions((response) => {
+          console.log("--- Pulled Procedure Option Data ---");
+          console.log("Pulled this many procedure options:" + response.values.length);
+          
+          var optionsList = [];
+          var rows = response.values;
+          
+          var createOptionsObject = function(optionId, type, min_days_lmp, max_days_lmp, state){
+              var cleanedState = state.replace(/\s/g,'');
+              var singleOption = {
+                  optionId: optionId,
+                  type: type,
+                  min_days_lmp: min_days_lmp,
+                  max_days_lmp: max_days_lmp,
+                  state: cleanedState.split(',')
+              };
+              return singleOption;
+          };
+          // Structure in the google sheet is
+          // type | Min preg length (days LMP) | Max preg length (days LMP) | state
+          for (var i = 0; i < rows.length; i++) {
+              var row = rows[i];
+              optionsList.push(
+                  createOptionsObject(
+                      i,
+                      row[0],
+                      row[1],
+                      row[2],
+                      row[3]
+                  )
+              );
+          }
+          globalData.options = optionsList;
+        //   if(callback !== null){
+        //       callback();
+        //   }
+      })
 }
 
 function _pullAgeWarning(successCallback) {
@@ -59,14 +125,6 @@ function _pullAgeWarning(successCallback) {
 
 
 module.exports = {
-    pullLongCopy : function(successCallback){
-        _pullLongCopy(successCallback);
-    },
-    convertLongCopyToJson: _convertLongCopyToJson,
-    pullProcedureOptions: function(successCallback){
-      _pullProcedureOptions(successCallback);
-    },
-    pullAgeWarning: function(successCallback){
-      _pullAgeWarning(successCallback);
-    }
+    pullAndStoreLongCopy: _pullAndStoreLongCopy,
+    pullAndStoreProcedureOptions: _pullAndStoreProcedureOptions    
 };
