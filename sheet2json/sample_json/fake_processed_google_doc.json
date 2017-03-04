@@ -1,0 +1,18 @@
+{
+	"options": [
+		{
+			"id": "medical_1",
+			"type": "medical",
+			"min_pregnancy_length": 0,
+			"max_pregnancy_length": 70,
+			"states": "ALL"
+		},
+		{
+			"id": "surgical_1",
+			"type": "surgical",
+			"min_pregnancy_length": 0,
+			"max_pregnancy_length": 140,
+			"states": "ALL"
+		}
+	]
+}
