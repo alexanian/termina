@@ -40,7 +40,7 @@
     <![endif]-->
   </head>
   <body>
-    <div class="splash-screen container-fluid">
+    <div id="js-page-splash-screen" class="splash-screen container-fluid">
         <div class="row">
           <div class="col-xs-12"><h1>Learn your pregnancy options.</h1></div>
         </div>
@@ -58,13 +58,22 @@
         </div>
 
         <div class="splash-screen__start">
-          <button class="btn btn-primary">Get Started</button>
+          <button id="js-start" class="btn btn-primary">Get Started</button>
         </div>
+    </div>
+
+    <div id="js-page-form" class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+        <h1>Form will show up here</h1>
+        </div>
+      </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="./vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="./js/index.js"></script>
   </body>
 </html>
