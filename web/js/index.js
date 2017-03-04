@@ -5,6 +5,10 @@ function init() {
             scrollTop: $("#js-page-form").offset().top
         });
     });
+  $('.input-daterange').each(function() {
+    $(this).datepicker('setStartDate', '01/01/2017');
+    $(this).datepicker('clearDates');
+  });
 }
 
 // good old document load
