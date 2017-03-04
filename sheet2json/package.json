@@ -9,6 +9,7 @@
   "author": "p@pstehlik.com",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.15.0",
     "fbgraph": "^1.4.1",
     "google-auth-library": "^0.10.0",
     "googleapis": "^16.1.0"

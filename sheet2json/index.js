@@ -1,4 +1,5 @@
 var sheetprocessing = require('./sheetprocessing');
+var globalData = require('./globaldata');
 
 
 var tempPrintOut = function(rows){
@@ -19,6 +20,7 @@ sheetprocessing.pullLongCopy(
         console.log("--- Pulled Long Text Copy ---");
         var rows = response.values;
         tempPrintOut(rows);
+        globalData.optionCopy = sheetprocessing.convertLongCopyToJson(rows);
     }
 );
 
