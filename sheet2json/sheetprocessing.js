@@ -1,5 +1,4 @@
 "use strict";
-
 var gapi = require('./googleapi');
 var config = require('./config');
 var globalData = require('./globaldata');
