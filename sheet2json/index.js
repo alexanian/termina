@@ -1,4 +1,5 @@
 var sheetprocessing = require('./sheetprocessing');
+var globalData = require('./globaldata');
 
 
 var tempPrintOut = function(rows){
@@ -18,7 +19,8 @@ sheetprocessing.pullLongCopy(
     (response) => {
         console.log("--- Pulled Long Text Copy ---");
         var rows = response.values;
-        // tempPrintOut(rows);
+        tempPrintOut(rows);
+        globalData.optionCopy = sheetprocessing.convertLongCopyToJson(rows);
     }
 );
 
@@ -26,7 +28,7 @@ sheetprocessing.pullProcedureOptions(
     (response) => {
         console.log("--- Pulled Procedure Option Data ---");
         var rows = response.values;
-        // tempPrintOut(rows);
+        tempPrintOut(rows);
     }
 );
 
@@ -34,6 +36,6 @@ sheetprocessing.pullAgeWarning(
     (response) => {
         console.log("--- Pulled Age Warning Data ---");
         var rows = response.values;
-        // tempPrintOut(rows);
+        tempPrintOut(rows);
     }
 );

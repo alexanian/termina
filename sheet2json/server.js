@@ -1,18 +1,8 @@
+require('./index');
 var express = require('express');
-var pullSheets = require('./index.js');
-var app = express()
-var sheetprocessing = require('./sheetprocessing');
+var app = express();
+var globalData = require('./globaldata');
 var url = require('url');
-
-var procedureOptions = [];
-sheetprocessing.pullProcedureOptions(
-    (response) => {
-        console.log("--- Pulled Long Text Copy ---");
-        var rows = response.values;
-        procedureOptions = rows;
-    }
-);
-
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
@@ -48,7 +38,7 @@ app.get('/options', function(req, res) {
 
 	var optionIsAvailable = function(option, userState, userDaysSince) {
 		var availableDueToState = (option.states === 'ALL' || option.states.indexOf(userState) !== -1);
-		var availableDueToDaysSince = (option.min_pregnancy_length <= userDaysSince && userDaysSince <= option.min_pregnancy_length);
+		var availableDueToDaysSince = (option.min_pregnancy_length <= userDaysSince && userDaysSince <= option.max_pregnancy_length);
 		return availableDueToState && availableDueToDaysSince;
 	}
 
@@ -75,8 +65,11 @@ app.get('/options', function(req, res) {
 	res.send(optionsToReturn);
 })
 
+app.get('/options/copy', function(req, res) {
+  res.send(globalData.optionCopy);
+})
+
 
 app.listen(3000, function () {
-	
   console.log('Example app listening on port 3000!');
 })
