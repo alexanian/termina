@@ -1,4 +1,4 @@
-npm install http-server
+npm install http-server --save
 
 cd <path_to_repo>/web
-http-server .
+npm run http-server .
