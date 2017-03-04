@@ -2,7 +2,7 @@ var gapi = require('./googleapi');
 var config = require('./config');
 
 
-function _singleTabFromSheet(successCallback, tabId) {
+function _pullSingleTabFromSheet(successCallback, tabId) {
   gapi.withGoogleAuth(
         (authObject) => {
             var sheets = gapi.google.sheets('v4');
@@ -24,17 +24,23 @@ function _singleTabFromSheet(successCallback, tabId) {
 
 
 function _pullLongCopy(successCallback) {
-    _singleTabFromSheet(successCallback, config.gapi.tabs.longCopy)
+    _pullSingleTabFromSheet(successCallback, config.gapi.tabs.longCopy)
+}
+
+function _convertLongCopyToJson(){
+  
 }
 
 function _pullProcedureOptions(successCallback) {
-    _singleTabFromSheet(successCallback, config.gapi.tabs.procedureOptions)
+    _pullSingleTabFromSheet(successCallback, config.gapi.tabs.procedureOptions)
 }
 
 function _pullAgeWarning(successCallback) {
-    _singleTabFromSheet(successCallback, config.gapi.tabs.ageWarning)
+    _pullSingleTabFromSheet(successCallback, config.gapi.tabs.ageWarning)
 }
-    
+
+
+
 module.exports = {
     pullLongCopy : function(successCallback){
         _pullLongCopy(successCallback);
