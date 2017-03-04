@@ -1,0 +1,32 @@
+{
+    "options":
+    {
+        "surgical":
+        {
+            "title" : "Surgical Abortion",
+            "description": "Surgical abortion procedures (known as D&E or D&C) are always done in a clinic, doctor’s office, or hospital. The abortion itself usually takes less than 15 minutes, but between checking in, waiting, talking to counselors and providers, taking any medications, the procedure, and recovery time, the whole thing can take several hours—or even a whole day. You will likley have blood drawn and an ultrasound. The pregnancy is removed or expelled through your cervix, which is the natural opening to your uterus where your menstrual blood comes out.",
+            "cost": 500,
+            "common": "20 million women get surgical abortions each year.",
+            "info": "Want more information? Try calling SFSI at "
+        },
+        "surgical_advice":
+        {
+            "title" : "Consult a doctor- Surgical Abortion may be available",
+            "description": "In your state, abortion is restricted by viability. You must see a doctor to assess whether your pregnancy is viable.",
+            "cost": 500,
+            "common": "20 million women get surgical abortions each year.",
+            "info": "Want more information? Try calling SFSI at "
+        }
+    },
+    "unavailable_reasons":
+    {
+        "too_late_medical":
+        {
+            "description": "Abortion with medication only works up until 10 weeks."
+        },
+        "too_late_state":
+        {
+            "description": "In the state you have entered, this kind of abortion is restricted by length of pregnancy. Based on the first date of your last period, we do not think it would be available for you."
+        }
+    }
+}

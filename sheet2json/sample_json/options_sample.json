@@ -1,0 +1,48 @@
+{
+    "options":
+    [
+        {
+            "id": "abortion_pill",
+            "type": "abortion_pill",
+            "available": false,
+            "min": 0,
+            "max": 70
+        },
+        {
+            "id": "surgical_3",
+            "type": "surgical",
+            "available" : false,
+            "min": 0,
+            "max": 168
+        },
+        {
+            "id": "surgical_advice_1",
+            "type": "surgical_advice",
+            "available": true,
+            "min": 168,
+            "max": 196
+        },
+        {
+            "id": "travel_3",
+            "type": "travel",
+            "available": true,
+            "min": 168,
+            "max": 196
+        },
+        {
+            "id": "parenthood",
+            "type": "parenthood",
+            "available": true,
+            "min": 0,
+            "max": 99999
+        },
+        {
+            "id": "adoption",
+            "type": "adoption",
+            "available": true,
+            "min": 0,
+            "max": 99999
+        }
+    ],
+    "age_warning": "Your state requires that one of your parents give permission for your abortion. A judge can excuse you from this requirement."
+}

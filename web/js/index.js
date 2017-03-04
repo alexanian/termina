@@ -1,13 +1,12 @@
 (function($) {
 function init() {
-    $("#js-page-form").hide();
-
     $("#js-start").click(function () {
-        $("#js-page-splash-screen").hide();
-        $("#js-page-form").show();
+        $("html, body").animate({
+            scrollTop: $("#js-page-form").offset().top
+        });
     });
 }
 
 // good old document load
-$(init);
+$(document).ready(init);
 })(jQuery)

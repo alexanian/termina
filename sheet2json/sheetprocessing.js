@@ -27,8 +27,24 @@ function _pullLongCopy(successCallback) {
     _pullSingleTabFromSheet(successCallback, config.gapi.tabs.longCopy)
 }
 
-function _convertLongCopyToJson(){
-  
+function _convertLongCopyToJson(rawObject){
+    let headers = rawObject.shift();
+    let rows = rawObject.map(_convertLongCopyRow);
+    let copyObject = {};
+    rows.forEach(function(rowArray) {
+      copyObject[rowArray[0]] = rowArray[1];
+    });
+    return copyObject;
+}
+
+function _convertLongCopyRow(rawRow){
+    const keys = ['title', 'description', 'cost', 'common', 'info_link'];
+    let type = rawRow.shift();
+    let rowJson = {};
+    rawRow.forEach((value, index) => {
+      rowJson[keys[index]] = value;
+    })
+    return [type, rowJson];
 }
 
 function _pullProcedureOptions(successCallback) {
@@ -85,6 +101,7 @@ module.exports = {
     pullLongCopy : function(successCallback){
         _pullLongCopy(successCallback);
     },
+    convertLongCopyToJson: _convertLongCopyToJson,
     pullProcedureOptions: function(successCallback){
       _pullProcedureOptions(successCallback);
     },
