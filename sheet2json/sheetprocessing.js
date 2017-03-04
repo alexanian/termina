@@ -1,5 +1,8 @@
+"use strict";
+
 var gapi = require('./googleapi');
 var config = require('./config');
+var globalData = require('./globaldata');
 
 
 function _pullSingleTabFromSheet(successCallback, tabId) {
@@ -47,12 +50,37 @@ function _convertLongCopyRow(rawRow){
     return [type, rowJson];
 }
 
+var tempPrintOut = function(rows){
+    if (rows.length == 0) {
+            console.log('No data found.');
+        } else {
+            console.log('1st column, 2nd column');
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                // Print columns A and B, which correspond to indices 0 and 1.
+                console.log('%s, %s', row[0], row[1]);
+            }
+        }
+};
+
+function _pullAndStoreLongCopy(){
+    _pullLongCopy(
+        (response) => {
+            console.log("--- Pulled Long Text Copy ---");
+            var rows = response.values;
+            tempPrintOut(rows);
+            globalData.optionCopy = _convertLongCopyToJson(rows);
+        }
+    );
+};
+
+
 function _pullProcedureOptions(successCallback) {
     _pullSingleTabFromSheet(successCallback, config.gapi.tabs.procedureOptions)
 }
 
-function _getAndStoreProcedureOptions() {
-    _pullSingleTabFromSheet((response) => {
+function _pullAndStoreProcedureOptions() {
+    _pullProcedureOptions((response) => {
           console.log("--- Pulled Procedure Option Data ---");
           console.log("Pulled this many procedure options:" + response.values.length);
           
@@ -85,10 +113,10 @@ function _getAndStoreProcedureOptions() {
               );
           }
           globalData.options = optionsList;
-          console.log(globalData.options);
-      }, 
-      config.gapi.tabs.procedureOptions
-    )
+        //   if(callback !== null){
+        //       callback();
+        //   }
+      })
 }
 
 function _pullAgeWarning(successCallback) {
@@ -98,14 +126,6 @@ function _pullAgeWarning(successCallback) {
 
 
 module.exports = {
-    pullLongCopy : function(successCallback){
-        _pullLongCopy(successCallback);
-    },
-    convertLongCopyToJson: _convertLongCopyToJson,
-    pullProcedureOptions: function(successCallback){
-      _pullProcedureOptions(successCallback);
-    },
-    pullAgeWarning: function(successCallback){
-      _pullAgeWarning(successCallback);
-    }
+    pullAndStoreLongCopy: _pullAndStoreLongCopy,
+    pullAndStoreProcedureOptions: _pullAndStoreProcedureOptions    
 };
