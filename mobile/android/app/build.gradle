@@ -41,4 +41,7 @@ dependencies {
 
     //intro
     compile 'agency.tango.android:material-intro-screen:0.0.5'
+
+    // Conductor UI Framework
+    compile 'com.bluelinelabs:conductor-support:2.1.1'
 }
