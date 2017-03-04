@@ -38,4 +38,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
+
+    //intro
+    compile 'agency.tango.android:material-intro-screen:0.0.5'
 }
