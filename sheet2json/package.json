@@ -1,0 +1,16 @@
+{
+  "name": "aah-termina",
+  "version": "1.0.0",
+  "description": "exporting fb group members into CSV file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "p@pstehlik.com",
+  "license": "ISC",
+  "dependencies": {
+    "fbgraph": "^1.4.1",
+    "google-auth-library": "^0.10.0",
+    "googleapis": "^16.1.0"
+  }
+}
