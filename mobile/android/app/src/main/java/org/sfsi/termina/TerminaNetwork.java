@@ -1,6 +1,11 @@
 package org.sfsi.termina;
 
+import android.util.Log;
+
+import com.bluelinelabs.logansquare.LoganSquare;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -45,8 +50,8 @@ public class TerminaNetwork {
                 for (int i = 0, size = responseHeaders.size(); i < size; i++) {
                     System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
                 }
-
-                System.out.println(response.body().string());
+                String responseString = response.body().string();
+                ArrayList<Option> options = (ArrayList<Option>) LoganSquare.parseList(responseString, Option.class);
             }
         });
     }
