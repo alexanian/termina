@@ -41,7 +41,7 @@ public class TerminaNetwork {
         mState = state;
         mAge = age;
         Request request = new Request.Builder()
-                .url("https://peaceful-peak-13670.herokuapp.com/options?age=" + age + "&state=" + state + "&days_since=" + days)
+                .url("https://tranquil-retreat-70199.herokuapp.com/options?age=" + age + "&state=" + state + "&days_since=" + days)
                 .build();
 
         mClient.newCall(request).enqueue(new Callback() {
