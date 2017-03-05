@@ -1,8 +1,10 @@
 package org.sfsi.termina;
 
-import android.util.Log;
-
 import com.bluelinelabs.logansquare.LoganSquare;
+
+import org.sfsi.termina.models.AgeWarning;
+import org.sfsi.termina.models.Option;
+import org.sfsi.termina.models.OptionsResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;

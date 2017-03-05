@@ -6,11 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.bluelinelabs.conductor.Controller;
-import com.borax12.materialdaterangepicker.date.DatePickerDialog;
-import org.sfsi.termina.customviews.ActionCardView;
+
+import org.sfsi.termina.models.Option;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by Smule on 3/4/17.

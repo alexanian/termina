@@ -1,17 +1,20 @@
-package org.sfsi.termina;
+package org.sfsi.termina.models;
 
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Smule on 3/4/17.
  */
 
 @JsonObject
-public class AgeWarning {
+public class OptionsResponse {
     @JsonField
-    String type;
+    public ArrayList<Option> options;
 
     @JsonField
-    String display_text;
+    public AgeWarning age_warning;
+
 }

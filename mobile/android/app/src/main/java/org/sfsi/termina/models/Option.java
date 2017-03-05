@@ -1,4 +1,4 @@
-package org.sfsi.termina;
+package org.sfsi.termina.models;
 
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
