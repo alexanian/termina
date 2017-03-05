@@ -118,6 +118,35 @@ function updateURL(args) {
     }
 }
 
+function showOptions(optionsCopy) {
+  var data = $('form').serialize();
+  var date = new Date($('#date').val());
+  var oneDay = 24*60*60*1000;
+  var today = new Date();
+  var urlData = data;
+  urlData += "&date=" + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+  updateURL(urlData);
+  var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
+  data += "&days_since=" + daysSince;
+  $.getJSON("http://localhost:3000/options?", data)
+  .then(function(response) {
+      updateFirstTrimesterWarning(date, daysSince);
+      updateOptions(response.options, response.age_warning, optionsCopy);
+  });
+  $("#js-show-options").text("Refresh My Options");
+  $("#js-section-options-display").show();
+  scrollTo("#js-section-options-display");
+}
+
+function onShowOptions(e) {
+    e.preventDefault();
+    showOptions(e.data);
+}
+
+function showNextField(e) {
+    $(e.target).closest(".options-form__item").next().removeClass('options-form__item--initial');
+}
+
 function initFormFromURL() {
     var query = window.location.search;
     var queryArray = query.slice(1).split("&");
@@ -132,50 +161,9 @@ function initFormFromURL() {
             $("[name='" + key+ "']").val(value).trigger('change');
         }
     }
-    if (queryArray.length === 3) {
-        $("#js-section-options-display").show();
-        scrollTo("#js-section-options-display");
-    }
-}
-
-  function showOptions(e) {
-    e.preventDefault();
-    var data = $('form').serialize();
-
-    var date = new Date($('#date').val());
-    var oneDay = 24*60*60*1000;
-    var today = new Date();
-
-    var urlData = data;
-    urlData += "&date=" + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
-    updateURL(urlData);
-
-    var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
-    var optionsCopy = e.data;
-
-    data += "&days_since=" + daysSince;
-
-    $.getJSON("http://localhost:3000/options?", data)
-    .then(function(response) {
-        updateFirstTrimesterWarning(date, daysSince);
-        updateOptions(response.options, response.age_warning, optionsCopy);
-    });
-
-    $(e.target).text("Refresh My Options");
-    $("#js-section-options-display").show();
-    scrollTo("#js-section-options-display");
-  }
-
-function showNextField(e) {
-    $(e.target).closest(".options-form__item").next().removeClass('options-form__item--initial');
 }
 
 function init() {
-    var optionsCopy;
-    var optionsCopy = $.getJSON("http://localhost:3000/options/copy").then(function(response) {
-        $("#js-show-options").click(response, showOptions);
-    });
-
     $("#js-start").click(startForm);
 
     $(".options-form__item:not(:first-child)").addClass('options-form__item--initial');
@@ -191,7 +179,13 @@ function init() {
       $('.datepicker').hide();
     });
 
-    initFormFromURL();
+    var optionsCopy = $.getJSON("http://localhost:3000/options/copy").then(function(response) {
+        initFormFromURL();
+        if ($('form').serializeArray().length === 2 && $("#date").datepicker('getDate')) {
+            showOptions(response);
+        }
+        $("#js-show-options").click(response, onShowOptions);
+    });
 }
 
 // good old document load
