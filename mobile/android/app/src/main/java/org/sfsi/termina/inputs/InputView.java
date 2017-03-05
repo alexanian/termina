@@ -18,8 +18,7 @@ import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-import org.sfsi.termina.options.ActionCardController;
-import org.sfsi.termina.inputs.InputView_;
+import org.sfsi.termina.options.OptionsController;
 import org.sfsi.termina.R;
 import org.sfsi.termina.TerminaNetwork;
 
@@ -73,7 +72,7 @@ public class InputView extends ScrollView implements AdapterView.OnItemSelectedL
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mController.getRouter().pushController(RouterTransaction.with(new ActionCardController()));
+                        mController.getRouter().pushController(RouterTransaction.with(new OptionsController()));
                     }
                 });
             }
