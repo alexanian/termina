@@ -9,9 +9,19 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <style>
       /* global styles */
+
+      a {
+        color: #800099 !important;
+        font-weight: bold;
+      }
+
       input, select {
         border: 1px #999 solid !important;
         width: 100%;
+      }
+
+      .text-warning {
+        color: #D62000 !important;
       }
 
       .btn.btn-primary,
@@ -29,6 +39,20 @@
       }
 
       .alert.alert-warning h3 {
+        margin-top: 0;
+      }
+
+      .hidden-section {
+        border-top: 1px solid #CCC;
+        margin-top: 2em;
+        padding-top: 1em;
+      }
+
+      #js-warning-display {
+        margin: .5em 0 1em;
+      }
+
+      .panel-body > h2 {
         margin-top: 0;
       }
 
@@ -172,6 +196,10 @@
           background-color: #4C005A !important;
           border-color: #26002d !important;
           outline: none !important;
+       }
+
+       .options-display {
+         min-height: 100vh;
        }
 
        /* options form */
