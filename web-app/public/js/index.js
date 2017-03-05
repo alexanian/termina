@@ -5,14 +5,6 @@
     });
   }
 
-function _getAvailability(available) {
-    if (available) {
-        return 'This is available for you.';
-    } else {
-        return 'This is not available for you.' + '<br />' + 'Reason: Lorem ipsum doler sit'
-    }
-}
-
 function _getReadableType(optionType) {
     return optionType;
 }
@@ -20,9 +12,6 @@ function _getReadableType(optionType) {
 function _createOptionElement(option, copy) {
     return [
         "<div class='panel panel-default'>",
-            "<div class='panel-heading'>",
-                _getAvailability(option.available),
-            "</div>",
             "<div class='panel-body'>",
                 "<h2>", _getReadableType(copy.type), "</h2>",
                 copy.description, "<br/><br/>",
@@ -62,7 +51,7 @@ function updateOptions(options, warning, optionsCopy) {
 
     $("#js-section-options-display").show();
     $("html, body").animate({
-        scrollTop: $("#js-section-options-display").offset().top - 200
+        scrollTop: $("#js-section-options-display").offset().top
     });
   }
 
