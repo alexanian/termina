@@ -24,7 +24,6 @@ function _createOptionElement(option, copy) {
 
 function updateOptions(options, warning, optionsCopy) {
     var optionElements = [];
-    console.log(optionsCopy);
     for (var i = 0; i < options.length; i++) {
         optionElements.push(_createOptionElement(options[i], optionsCopy[options[i]['type']]));
     }
