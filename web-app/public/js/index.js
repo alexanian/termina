@@ -116,7 +116,7 @@ function showOptions(e) {
     e.preventDefault();
     var data = $('form').serialize();
 
-    var date = $('#date').datepicker('getDate');
+    var date = new Date($('#date').val());
     var oneDay = 24*60*60*1000;
     var today = new Date();
     var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
