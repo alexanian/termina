@@ -115,45 +115,65 @@ function updateOptions(options, warning, optionsCopy) {
       $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
 }
 
-function showOptions(e) {
-    e.preventDefault();
-    var data = $('form').serialize();
+function updateURL(args) {
+    if ('history' in window) {
+        window.history.pushState({}, "", "?" + args)
+    }
+}
 
-    var date = new Date($('#date').val());
-    var oneDay = 24*60*60*1000;
-    var today = new Date();
-    var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
-    var optionsCopy = e.data;
-
-    data += "&days_since=" + daysSince;
-
-    $.getJSON("http://localhost:3000/options?", data)
-    .then(function(response) {
+function showOptions(optionsCopy) {
+  var data = $('form').serialize();
+  var date = new Date($('#date').val());
+  var oneDay = 24*60*60*1000;
+  var today = new Date();
+  var urlData = data;
+  urlData += "&date=" + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+  updateURL(urlData);
+  var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
+  data += "&days_since=" + daysSince;
+  $.getJSON("http://localhost:3000/options?", data)
+  .then(function(response) {
       updateFirstTrimesterWarning(date, daysSince);
       updateOptions(response.options, response.age_warning, optionsCopy);
+
       $('.expandOption').on('click', function(e){
         e.preventDefault();
         $(e.target).hide();
         var hiddenSection = $(e.target).data('target');
         $(hiddenSection).toggleClass('hidden');
       });
-    });
+  });
+  $("#js-show-options").text("Refresh My Options");
+  $("#js-section-options-display").show();
+  scrollTo("#js-section-options-display");
+}
 
-    $(e.target).text("Refresh My Options");
-    $("#js-section-options-display").show();
-    scrollTo("#js-section-options-display");
-  }
+function onShowOptions(e) {
+    e.preventDefault();
+    showOptions(e.data);
+}
 
 function showNextField(e) {
     $(e.target).closest(".options-form__item").next().removeClass('options-form__item--initial');
 }
 
-function init() {
-    var optionsCopy;
-    var optionsCopy = $.getJSON("http://localhost:3000/options/copy").then(function(response) {
-        $("#js-show-options").click(response, showOptions);
-    });
+function initFormFromURL() {
+    var query = window.location.search;
+    var queryArray = query.slice(1).split("&");
+    var today = new Date();
+    for (var i = 0; i < queryArray.length; i++) {
+        var argArray = queryArray[i].split("=");
+        var key = argArray[0];
+        var value = argArray[1];
+        if (key === "date") {
+            $("#date").datepicker('update', value);
+        } else {
+            $("[name='" + key+ "']").val(value).trigger('change');
+        }
+    }
+}
 
+function init() {
     $("#js-start").click(startForm);
 
     $(".options-form__item:not(:first-child)").addClass('options-form__item--initial');
@@ -167,6 +187,14 @@ function init() {
       endDate: '+0d'
     }).on('change', function(e){
       $('.datepicker').hide();
+    });
+
+    var optionsCopy = $.getJSON("http://localhost:3000/options/copy").then(function(response) {
+        initFormFromURL();
+        if ($('form').serializeArray().length === 2 && $("#date").datepicker('getDate')) {
+            showOptions(response);
+        }
+        $("#js-show-options").click(response, onShowOptions);
     });
 }
 
