@@ -47,6 +47,18 @@
         .options-form {
           padding-left: 20px;
           padding-right: 20px;
+          margin-top: 60px;
+        }
+
+        .options-form__item--initial {
+          opacity: 0.5;
+          /* not the best; a disabled on the input might be better. for a real thing, this also means that broken JS won't ever re-enable */
+          pointer-events: none;
+        }
+
+        .show-options {
+          position: relative;
+          top: 4em;
         }
       }
 
@@ -90,26 +102,14 @@
 
         /* options form */
         .section-options-form {
-          margin-top: 50px;
-          min-height: 90vh;
+          min-height: 95vh;
         }
-
         .options-form {
-          display: table;
-          height: 100vh;
-          width: 100%;
+          margin-top: 5vh;
         }
-
-        .options-form > * {
-          display: table-row;
-          height: 1px;
+        .options-form__item--initial {
+          display: none;
         }
-
-        .options-form__contents {
-          height: auto;
-        }
-
-        /* options display */
 
         /* show options button */
         .show-options {
@@ -176,14 +176,14 @@
 
               <form id="js-options-form">
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 options-form__item">
                       <div class="form-group">
                         <label for="last-period-date">When was the <em>first day</em> of your last period?</label>
-                        <span class="help-block" id="help-last-period-date">If you're not sure, you can select a range of possible days, up to one week.</span>
+                        <span class="help-block" id="help-last-period-date">If you're not sure, make your best guess.</span>
                         <p><small>This date is used to give you the most accurate options specific to your situation.</small></p>
 
                         <div class="input-group date" data-provide="datepicker">
-                          <input type="text" id="date" class="form-control">
+                          <input type="text" id="date" class="form-control" data-date-end-date="0d">
                           <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                           </div>
@@ -191,11 +191,12 @@
                       </div>
                     </div>
 
-                    <div class="col-sm-3 col-sm-offset-1">
+                    <div class="col-sm-3 options-form__item">
                       <div class="form-group">
                         <label for="state">Where do you live?</label>
                         <span class="help-block" id="help-state">Access to abortion and abortion laws vary by state.</span>
                         <select name="state" id="state" aria-describedby="help-state">
+                          <option selected disabled value="none">Choose state:</option>
                           <option value="AL">Alabama</option>
                           <option value="AK">Alaska</option>
                           <option value="AZ">Arizona</option>
@@ -251,21 +252,31 @@
                       </div>
                     </div>
 
-                    <div class="col-sm-3 col-sm-offset-1">
-                      <div class="form-group">
-                        <label for="age">How old are you?</label>
-                        <span class="help-block" id="help-age">Your age may determine if you need parental consent for an abortion.</span>
-                        <input type="number" id="age" name="age" aria-describedby="help-age" />
+                    <div class="col-sm-6 options-form__item">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="age">How old are you?</label>
+                            <span class="help-block" id="help-age">Your age may determine if you need parental consent for an abortion.</span>
+                            <select name="age" id="age" aria-describedby="help-age">
+                                <option selected value="18">18 &amp; over</option>
+                                <option value="17">17</option>
+                                <option value="16">16</option>
+                                <option value="15">15 &amp; under</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="show-options">
+                            <button id="js-show-options" type="button" class="btn btn-primary">Show My Options</button>
+                          </div>
+                        </div>
                       </div>
-                    </div>
                   </div>
+                </div>
               </form>
             </div>
         </div>
-        </div>
-
-        <div class="show-options">
-          <button id="js-show-options" type="button" class="btn btn-primary">Show My Options</button>
         </div>
       </div>
     </div>
@@ -273,7 +284,8 @@
     <div class="section-options-display container-fluid" id="js-section-options-display" style="display: none">
       <div class="options-display">
         <h1>Here are your options:</h1>
-        <div id="js-options-display"></div>
+        <div id="js-available-options-display"></div>
+        <div id="js-unavailable-options-display"></div>
       </div>
     </div>
 

@@ -37,6 +37,9 @@ function _createRestrictionAlertElement(warning)
 }
 
 function _createOptionElement(option, copy, warning) {
+    var financialInfo = "";
+    if(copy.cost.length > 0)
+      financialInfo = "<h3>Financial Information</h3>" + copy.cost;
     return [
         "<div class='panel panel-default'>",
             "<div class='panel-body'>",
@@ -44,8 +47,7 @@ function _createOptionElement(option, copy, warning) {
                 _createOptionAlertElement(warning),
                 copy.description, "<br/><br/>",
                 _createRestrictionAlertElement(warning),
-                "<h3>Financial Information</h3>",
-                copy.cost,
+                financialInfo,
                 "<h3>Resources</h3>",
                 copy.info_link,
             "</div>",
@@ -54,13 +56,21 @@ function _createOptionElement(option, copy, warning) {
 }
 
 function updateOptions(options, warning, optionsCopy) {
-    var optionElements = [];
+    var availableElements = [];
+    var unavailableElements = [];
     for (var i = 0; i < options.length; i++) {
-        optionElements.push(_createOptionElement(options[i],
-                                                 optionsCopy[options[i]['type']],
-                                                 warning));
+      if(options[i].available)
+        availableElements.push(_createOptionElement(options[i],
+              optionsCopy[options[i]['type']], warning));
+      else
+        unavailableElements.push(_createOptionElement(options[i],
+              optionsCopy[options[i]['type']], warning));
     }
-    $("#js-options-display").empty().append(optionElements);
+    var pluralizedCopy = (unavailableElements.length > 1)? "these options are" : "this option is"
+    var splitText = "<h1><div>Based on your information, " + pluralizedCopy + " not available</div></h1>";
+    $("#js-available-options-display").empty().append(availableElements);
+    if(unavailableElements.length > 0)
+      $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
 }
 
   function showOptions(e) {
@@ -71,11 +81,10 @@ function updateOptions(options, warning, optionsCopy) {
     var oneDay = 24*60*60*1000;
     var today = new Date();
     var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
-    
     var optionsCopy = e.data;
 
-    data += "&days_since=";
-    
+    data += "&days_since=" + daysSince;
+
     $.getJSON("/options?", data)
     .then(function(response) {
         updateOptions(response.options, response.age_warning, optionsCopy);
@@ -86,7 +95,10 @@ function updateOptions(options, warning, optionsCopy) {
     scrollTo("#js-section-options-display");
   }
 
-var NUM_EXPECTED_FIELDS = 3;
+function showNextField(e) {
+    $(e.target).closest(".options-form__item").next().removeClass('options-form__item--initial');
+}
+
 function init() {
     var optionsCopy;
     var optionsCopy = $.getJSON("/options/copy").then(function(response) {
@@ -95,27 +107,16 @@ function init() {
 
     $("#js-start").click(startForm);
 
-    $(".options-form select, .options-form input").on("change", function () {
-        var count = 0;
-        if ($('#date').datepicker('getDate')) {
-            count += 1;
-        }
+    $(".options-form__item:not(:first-child)").addClass('options-form__item--initial');
 
-        var elements = $("form").serializeArray();
-        for (var i = 0; i < elements.length; i++) {
-            if (elements[i].value) {
-                count+=1;
-            }
-        }
-
-        $("#js-show-options").attr("disabled", count !== NUM_EXPECTED_FIELDS);
-    });
+    $(".options-form select, .options-form input")
+        .on("change", showNextField);
 
     $('.input-group').datepicker({
       format: 'mm/dd/yyyy',
       autclose: 'true',
       endDate: '+0d'
-    }).on('change', function(){
+    }).on('change', function(e){
       $('.datepicker').hide();
     });
 }

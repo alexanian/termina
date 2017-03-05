@@ -24,18 +24,23 @@ var filterAvailableOptions = function(baseOptions, userState, userDaysSince) {
 		var availableOptions = optionsForType.filter(function(option) { return optionIsAvailable(option, userState, userDaysSince)});
 		var isAvailable = (availableOptions.length >= 1);
 
+		var optionData = null;
 		if (isAvailable) {
 			optionData = availableOptions[0];
-		} else {
+		} else if (!isAvailable && optionsForType[0].type === 'medication') {
 			optionData = optionsForType[0];
 		}
-		optionsToReturn.push({
-			'type': optionData.type,
-			'min': optionData.min_days_lmp,
-			'max': optionData.max_days_lmp,
-			'available': isAvailable,
-		})
+
+		if (optionData) {
+			optionsToReturn.push({
+				'type': optionData.type,
+				'min': optionData.min_days_lmp,
+				'max': optionData.max_days_lmp,
+				'available': isAvailable,
+			})
+		}
 	});
+
 	return optionsToReturn;
 }
 
