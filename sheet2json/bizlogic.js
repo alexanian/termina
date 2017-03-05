@@ -43,7 +43,12 @@ var filterParentalRules = function(parentalRules, userState, userAge) {
   var rule = parentalRules.find(function(element) {
     return element.state == userState && userAge <= element.up_to_age;
   });
-  return rule ? rule.display_text : null;
+  if (!rule) return null;
+
+  return {
+    type: rule.consent_type,
+    display_text: rule.display_text
+  }
 }
 
 module.exports = {

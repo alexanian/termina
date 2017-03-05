@@ -16,12 +16,9 @@ app.get('/options', function(req, res) {
 
 	// Parse Query
 	var baseOptions = globalData.options;
-<<<<<<< Updated upstream
-=======
   var parentalRules = globalData.parentalConsentRules;
 	console.log('global data');
 	console.log(baseOptions)
->>>>>>> Stashed changes
 	var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
 	var userAge = parseInt(query.age);
