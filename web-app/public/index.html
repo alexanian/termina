@@ -67,6 +67,31 @@
         padding: 1em 3em 2em 3em;
       }
 
+      /* Special snowflake case to make options line up. */
+      .options-form__item .help-block {
+        min-height: 40px;
+      }
+
+      @media screen and (max-width: 1300px) {
+        .options-form__item label {
+          min-height: 40px;
+        }
+      }
+
+      @media screen and (max-width: 1300px) {
+        .options-form__item .help-block  {
+          min-height: 60px;
+        }
+      }
+
+      @media screen and (max-width: 769px) {
+        .options-form__item .help-block,
+        .options-form__item label  {
+          min-height: initial;
+        }
+      }
+      /* Special snowflake ends */
+
       @media screen and (min-width: 769px) {
         .section-get-started  {
           position: relative;
