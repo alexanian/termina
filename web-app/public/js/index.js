@@ -31,6 +31,7 @@ function _getReadableDate(date) {
 function _createAlertElement(alertText) {
     return [
         "<div class='text-warning'>",
+            "<i class='fa fa-warning'></i>",
             alertText,
         "</div>"
     ].join("");
@@ -45,10 +46,12 @@ function _createRestrictionAlertElement(warning)
 {
     if (!warning) return "";
 
-    return _createAlertElement([
-        "<h3>Restrictions</h3>",
-        warning.display_text
-    ].join(""));
+    return [
+        "<div class='text-warning'>",
+            "<i class='fa fa-warning'></i><strong>Restrictions</strong><br/>",
+            warning.display_text,
+        "</div>"
+    ].join("");
 }
 
 function _displayAgeWarningForType(type) {
