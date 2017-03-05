@@ -72,6 +72,33 @@ function updateOptions(options, warning, optionsCopy) {
     $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
 }
 
+
+function updateURL(args) {
+    if ('history' in window) {
+        window.history.pushState({}, "", "?" + args)
+    }
+}
+
+function initFormFromURL() {
+    var query = window.location.search;
+    var queryArray = query.slice(1).split("&");
+    var today = new Date();
+    for (var i = 0; i < queryArray.length; i++) {
+        var argArray = queryArray[i].split("=");
+        var key = argArray[0];
+        var value = argArray[1];
+        if (key === "date") {
+            $("#date").datepicker('update', value);
+        } else {
+            $("[name='" + key+ "']").val(value).trigger('change');
+        }
+    }
+    if (queryArray.length === 3) {
+        $("#js-section-options-display").show();
+        scrollTo("#js-section-options-display");
+    }
+}
+
   function showOptions(e) {
     e.preventDefault();
     var data = $('form').serialize();
@@ -79,6 +106,11 @@ function updateOptions(options, warning, optionsCopy) {
     var date = $('#date').datepicker('getDate');
     var oneDay = 24*60*60*1000;
     var today = new Date();
+
+    var urlData = data;
+    urlData += "&date=" + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+    updateURL(urlData);
+
     var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
     var optionsCopy = e.data;
 
@@ -118,6 +150,8 @@ function init() {
     }).on('change', function(e){
       $('.datepicker').hide();
     });
+
+    initFormFromURL();
 }
 
 // good old document load
