@@ -26,7 +26,8 @@ function _createOptionElement(option, copy) {
             "<div class='panel-body'>",
                 "<h2>", _getReadableType(copy.type), "</h2>",
                 copy.description, "<br/><br/>",
-                copy.info_link,
+                copy.info_link, "<br/><br/>",
+                copy.cost,
             "</div>",
         "</div>"
     ].join("");
