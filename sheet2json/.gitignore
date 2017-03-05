@@ -2,3 +2,5 @@ node_modules/
 client_secret.json
 credentials/
 .DS_Store
+npm-debug.log
+/*.env
