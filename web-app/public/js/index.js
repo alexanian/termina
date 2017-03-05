@@ -1,8 +1,12 @@
 (function($) {
-  function startForm() {
+function scrollTo(selector) {
     $("html, body").animate({
-      scrollTop: $("#js-section-options-form").offset().top
+      scrollTop: $(selector).offset().top
     });
+
+}
+  function startForm() {
+    scrollTo("#js-section-options-form");
   }
 
 function _getReadableType(optionType) {
@@ -48,10 +52,9 @@ function updateOptions(options, warning, optionsCopy) {
         updateOptions(response.options, response.age_warning, optionsCopy);
     });
 
+    $(e.target).text("Refresh My Options")
     $("#js-section-options-display").show();
-    $("html, body").animate({
-        scrollTop: $("#js-section-options-display").offset().top
-    });
+    scrollTo("#js-section-options-display");
   }
 
 function init() {
