@@ -13,6 +13,21 @@ function _getReadableType(optionType) {
     return optionType;
 }
 
+function _getReadableDate(date) {
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return monthNames[monthIndex] + ' ' + day + ', ' + year;
+}
+
 function _createAlertElement(alertText) {
     return [
         "<div class='alert alert-warning'>",
@@ -55,6 +70,30 @@ function _createOptionElement(option, copy, warning) {
     ].join("");
 }
 
+function _createFirstTrimesterWarningElement(date, daysSince) {    
+    var daysInFirstTrimester = 90;
+    if (daysSince > daysInFirstTrimester) return "";
+    
+    var endOfTrimesterDate = new Date();
+    endOfTrimesterDate.setDate(date.getDate() + daysInFirstTrimester);
+    
+    return [
+        "<div id='first-trimester-warning'>",
+        "Abortion care will be easiest for you to access before your first trimester ends ",
+        "(around ",
+        "<span class='glyphicon glyphicon-time'></span> ",
+        "<strong id='first-trimester-date'>",
+        _getReadableDate(endOfTrimesterDate),
+        ")</strong>.",
+        "</div>"
+    ].join("");
+}
+
+function updateFirstTrimesterWarning(date, daysSince) {
+    var warningElement = _createFirstTrimesterWarningElement(date, daysSince);
+    $("#js-warning-display").empty().append(warningElement);
+}
+
 function updateOptions(options, warning, optionsCopy) {
     var availableElements = [];
     var unavailableElements = [];
@@ -73,7 +112,7 @@ function updateOptions(options, warning, optionsCopy) {
       $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
 }
 
-  function showOptions(e) {
+function showOptions(e) {
     e.preventDefault();
     var data = $('form').serialize();
 
@@ -87,6 +126,7 @@ function updateOptions(options, warning, optionsCopy) {
 
     $.getJSON("http://localhost:3000/options?", data)
     .then(function(response) {
+        updateFirstTrimesterWarning(date, daysSince);
         updateOptions(response.options, response.age_warning, optionsCopy);
     });
 
