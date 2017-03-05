@@ -44,6 +44,10 @@ public class OptionsController extends Controller {
                 shouldMoveFirstViewToBottom = true;
             }
 
+            if (TerminaNetwork.getInstance().getAgeWarning() != null) {
+                builder.setAgeWarningApplies(true, TerminaNetwork.getInstance().getAgeWarning().display_text);
+            }
+
             ActionCardView view = builder.build();
             view.setLayoutParams(new PercentRelativeLayout.LayoutParams(PercentRelativeLayout.LayoutParams.WRAP_CONTENT, PercentRelativeLayout.LayoutParams.WRAP_CONTENT));
             ((ViewGroup.MarginLayoutParams) view.getLayoutParams()).topMargin = (int) getResources().getDimension(R.dimen.margin_8);

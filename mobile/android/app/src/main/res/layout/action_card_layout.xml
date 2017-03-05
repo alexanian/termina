@@ -40,15 +40,24 @@
         tools:text="supeadsfasdfaoisdfjoiadsjfoiaj asoidfja osdaosjdf oasidf oasjdfaoisdf jaosdf ijaoijdsf oajsdfioajsdfoij aoiejfoiajdf ansdiosdjfa oida asdf
         aoisdjfo iajsdfaoisda sdfasdffjaoisdfjr long text where it should cut off"/>
 
+    <LinearLayout
+        android:id="@+id/details_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/tv_body">
+        
+
+    </LinearLayout>
     <TextView
         android:id="@+id/tv_learn_more"
         style="@style/Termina.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/tv_body"
+        android:layout_below="@+id/details_layout"
         android:textColor="@color/colorPrimary"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text="@string/action_card_learn_more"/>
 
 </android.support.percent.PercentRelativeLayout>

@@ -64,6 +64,8 @@ public class ActionCardView extends PercentRelativeLayout {
         String mCost;
         String mCommon;
         String mInfoLink;
+        String mAgeWarning;
+        boolean mAgeWarningApplies = false;
         boolean mIsAvailable = true;
         boolean mDoesExpire = false;
         int mNumWeeksSinceExpired = 0;
@@ -137,6 +139,12 @@ public class ActionCardView extends PercentRelativeLayout {
             return this;
         }
 
+        public Builder setAgeWarningApplies(boolean ageWarningApplies, String ageWarning) {
+            mAgeWarningApplies = ageWarningApplies;
+            mAgeWarning = ageWarning;
+            return this;
+        }
+
         public Builder setExpDate(String expDate) {
             mExpDate = expDate;
             return this;
@@ -179,47 +187,27 @@ public class ActionCardView extends PercentRelativeLayout {
                 view.mTitleTextView.setText(mTitle);
             }
 
-            if (!mIsAvailable && mNumWeeksSinceExpired > 0) {
+            if (mActionType == ActionType.MEDICATION && !mIsAvailable && mNumWeeksSinceExpired > 0) {
                 view.setBackgroundResource(R.drawable.card_rectangle_red);
                 view.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
                 view.mSubtitleTextView.setTextColor(mContext.getResources().getColor(R.color.red));
                 view.mSubtitleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icn_error_red, 0, 0, 0);
                 view.mSubtitleTextView.setCompoundDrawablePadding((int) mContext.getResources().getDimension(R.dimen.margin_4));
                 view.mSubtitleTextView.setText(mContext.getResources().getString(R.string.action_card_subtitle_not_available_from, mNumWeeksSinceExpired));
+            } else if (mAgeWarningApplies) {
+                if (mActionType != ActionType.PARENTHOOD && mActionType != ActionType.ADOPTION) {
+                    view.mSubtitleTextView.setTextColor(mContext.getResources().getColor(R.color.red));
+                    view.mSubtitleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icn_error_red, 0, 0, 0);
+                    view.mSubtitleTextView.setCompoundDrawablePadding((int) mContext.getResources().getDimension(R.dimen.margin_4));
+                    view.mSubtitleTextView.setText(mContext.getResources().getString(R.string.action_card_restriction));
+                }
             } else {
                 view.mSubtitleTextView.setVisibility(View.GONE);
             }
 
-//            if (mDoesExpire && TextUtils.isEmpty(mExpDate)) {
-//                view.mSubtitleTextView.setVisibility(View.VISIBLE);
-//                view.mSubtitleTextView.setText(mContext.getResources().getString(R.string.action_card_subtitle_available_until, mExpDate));
-//            } else {
-//                view.mSubtitleTextView.setVisibility(View.GONE);
-//            }
-
             if (!TextUtils.isEmpty(mBody)) {
                 view.mBodyTextView.setText(mBody);
             }
-
-            final ViewTreeObserver vto = view.mBodyTextView.getViewTreeObserver();
-            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    Layout layout = view.mBodyTextView.getLayout();
-                    if (layout!=null) {
-                        int lines = layout.getLineCount();
-                        if (lines > 0) {
-                            if (layout.getEllipsisCount(lines - 1) > 0) {
-                                view.mLearnMoreTextView.setVisibility(View.VISIBLE);
-                            }
-                        }
-                    }
-
-                    if (vto.isAlive()) {
-                        vto.removeOnGlobalLayoutListener(this);
-                    }
-                }
-            });
 
             return view;
         }
