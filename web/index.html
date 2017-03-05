@@ -16,30 +16,37 @@
         border: 1px #999 solid !important;
       }
 
-      /* splash screen */
-      .splash-screen {
-        height: 100vh;
-      }
+      /* Mobile */
+      @media screen and (max-width: 800px) {
+        /* splash screen */
+        .splash-screen {
+          height: 100vh;
+        }
 
-      .splash-screen__disclaimer {
-        margin-top: 10vh;
-      }
+        .splash-screen__disclaimer {
+          margin-top: 10vh;
+        }
 
-      .splash-screen__start {
-        position: absolute;
-        bottom: 5vh;
-        /* hackety hack */
-        width: 93%;
-      }
+        .splash-screen__start {
+          position: absolute;
+          bottom: 5vh;
+          /* hackety hack */
+          width: 93%;
+        }
 
-      .splash-screen__start .btn {
-        width: 100%;
-      }
+        .splash-screen__start .btn {
+          width: 100%;
+        }
 
-      /* form */
-      .page-form {
-        margin-top: 150px;
-        min-height: 100vh;
+        /* form */
+        .page-form {
+          margin-top: 150px;
+          min-height: 100vh;
+        }
+
+        .page-form .btn {
+          width: 100%;
+        }
       }
     </style>
 
@@ -89,7 +96,6 @@
           <div class="form-group">
             <label for="last-period-date">When was the first day of your last period?</label>
             <span class="help-block" id="help-last-period-date">If you're not sure, you can select a range of possible days, up to one week.</span>
-
             <div class="input-group input-daterange">
               <input type="text" class="form-control">
               <div class="input-group-addon">to</div>
@@ -159,6 +165,10 @@
             <label for="age">How old are you?</label>
             <span class="help-block" id="help-age">Your age can determine what options are available.</span>
             <input type="number" id="age" name="age" aria-describedby="help-age" />
+          </div>
+
+          <div class="show-options">
+            <input type="submit" class="btn btn-primary" value="Show My Options">
           </div>
       </form>
     </div>
