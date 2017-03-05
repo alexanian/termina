@@ -59,7 +59,7 @@ function updateOptions(options, optionsCopy) {
 
     $.getJSON("http://localhost:3000/options?", data)
     .then(function(response) {
-        updateOptions(response.options, optionsCopy);
+        updateOptions(response, optionsCopy);
     });
 
     $("#js-section-options-display").show();
