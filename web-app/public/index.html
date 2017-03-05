@@ -5,10 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Learn Your Pregnancy Options</title>
+    <title>Learn About Your Pregnancy Options</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <style>
       /* global styles */
+
+      .dropdown {
+        background-color: white;
+        min-height: 34px;
+      }
 
       a {
         color: #800099 !important;
@@ -56,8 +61,9 @@
         margin: .5em 0 1em;
       }
 
-      .panel-body > h2 {
+      .panel-body > h3 {
         margin-top: 0;
+        color: #800099;
       }
 
       .page-link-container {
@@ -315,7 +321,7 @@
         <div class="get-started__disclaimer">
           <h4>Did you know?</h4>
 
-          <div class="get-started__disclaimer__body">About half of all women in the U.S. have an unplanned pregnancy at some point in their lives. About 4 out of 10 women with unplanned pregnancies decide to have abortions.
+          <div class="get-started__disclaimer__body">About half of all pregnancies in the U.S. are unplanned, and about 4 out of 10 people with unplanned pregnancies decide to have abortions.
 
             <p>&nbsp;</p>
 
@@ -329,8 +335,8 @@
       <div class="arrow-down"></div>
     </div>
 
-    <div id="js-section-options-form" class="section-options-form container-fluid">
-      <div class="options-form">
+    <div id="js-section-options-form" class="section-options-form">
+      <div class="options-form container">
         <div class="row">
           <div class="col-xs-12">
             <div class="options-form__contents">
@@ -355,7 +361,7 @@
                       <div class="form-group">
                         <label for="state">Where do you live?</label>
                         <span class="help-block" id="help-state">Access to abortion and abortion laws vary by state.</span>
-                        <select name="state" id="state" aria-describedby="help-state">
+                        <select name="state" class="dropdown form-control" id="state" aria-describedby="help-state">
                           <option selected disabled value="none">Choose state:</option>
                           <option value="AL">Alabama</option>
                           <option value="AK">Alaska</option>
@@ -418,7 +424,7 @@
                           <div class="form-group">
                             <label for="age">How old are you?</label>
                             <span class="help-block" id="help-age">Your age may determine if you need parental consent for an abortion.</span>
-                            <select name="age" id="age" aria-describedby="help-age">
+                            <select name="age" class="dropdown form-control" id="age" aria-describedby="help-age">
                                 <option selected value="18">18 &amp; over</option>
                                 <option value="17">17</option>
                                 <option value="16">16</option>
@@ -441,15 +447,15 @@
       </div>
     </div>
 
-    <div class="section-options-display container-fluid" id="js-section-options-display" style="display: none">
-      <div class="options-display">
-        <h1>Here are your options:</h1>
+    <div class="section-options-display" id="js-section-options-display" style="display: none">
+      <div class="options-display container">
+        <h2>Here are your options:</h2>
         <div id="js-warning-display"></div>
         <div id="js-available-options-display"></div>
         <div id="js-unavailable-options-display"></div>
         <div class="row">
           <div class="col-md-4 col-md-offset-4 text-center page-link-container">
-            <h5>Save this link to view your results later</h5>
+            <h5>Save this link to view your results later:</h5>
             <div id="js-page-link" class="page-link"></div>
           </div>
         </div>
