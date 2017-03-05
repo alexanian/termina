@@ -36,6 +36,11 @@ var filterAvailableOptions = function(baseOptions, userState, userDaysSince) {
 			'available': isAvailable,
 		})
 	});
+
+	var surgicalAvailable = optionsToReturn.filter(function(option) { return option.available && option.type === 'surgical' } );
+	if (surgicalAvailable.length) {
+		optionsToReturn = optionsToReturn.filter(function(option) { return option.type !== 'surgical_travel' && option.type !== 'later_care' })
+	}
 	return optionsToReturn;
 }
 
