@@ -53,6 +53,10 @@
           padding-left: 20px;
           padding-right: 20px;
         }
+        .show-options {
+          position: relative;
+          top: 4em;
+        }
       }
 
       /* Mobile */
@@ -169,10 +173,10 @@
 
               <form id="js-options-form">
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                       <div class="form-group">
                         <label for="last-period-date">When was the first day of your last period?</label>
-                        <span class="help-block" id="help-last-period-date">If you're not sure, you can select a range of possible days, up to one week.</span>
+                        <span class="help-block" id="help-last-period-date">If you're not sure, make your best guess.</span>
 
                         <div class="input-group date" data-provide="datepicker">
                           <input type="text" id="date" class="form-control">
@@ -183,7 +187,7 @@
                       </div>
                     </div>
 
-                    <div class="col-sm-3 col-sm-offset-1">
+                    <div class="col-sm-3">
                       <div class="form-group">
                         <label for="state">Where do you live?</label>
                         <span class="help-block" id="help-state">Laws vary by state.</span>
@@ -243,11 +247,17 @@
                       </div>
                     </div>
 
-                    <div class="col-sm-3 col-sm-offset-1">
+                    <div class="col-sm-3">
                       <div class="form-group">
                         <label for="age">How old are you?</label>
                         <span class="help-block" id="help-age">Your age can determine what options are available.</span>
                         <input type="number" id="age" name="age" aria-describedby="help-age" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                      <div class="show-options">
+                        <button id="js-show-options" type="button" class="btn btn-primary" disabled>Show My Options</button>
                       </div>
                     </div>
                   </div>
@@ -256,9 +266,6 @@
         </div>
         </div>
 
-        <div class="show-options">
-          <button id="js-show-options" type="button" class="btn btn-primary" disabled>Show My Options</button>
-        </div>
       </div>
     </div>
 
