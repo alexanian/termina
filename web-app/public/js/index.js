@@ -135,7 +135,7 @@
     }
     $("#js-available-options-display, #js-unavailable-options-display").empty()
     var pluralizedCopy = (unavailableElements.length > 1)? "these options are" : "this option is"
-    var splitText = "<h1><div>Based on your information, " + pluralizedCopy + " not available</div></h1>";
+    var splitText = "<h1><div>Based on your information, " + pluralizedCopy + " not available:</div></h1>";
     $("#js-available-options-display").append(availableElements);
     if(unavailableElements.length > 0)
       $("#js-unavailable-options-display").append(splitText).append(unavailableElements);
