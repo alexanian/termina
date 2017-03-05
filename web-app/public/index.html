@@ -56,6 +56,13 @@
         margin-top: 0;
       }
 
+      .page-link {
+        font-size: 2rem;
+        -webkit-user-select: all; /* Covers Blink-land & Firefox (yup) */
+        user-select: all;
+        padding: 1em 3em 2em 3em;
+      }
+
       @media screen and (min-width: 769px) {
         .section-get-started  {
           position: relative;
@@ -380,6 +387,12 @@
         <div id="js-warning-display"></div>
         <div id="js-available-options-display"></div>
         <div id="js-unavailable-options-display"></div>
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>Save this link to view your results later</h2>
+            <div id="js-page-link" class="page-link"></div>
+          </div>
+        </div>
       </div>
     </div>
 
