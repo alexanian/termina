@@ -123,6 +123,7 @@ function updateFirstTrimesterWarning(date, daysSince) {
 }
 
 function updateOptions(options, warning, optionsCopy) {
+<<<<<<< Updated upstream
   var availableElements = [];
   var unavailableElements = [];
   for (var i = 0; i < options.length; i++) {
@@ -138,6 +139,24 @@ function updateOptions(options, warning, optionsCopy) {
   $("#js-available-options-display").empty().append(availableElements);
   if(unavailableElements.length > 0)
     $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
+=======
+    var availableElements = [];
+    var unavailableElements = [];
+    for (var i = 0; i < options.length; i++) {
+      if(options[i].available)
+        availableElements.push(_createOptionElement(options[i],
+              optionsCopy[options[i]['type']], warning, i));
+      else
+        unavailableElements.push(_createOptionElement(options[i],
+              optionsCopy[options[i]['type']], warning));
+    }
+    $("#js-available-options-display, #js-unavailable-options-display").empty()
+    var pluralizedCopy = (unavailableElements.length > 1)? "these options are" : "this option is"
+    var splitText = "<h1><div>Based on your information, " + pluralizedCopy + " not available</div></h1>";
+    $("#js-available-options-display").append(availableElements);
+    if(unavailableElements.length > 0)
+      $("#js-unavailable-options-display").append(splitText).append(unavailableElements);
+>>>>>>> Stashed changes
 
   $("#js-page-link").text(getURL());
 }
