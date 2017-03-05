@@ -115,10 +115,12 @@ function updateOptions(options, warning, optionsCopy) {
       $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
 }
 
-function updateURL(args) {
-    if ('history' in window) {
-        window.history.pushState({}, "", "?" + args)
-    }
+function getURL() {
+    // Use to get the URL to this set of options; can be shown in a save
+    var date = new Date($('#date').val());
+    var data = $('form').serialize();
+    data += "&date=" + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+    return window.location.href + "?" + data
 }
 
 function showOptions(optionsCopy) {
@@ -126,9 +128,7 @@ function showOptions(optionsCopy) {
   var date = new Date($('#date').val());
   var oneDay = 24*60*60*1000;
   var today = new Date();
-  var urlData = data;
-  urlData += "&date=" + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
-  updateURL(urlData);
+
   var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
   data += "&days_since=" + daysSince;
   $.getJSON("http://localhost:3000/options?", data)
