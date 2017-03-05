@@ -43,7 +43,7 @@ function updateOptions(options, warning, optionsCopy) {
 
   function showOptions(e) {
     e.preventDefault();
-    var data = $(e.target).serialize();
+    var data = $('form').serialize();
     var startDate = $('#start-date').datepicker('getDate');
     var endDate = $('#end-date').datepicker('getDate');
     var oneDay = 24*60*60*1000;
