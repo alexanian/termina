@@ -90,6 +90,10 @@
         <item >WI</item>
         <item >WY</item>
     </string-array>
+    <string name="fa_icon_medkit">&#xf0fa;</string>
+    <string name="fa_icon_user_md">&#xf0f0;</string>
+    <string name="fa_icon_group">&#xf0c0;</string>
+    <string name="fa_icon_child">&#xf1ae;</string>
 
 
     <!-- Action Cards -->

@@ -13,7 +13,7 @@ import org.sfsi.termina.inputs.InputView;
 import org.sfsi.termina.inputs.InputView_;
 
 /**
- * Created by Smule on 3/5/17.
+ * Created by Alex Korzec on 3/5/17.
  */
 
 @EViewGroup(R.layout.options_view)

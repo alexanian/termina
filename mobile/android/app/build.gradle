@@ -53,4 +53,7 @@ dependencies {
 
     // Date Range Picker for Calendar
     compile 'com.borax12.materialdaterangepicker:library:1.9'
+
+    // Calligraphy for Custom Fonts
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 }

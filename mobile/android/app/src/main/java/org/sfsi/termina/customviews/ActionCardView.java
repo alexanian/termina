@@ -2,19 +2,16 @@ package org.sfsi.termina.customviews;
 
 import android.content.Context;
 import android.support.percent.PercentRelativeLayout;
-import android.text.Html;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.sfsi.termina.R;
-import org.sfsi.termina.models.OptionDetails;
 import org.sfsi.termina.models.OptionDetailsResponse;
 import org.sfsi.termina.utils.StringUtils;
 
@@ -44,6 +41,10 @@ public class ActionCardView extends PercentRelativeLayout {
 
     @ViewById(R.id.tv_learn_more)
     protected TextView mLearnMoreTextView;
+
+
+    @ViewById(R.id.icon)
+    protected TextView mIcon;
 
     @ViewById(R.id.details_layout)
     protected LinearLayout mDetailsLayout;
@@ -199,9 +200,23 @@ public class ActionCardView extends PercentRelativeLayout {
                 switch (mActionType) {
                     case MEDICATION:
                         cardView.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.med_green));
+                        cardView.mIcon.setText(mContext.getResources().getString(R.string.fa_icon_medkit));
                         break;
                     case SURGICAL:
                         cardView.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.sur_blue));
+                        cardView.mIcon.setText(mContext.getResources().getString(R.string.fa_icon_user_md));
+                        break;
+                    case SURGICAL_TRAVEL:
+                        cardView.mIcon.setText(mContext.getResources().getString(R.string.fa_icon_user_md));
+                        break;
+                    case LATER_CARE:
+                        cardView.mIcon.setText(mContext.getResources().getString(R.string.fa_icon_user_md));
+                        break;
+                    case PARENTHOOD:
+                        cardView.mIcon.setText(mContext.getResources().getString(R.string.fa_icon_group));
+                        break;
+                    case ADOPTION:
+                        cardView.mIcon.setText(mContext.getResources().getString(R.string.fa_icon_child));
                         break;
                     case CONTINUE:
                         cardView.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.con_orange));
