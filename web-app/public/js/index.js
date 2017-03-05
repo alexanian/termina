@@ -37,6 +37,9 @@ function _createRestrictionAlertElement(warning)
 }
 
 function _createOptionElement(option, copy, warning) {
+    var financialInfo = "";
+    if(copy.cost.length > 0)
+      financialInfo = "<h3>Financial Information</h3>" + copy.cost;
     return [
         "<div class='panel panel-default'>",
             "<div class='panel-body'>",
@@ -44,8 +47,7 @@ function _createOptionElement(option, copy, warning) {
                 _createOptionAlertElement(warning),
                 copy.description, "<br/><br/>",
                 _createRestrictionAlertElement(warning),
-                "<h3>Financial Information</h3>",
-                copy.cost,
+                financialInfo,
                 "<h3>Resources</h3>",
                 copy.info_link,
             "</div>",
