@@ -103,7 +103,7 @@ function _authorize(credentials, callback) {
             });
         } else {
             var token = _buildCredentials();
-            if (secret === null) {
+            if (token === null) {
                 console.log('Error parsing credentials envs.');
                 return;
             }
