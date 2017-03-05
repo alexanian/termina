@@ -5,14 +5,6 @@
     });
   }
 
-function _getAvailability(available) {
-    if (available) {
-        return 'This is available for you.';
-    } else {
-        return 'This is not available for you.' + '<br />' + 'Reason: Lorem ipsum doler sit'
-    }
-}
-
 function _getReadableType(optionType) {
     return optionType;
 }
@@ -20,13 +12,11 @@ function _getReadableType(optionType) {
 function _createOptionElement(option, copy) {
     return [
         "<div class='panel panel-default'>",
-            "<div class='panel-heading'>",
-                _getAvailability(option.available),
-            "</div>",
             "<div class='panel-body'>",
                 "<h2>", _getReadableType(copy.type), "</h2>",
                 copy.description, "<br/><br/>",
-                copy.info_link,
+                copy.info_link, "<br/><br/>",
+                copy.cost,
             "</div>",
         "</div>"
     ].join("");
@@ -34,7 +24,6 @@ function _createOptionElement(option, copy) {
 
 function updateOptions(options, warning, optionsCopy) {
     var optionElements = [];
-    console.log(optionsCopy);
     for (var i = 0; i < options.length; i++) {
         optionElements.push(_createOptionElement(options[i], optionsCopy[options[i]['type']]));
     }
@@ -43,19 +32,16 @@ function updateOptions(options, warning, optionsCopy) {
 
   function showOptions(e) {
     e.preventDefault();
-    var data = $(e.target).serialize();
-    var startDate = $('#start-date').datepicker('getDate');
-    var endDate = $('#end-date').datepicker('getDate');
+    var data = $('form').serialize();
+    var date = $('#date').datepicker('getDate');
     var oneDay = 24*60*60*1000;
     var today = new Date();
 
-    //Keeping the max around just in case
-    var min = Math.round(Math.abs((today.getTime() - endDate.getTime())/(oneDay)));
-    var max = Math.round(Math.abs((today.getTime() - startDate.getTime())/(oneDay)));
+    var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
 
     var optionsCopy = e.data;
 
-    data += "&days_since=" + min;
+    data += "&days_since=" + daysSince;
 
     $.getJSON("/options?", data)
     .then(function(response) {
@@ -64,7 +50,7 @@ function updateOptions(options, warning, optionsCopy) {
 
     $("#js-section-options-display").show();
     $("html, body").animate({
-        scrollTop: $("#js-section-options-display").offset().top - 200
+        scrollTop: $("#js-section-options-display").offset().top
     });
   }
 
@@ -76,10 +62,12 @@ function init() {
 
     $("#js-start").click(startForm);
 
-    $('.input-daterange').each(function() {
-      $(this).datepicker({startDate: '-2m', endDate: '+0d'});
-      $(this).datepicker('setStartDate', '01/01/2017');
-      $(this).datepicker('clearDates');
+    $('.input-group').datepicker({
+      format: 'mm/dd/yyyy',
+      autclose: 'true',
+      endDate: '+0d'
+    }).on('change', function(){
+      $('.datepicker').hide();
     });
 }
 
