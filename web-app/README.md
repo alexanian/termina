@@ -19,5 +19,5 @@ That's it - the OAuth is set up and you can call the APIs.
 HEROKU:
 
 `heroku login`
-`git remote add heroku https://git.heroku.com/peaceful-peak-13670.git`
+`git remote add heroku https://git.heroku.com/tranquil-retreat-70199.git`
 `git subtree push --prefix web-app heroku master`
