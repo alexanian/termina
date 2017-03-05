@@ -92,6 +92,7 @@ public class InputView extends ScrollView implements AdapterView.OnItemSelectedL
                 mController.mCalendar.get(Calendar.MONTH),
                 mController.mCalendar.get(Calendar.DAY_OF_MONTH)
         );
+        dpd.setAccentColor(getResources().getColor(R.color.colorPrimary));
         dpd.show(getActivity().getFragmentManager(), "LastPeriodInputDatePickerDialog");
     }
 
