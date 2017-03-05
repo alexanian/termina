@@ -57,7 +57,7 @@ function updateOptions(options, warning, optionsCopy) {
 
     data += "&days_since=" + min;
 
-    $.getJSON("http://localhost:3000/options?", data)
+    $.getJSON("/options?", data)
     .then(function(response) {
         updateOptions(response.options, response.age_warning, optionsCopy);
     });
@@ -70,7 +70,7 @@ function updateOptions(options, warning, optionsCopy) {
 
 function init() {
     var optionsCopy;
-    var optionsCopy = $.getJSON("http://localhost:3000/options/copy").then(function(response) {
+    var optionsCopy = $.getJSON("/options/copy").then(function(response) {
         $("#js-show-options").click(response, showOptions);
     });
 

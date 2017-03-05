@@ -2,13 +2,16 @@
   "name": "aah-termina",
   "version": "1.0.0",
   "description": "exporting fb group members into CSV file",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "start": "node server.js",
   "author": "p@pstehlik.com",
   "license": "ISC",
+  "engines": {
+      "node": "7.1.0"
+  },
   "dependencies": {
     "cors": "^2.8.1",
     "express": "^4.15.0",
