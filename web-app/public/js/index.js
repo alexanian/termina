@@ -30,7 +30,7 @@ function _getReadableDate(date) {
 
 function _createAlertElement(alertText) {
     return [
-        "<div class='alert alert-warning'>",
+        "<div class='text-warning'>",
             alertText,
         "</div>"
     ].join("");
