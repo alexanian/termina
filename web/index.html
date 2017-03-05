@@ -38,12 +38,14 @@
 
       /* form */
       .page-form {
+        margin-top: 150px;
         min-height: 100vh;
       }
     </style>
 
     <!-- Bootstrap -->
     <link href="./vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -87,7 +89,12 @@
           <div class="form-group">
             <label for="last-period-date">When was the first day of your last period?</label>
             <span class="help-block" id="help-last-period-date">If you're not sure, you can select a range of possible days, up to one week.</span>
-            <input type="date" name="last-period-date" id="last-period-date" aria-describedby="help-last-period-date" />
+
+            <div class="input-group input-daterange">
+              <input type="text" class="form-control">
+              <div class="input-group-addon">to</div>
+              <input type="text" class="form-control">
+            </div>
           </div>
 
           <div class="form-group">
@@ -161,5 +168,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="./vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="./js/index.js"></script>
+    <script src="./vendor/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
   </body>
 </html>
