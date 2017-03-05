@@ -50,4 +50,7 @@ dependencies {
     // LoganSquare JSON Parsing
     apt 'com.bluelinelabs:logansquare-compiler:1.3.6'
     compile 'com.bluelinelabs:logansquare:1.3.6'
+
+    // Date Range Picker for Calendar
+    compile 'com.borax12.materialdaterangepicker:library:1.9'
 }
