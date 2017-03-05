@@ -81,7 +81,7 @@ function _pullProcedureOptions(successCallback) {
 function _pullAndStoreProcedureOptions() {
     _pullProcedureOptions((response) => {
           console.log("--- Pulled Procedure Option Data ---");
-          console.log("Pulled this many procedure options:" + response.values.length);
+          
           
           var optionsList = [];
           var rows = response.values;
@@ -101,6 +101,7 @@ function _pullAndStoreProcedureOptions() {
               }
           );
           globalData.options = optionsList;
+          console.log("Pulled this many procedure options:" + globalData.options);
       })
 }
 
