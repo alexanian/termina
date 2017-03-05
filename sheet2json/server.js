@@ -30,6 +30,9 @@ app.get('/options/copy', function(req, res) {
   res.send(globalData.optionCopy);
 })
 
+app.get('/parentalConsent', function(req, res) {
+  res.send(globalData.parentalConsentRules);
+})
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
