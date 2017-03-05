@@ -1,8 +1,11 @@
 package org.sfsi.termina;
 
+import android.util.Log;
+
 import com.bluelinelabs.logansquare.LoganSquare;
 
 import org.sfsi.termina.models.AgeWarning;
+import org.sfsi.termina.models.CopyResponse;
 import org.sfsi.termina.models.Option;
 import org.sfsi.termina.models.OptionsResponse;
 
@@ -19,8 +22,10 @@ import okhttp3.Response;
 public class TerminaNetwork {
     private static TerminaNetwork sTerminaNetwork;
     private final OkHttpClient mClient;
+    private final String mUrl = "https://tranquil-retreat-70199.herokuapp.com";
 
     private OptionsResponse mOptionsResponse;
+    private CopyResponse mCopyResponse;
     private int mDays;
     private String mState;
     private int mAge;
@@ -41,7 +46,7 @@ public class TerminaNetwork {
         mState = state;
         mAge = age;
         Request request = new Request.Builder()
-                .url("https://tranquil-retreat-70199.herokuapp.com/options?age=" + age + "&state=" + state + "&days_since=" + days)
+                .url(mUrl + "/options?age=" + age + "&state=" + state + "&days_since=" + days)
                 .build();
 
         mClient.newCall(request).enqueue(new Callback() {
@@ -60,6 +65,30 @@ public class TerminaNetwork {
                 System.out.println(responseString);
                 mOptionsResponse = LoganSquare.parse(responseString, OptionsResponse.class);
                 callback.run();
+            }
+        });
+    }
+
+    public void requestCopy() throws Exception {
+        Request request = new Request.Builder()
+                .url(mUrl + "/options/copy")
+                .build();
+
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                Headers responseHeaders = response.headers();
+                for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                    System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                }
+                String responseString = response.body().string();
+                System.out.println(responseString);
+                mCopyResponse = LoganSquare.parse(responseString, CopyResponse.class);
             }
         });
     }

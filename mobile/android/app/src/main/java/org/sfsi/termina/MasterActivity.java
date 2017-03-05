@@ -20,6 +20,12 @@ public class MasterActivity extends AppCompatActivity {
 
         ViewGroup container = (ViewGroup)findViewById(R.id.controller_container);
 
+        try {
+            TerminaNetwork.getInstance().requestCopy();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         router = Conductor.attachRouter(this, container, savedInstanceState);
         if (!router.hasRootController()) {
             router.setRoot(RouterTransaction.with(new InputController()));
