@@ -71,9 +71,9 @@
       hiddenSection += _createRestrictionAlertElement(warning);
       ageAlert = _createOptionAlertElement(warning);
     }
-    hiddenSection += financialInfo + "<h3>Resources</h3>" + copy.info_link + "</div>";
+    hiddenSection += financialInfo + "<h3>Resources</h3>" + copy.info_link + "<div><a href='#' class='hideOption' data-sibling='.expandLink"+id+"' data-target='.hiddenSection" + id + "'> Show less</a></div></div>";
 
-    var learnMoreToggle = "<a href='#' class='expandOption' data-target='.hiddenSection" + id + "'> Learn more...</a>";
+    var learnMoreToggle = "<a href='#' class='expandOption expandLink"+id+"' data-target='.hiddenSection" + id + "'> Learn more...</a>";
 
     var typeToIconMap = {
       "medication":"medkit",
@@ -166,9 +166,17 @@
 
         $('.expandOption').on('click', function(e){
           e.preventDefault();
-          $(e.target).hide();
+          $(e.target).toggleClass('hidden');
           var hiddenSection = $(e.target).data('target');
           $(hiddenSection).toggleClass('hidden');
+        });
+
+        $('.hideOption').on('click', function(e){
+          e.preventDefault();
+          var hiddenSection = $(e.target).data('target');
+          var showSection = $(e.target).data('sibling');
+          $(hiddenSection).toggleClass('hidden');
+          $(showSection).toggleClass('hidden');
         });
       });
     $("#js-show-options").text("Refresh My Options");
