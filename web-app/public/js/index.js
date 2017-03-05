@@ -110,6 +110,8 @@ function updateOptions(options, warning, optionsCopy) {
     $("#js-available-options-display").empty().append(availableElements);
     if(unavailableElements.length > 0)
       $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
+
+    $("#js-page-link").text(getURL());
 }
 
 function getURL() {
@@ -117,7 +119,7 @@ function getURL() {
     var date = new Date($('#date').val());
     var data = $('form').serialize();
     data += "&date=" + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
-    return window.location.href + "?" + data
+    return window.location.origin + window.location.pathname + "?" + data
 }
 
 function showOptions(optionsCopy) {
@@ -165,6 +167,9 @@ function initFormFromURL() {
 
 function init() {
     $("#js-start").click(startForm);
+    $("#js-page-link").on("click", "input", function() {
+      this.setSelectionRange(0, this.value.length);
+    });
 
     $(".options-form__item:not(:first-child)").addClass('options-form__item--initial');
 
