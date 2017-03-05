@@ -85,36 +85,22 @@ function _pullAndStoreProcedureOptions() {
           
           var optionsList = [];
           var rows = response.values;
-          
-          var createOptionsObject = function(optionId, type, min_days_lmp, max_days_lmp, state){
-              var cleanedState = state.replace(/\s/g,'');
-              var singleOption = {
-                  optionId: optionId,
-                  type: type,
-                  min_days_lmp: min_days_lmp,
-                  max_days_lmp: max_days_lmp,
-                  state: cleanedState.split(',')
-              };
-              return singleOption;
-          };
-          // Structure in the google sheet is
-          // type | Min preg length (days LMP) | Max preg length (days LMP) | state
-          for (var i = 0; i < rows.length; i++) {
-              var row = rows[i];
-              optionsList.push(
-                  createOptionsObject(
-                      i,
-                      row[0],
-                      row[1],
-                      row[2],
-                      row[3]
-                  )
-              );
-          }
+          rows.shift(); //first line is header line
+
+          var result = rows.map(
+              (curr, ix) => {   
+                var cleanedState = curr[3].replace(/\s/g,'');
+                var singleOption = {
+                    optionId: ix,
+                    type: curr[0],
+                    min_days_lmp: curr[1],
+                    max_days_lmp: curr[2],
+                    state: cleanedState.split(',')
+                };
+                return singleOption;  
+              }
+          );
           globalData.options = optionsList;
-        //   if(callback !== null){
-        //       callback();
-        //   }
       })
 }
 
