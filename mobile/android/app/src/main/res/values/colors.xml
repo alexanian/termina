@@ -10,6 +10,7 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="red">#d32f2f</color>
 
     <!-- options color -->
     <color name="med_green">#50E3C2</color>

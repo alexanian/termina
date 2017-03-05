@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_rectangle"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Termina.Text.Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_20"
+        tools:text="title"/>
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        style="@style/Termina.Text.SubTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginEnd="@dimen/margin_20"
+        tools:text="Available until approx. Jan 3rd"/>
+
+    <TextView
+        android:id="@+id/tv_body"
+        style="@style/Termina.Text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_subtitle"
+        android:layout_above="@+id/tv_learn_more"
+        android:maxLines="4"
+        android:ellipsize="end"
+        android:layout_marginTop="12dp"
+        tools:text="supeadsfasdfaoisdfjoiadsjfoiaj asoidfja osdaosjdf oasidf oasjdfaoisdf jaosdf ijaoijdsf oajsdfioajsdfoij aoiejfoiajdf ansdiosdjfa oida asdf
+        aoisdjfo iajsdfaoisda sdfasdffjaoisdfjr long text where it should cut off"/>
+
+    <TextView
+        android:id="@+id/tv_learn_more"
+        style="@style/Termina.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:text="@string/action_card_learn_more"/>
+
+</android.support.percent.PercentRelativeLayout>

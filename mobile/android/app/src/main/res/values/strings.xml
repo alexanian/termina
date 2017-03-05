@@ -26,4 +26,9 @@
 
         Links to educational content not created by SFSI are taken at your own risk. SFSI is not
         responsible for the claims of external websites and education companies.</string>
+
+    <!-- Action Cards -->
+    <string name="action_card_subtitle_available_until" context="%1 - Put date in String">Available until approx. %1$s</string>
+    <string name="action_card_subtitle_not_available_from" context="%1 - Put number of weeks in int">This is not available after %1$d weeks.</string>
+    <string name="action_card_learn_more">Learn More</string>
 </resources>
