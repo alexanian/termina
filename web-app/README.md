@@ -14,3 +14,10 @@ Then run:
 
 When you run this the first time it will require you to go to the printed URL, then enter the token from that URL.
 That's it - the OAuth is set up and you can call the APIs.
+
+
+HEROKU:
+
+`heroku login`
+`git remote add heroku https://git.heroku.com/peaceful-peak-13670.git`
+`git subtree push --prefix web-app heroku master`
