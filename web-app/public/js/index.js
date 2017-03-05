@@ -103,7 +103,7 @@
     if (daysSince > daysInFirstTrimester) return "";
 
     var endOfTrimesterDate = new Date();
-    endOfTrimesterDate.setDate(date.getDate() + daysInFirstTrimester);
+    endOfTrimesterDate.setDate((date.getDate() - daysSince) + daysInFirstTrimester);
 
     return [
       "<div id='first-trimester-warning'>",
