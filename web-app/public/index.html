@@ -242,12 +242,16 @@
                         </select>
                       </div>
                     </div>
-
                     <div class="col-sm-3 col-sm-offset-1">
                       <div class="form-group">
                         <label for="age">How old are you?</label>
                         <span class="help-block" id="help-age">Your age can determine what options are available.</span>
-                        <input type="number" id="age" name="age" aria-describedby="help-age" />
+                        <select name="age" id="age" aria-describedby="help-age">
+                            <option selected value="18">18 &amp; over</option>
+                            <option value="17">17</option>
+                            <option value="16">16</option>
+                            <option value="15">15 &amp; under</option>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -261,7 +265,7 @@
         </div>
       </div>
     </div>
-
+    
     <div class="section-options-display container-fluid" id="js-section-options-display" style="display: none">
       <div class="options-display">
         <h1>Based on your information, here are your options.</h1>
