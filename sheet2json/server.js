@@ -26,7 +26,11 @@ app.get('/options', function(req, res) {
 
 	// Array of options to return to the user
 	var optionsToReturn = bizLogic.filterAvailableOptions(baseOptions, userState, userDaysSince);
-	res.send(optionsToReturn);
+	// var ageWarnings = bizLogic.filterAgeWarnings(bizLogic.ageWarnings, userState, userAge);
+	res.send({
+		'options': optionsToReturn,
+		// 'ageWarnings': ageWarnings
+	});
 })
 
 app.get('/options/copy', function(req, res) {

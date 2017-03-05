@@ -39,6 +39,13 @@ var filterAvailableOptions = function(baseOptions, userState, userDaysSince) {
 	return optionsToReturn;
 }
 
+var filterAgeWarnings = function(ageWarnings, userState, userAge) {
+	console.log("AGE WARNINGS")
+	console.log(ageWarnings[0])
+	return [];
+}
+
 module.exports = {
-	'filterAvailableOptions': filterAvailableOptions
+	'filterAvailableOptions': filterAvailableOptions,
+	'filterAgeWarnings': filterAgeWarnings
 }
