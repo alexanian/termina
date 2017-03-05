@@ -5,7 +5,7 @@ module.exports = {
         tabs :{
             longCopy: "Options Display Text",
             procedureOptions: "Options Rules",
-            ageWarning: "Parental Rules"
+            parentalConsent: "Parental Rules"
         }
     }
 }

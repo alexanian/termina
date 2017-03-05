@@ -2,5 +2,5 @@
 module.exports = {
     options: {},
     optionCopy: {},
-    ageWarnings: {}
+    parentalConsentRules: []
 };

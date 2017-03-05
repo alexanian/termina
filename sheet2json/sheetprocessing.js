@@ -81,13 +81,11 @@ function _pullProcedureOptions(successCallback) {
 function _pullAndStoreProcedureOptions() {
     _pullProcedureOptions((response) => {
           console.log("--- Pulled Procedure Option Data ---");
-          
-          
-          var optionsList = [];
+        
           var rows = response.values;
-          rows.shift(); //first line is header line
+          rows.shift(); //first line is header line - toss it
 
-          var result = rows.map(
+          globalData.options = rows.map(
               (curr, ix) => {   
                 var cleanedState = curr[3].replace(/\s/g,'');
                 var singleOption = {
@@ -99,17 +97,36 @@ function _pullAndStoreProcedureOptions() {
                 };
                 return singleOption;  
               }
-          );
-          globalData.options = optionsList;
-          console.log("Pulled this many procedure options:" + globalData.options);
+          );;
+          console.log("Pulled this many procedure options:" + globalData.options.length);
       })
 }
 
-function _pullAgeWarning(successCallback) {
-    _pullSingleTabFromSheet(successCallback, config.gapi.tabs.ageWarning)
+function _pullParentalConsent(successCallback) {
+    _pullSingleTabFromSheet(successCallback, config.gapi.tabs.parentalConsent)
 }
 
+function _pullAndStoreParentalConsent() {
+    _pullParentalConsent((response) => {
+          console.log("--- Pulled Parental Consent Option Data ---");
+    
+          var rows = response.values;
+          rows.shift(); //first line is header line - toss it
 
+          globalData.parentalConsentRules = rows.map(
+              (curr, ix) => {   
+                return {
+                    state: curr[0],
+                    exists: (curr[1] === 'T'?true:false,
+                    up_to_age: ( Number.isInteger(parseInt(curr[2]) ) ? parseInt(curr[2]) : null, 
+                    consent_type: curr[3],
+                    display_text: curr[4]
+                };
+              }
+          );
+          console.log("Pulled this many parental consent rules:" + globalData.parentalConsentRules.length);
+      })
+}
 
 module.exports = {
     pullAndStoreLongCopy: _pullAndStoreLongCopy,
