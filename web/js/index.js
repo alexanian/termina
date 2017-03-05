@@ -17,25 +17,26 @@ function _getReadableType(optionType) {
     return optionType;
 }
 
-function _createOptionElement(option) {
+function _createOptionElement(option, copy) {
     return [
         "<div class='panel panel-default'>",
             "<div class='panel-heading'>",
                 _getAvailability(option.available),
             "</div>",
             "<div class='panel-body'>",
-                "<h2>", _getReadableType(option.type), "</h2>",
-                "Here is a truncated version of the full description. It can be really long at first...",
+                "<h2>", _getReadableType(copy.type), "</h2>",
+                copy.description, "<br/><br/>",
+                copy.info_link,
             "</div>",
         "</div>"
     ].join("");
 }
 
-function updateOptions(options) {
+function updateOptions(options, optionsCopy) {
     var optionElements = [];
-    console.log(options);
+    console.log(optionsCopy);
     for (var i = 0; i < options.length; i++) {
-        optionElements.push(_createOptionElement(options[i]));
+        optionElements.push(_createOptionElement(options[i], optionsCopy[options[i]['type']]));
     }
     $("#js-options-display").empty().append(optionElements);
 }
@@ -43,15 +44,15 @@ function updateOptions(options) {
 function showOptions(e) {
     e.preventDefault();
     var data = $(e.target).serialize();
+    var optionsCopy = e.data;
+
     $.getJSON("http://localhost:3000/options",
     {
         data: data
     }).then(function(response) {
-        updateOptions(response.options);
-        console.log("response")
+        updateOptions(response.options, optionsCopy);
     });
 
-    updateOptions(window.options);
     $("#js-section-options-display").show();
     $("html, body").animate({
         scrollTop: $("#js-section-options-display").offset().top - 200
@@ -60,8 +61,12 @@ function showOptions(e) {
 }
 
 function init() {
+    var optionsCopy;
+    var optionsCopy = $.getJSON("http://localhost:3000/options/copy").then(function(response) {
+        $("#js-show-options").click(response, showOptions);
+    });
+
     $("#js-start").click(startForm);
-    $("#js-show-options").click(showOptions);
 
     $('.input-daterange').each(function() {
       $(this).datepicker('setStartDate', '01/01/2017');
