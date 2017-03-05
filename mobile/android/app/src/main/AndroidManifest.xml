@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MasterActivity_"/>
+        <activity android:name=".MasterActivity"/>
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import agency.tango.materialintroscreen.MaterialIntroActivity;
 import agency.tango.materialintroscreen.MessageButtonBehaviour;
 import agency.tango.materialintroscreen.SlideFragmentBuilder;
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,6 +17,7 @@ public class IntroActivity extends MaterialIntroActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        
         addSlide(new SlideFragmentBuilder()
                         .backgroundColor(R.color.colorPrimary)
                         .buttonsColor(R.color.colorAccent)
@@ -38,5 +40,13 @@ public class IntroActivity extends MaterialIntroActivity {
                 .title("Want more?")
                 .description("Go on")
                 .build());
+    }
+
+    @Override
+    public void onFinish() {
+        super.onFinish();
+
+        Intent masterIntent = new Intent(IntroActivity.this, MasterActivity.class);
+        startActivity(masterIntent);
     }
 }
