@@ -7,9 +7,6 @@ import android.view.ViewGroup;
 
 import com.bluelinelabs.conductor.Controller;
 
-/**
- * Created by Smule on 3/4/17.
- */
 public class HomeController extends Controller {
     @NonNull
     @Override

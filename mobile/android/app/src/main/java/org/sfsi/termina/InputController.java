@@ -14,10 +14,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Smule on 3/4/17.
- */
-
 public class InputController extends Controller implements DatePickerDialog.OnDateSetListener{
     /* package */ InputView mInputView;
     /* package */ Calendar mCalendar = Calendar.getInstance();

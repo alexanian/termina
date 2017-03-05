@@ -16,10 +16,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by Smule on 3/4/17.
- */
-
 public class TerminaNetwork {
     private static TerminaNetwork sTerminaNetwork;
     private final OkHttpClient mClient;

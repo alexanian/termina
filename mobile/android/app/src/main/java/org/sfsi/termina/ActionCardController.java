@@ -11,10 +11,6 @@ import org.sfsi.termina.models.Option;
 
 import java.util.ArrayList;
 
-/**
- * Created by Smule on 3/4/17.
- */
-
 public class ActionCardController extends Controller {
     public static final String TAG = ActionCardController.class.getSimpleName();
 

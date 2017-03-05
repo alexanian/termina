@@ -3,6 +3,7 @@ package org.sfsi.termina;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 
+import com.bluelinelabs.conductor.RouterTransaction;
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
 import org.androidannotations.annotations.Click;
@@ -18,10 +20,6 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.Calendar;
-
-/**
- * Created by Smule on 3/4/17.
- */
 
 @EViewGroup(R.layout.input_view)
 public class InputView extends ScrollView implements AdapterView.OnItemSelectedListener {
@@ -33,6 +31,9 @@ public class InputView extends ScrollView implements AdapterView.OnItemSelectedL
 
     @ViewById(R.id.age_edit_text)
     EditText mAgeEditText;
+
+    @ViewById(R.id.fab_next)
+    FloatingActionButton mButtonNext;
 
     public InputView(Context context) {
         super(context);
@@ -57,6 +58,11 @@ public class InputView extends ScrollView implements AdapterView.OnItemSelectedL
         spinner.setAdapter(view.mAdapter);
 
         return view;
+    }
+
+    @Click(R.id.fab_next)
+    protected void nextButtonClicked() {
+        mController.getRouter().pushController(RouterTransaction.with(new ActionCardController()));
     }
 
     @Click(R.id.last_period_edit_text)

@@ -63,27 +63,27 @@ public class ActionCardView extends PercentRelativeLayout {
             return this;
         }
 
-        public Builder setBody(String body){
+        public Builder setBody(String body) {
             mBody = body;
             return this;
         }
 
-        public Builder setExpDate(String expDate){
+        public Builder setExpDate(String expDate) {
             mExpDate = expDate;
             return this;
         }
 
-        public Builder setIsAvailable(boolean isAvailable){
+        public Builder setIsAvailable(boolean isAvailable) {
             mIsAvailable = isAvailable;
             return this;
         }
 
-        public Builder setDoesExpire(boolean doesExpire){
+        public Builder setDoesExpire(boolean doesExpire) {
             mDoesExpire = doesExpire;
             return this;
         }
 
-        public Builder setNumWeeksTilExpire(int numWeeksTilExpire){
+        public Builder setNumWeeksTilExpire(int numWeeksTilExpire) {
             mNumWeeksTilExpire = numWeeksTilExpire;
             return this;
         }
