@@ -90,7 +90,7 @@ function _authorize(credentials, callback) {
     var auth = new googleAuth();
     var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
-    fs.exists((exists) => {
+    fs.exists(TOKEN_PATH, (exists) => {
         if (exists) {
             // Check if we have previously stored a token.
             fs.readFile(TOKEN_PATH, function(err, token) {
