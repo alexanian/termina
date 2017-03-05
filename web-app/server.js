@@ -7,10 +7,7 @@ var url = require('url');
 var bizLogic = require('./bizlogic');
 
 app.use(cors());
-
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
+app.use(express.static('public'));
 
 app.get('/options', function(req, res) {
 
