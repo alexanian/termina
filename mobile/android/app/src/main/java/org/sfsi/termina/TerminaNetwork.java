@@ -22,7 +22,7 @@ public class TerminaNetwork {
     private static TerminaNetwork sTerminaNetwork;
     private final OkHttpClient mClient;
 
-    private ArrayList<Option> mOptions;
+    private OptionsResponse mOptionsResponse;
 
     public static synchronized TerminaNetwork getInstance() {
         if (sTerminaNetwork == null) {
@@ -54,12 +54,16 @@ public class TerminaNetwork {
                 }
                 String responseString = response.body().string();
                 System.out.println(responseString);
-                mOptions = (ArrayList<Option>) LoganSquare.parseList(responseString, Option.class);
+                mOptionsResponse = LoganSquare.parse(responseString, OptionsResponse.class);
             }
         });
     }
 
     public ArrayList<Option> getOptions() {
-        return mOptions;
+        return mOptionsResponse.options;
+    }
+
+    public AgeWarning getAgeWarning() {
+        return mOptionsResponse.age_warning;
     }
 }
