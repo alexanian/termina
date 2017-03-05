@@ -10,6 +10,7 @@
   "author": "p@pstehlik.com",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.1",
     "express": "^4.15.0",
     "google-auth-library": "^0.10.0",
     "googleapis": "^16.1.0"

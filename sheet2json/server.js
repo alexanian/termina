@@ -1,9 +1,12 @@
 require('./index');
 var express = require('express');
+var cors = require('cors');
 var app = express();
 var globalData = require('./globaldata');
 var url = require('url');
 var bizLogic = require('./bizlogic');
+
+app.use(cors());
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
