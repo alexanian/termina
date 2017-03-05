@@ -8,33 +8,54 @@
     <title>Learn Your Pregnancy Options</title>
     <style>
       /* global styles */
-      p {
-        color: #999;
-      }
-
       input, select {
         border: 1px #999 solid !important;
       }
 
+      @media screen and (min-width: 769px) {
+        .section-get-started {
+          position: relative;
+        }
+        .section-get-started .btn {
+          display: none;
+        }
+
+        .arrow-down {
+          width: 0;
+          height: 0;
+          border-left: 50px solid transparent;
+          border-right: 50px solid transparent;
+
+          border-top: 50px solid #eee;
+          position: absolute;
+          bottom: -50px;
+          right: 50%;
+        }
+      }
+
       /* Mobile */
-      @media screen and (max-width: 800px) {
+      @media screen and (max-width: 768px) {
+        p {
+          color: #999;
+        }
+
         /* splash screen */
-        .splash-screen {
+        .get-started {
           height: 100vh;
         }
 
-        .splash-screen__disclaimer {
+        .get-started__disclaimer {
           margin-top: 10vh;
         }
 
-        .splash-screen__start {
+        .get-started__start {
           position: absolute;
           bottom: 5vh;
           /* hackety hack */
           width: 93%;
         }
 
-        .splash-screen__start .btn {
+        .get-started__start .btn {
           width: 100%;
         }
 
@@ -73,11 +94,11 @@
     <![endif]-->
   </head>
   <body>
-    <div class="section-splash-screen container-fluid">
-      <div class="splash-screen">
+    <div class="section-get-started jumbotron container-fluid">
+      <div class="get-started">
           <h1>Learn your pregnancy options.</h1>
 
-          <div class="splash-screen__disclaimer">
+          <div class="get-started__disclaimer">
             <div class="row">
               <div class="col-xs-12">
                 <p>
@@ -89,10 +110,11 @@
             </div>
           </div>
 
-          <div class="splash-screen__start">
+          <div class="get-started__start">
             <button id="js-start" class="btn btn-primary">Get Started</button>
           </div>
       </div>
+      <div class="arrow-down"></div>
     </div>
 
     <div id="js-section-options-form" class="section-options-form container-fluid">
