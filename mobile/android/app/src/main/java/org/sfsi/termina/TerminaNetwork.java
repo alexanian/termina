@@ -35,7 +35,7 @@ public class TerminaNetwork {
 
     public void run() throws Exception {
         Request request = new Request.Builder()
-                .url("http://172.31.32.145:3000/options?age=15&state=HI&days_since=150")
+                .url("https://peaceful-peak-13670.herokuapp.com/options?age=14&state=AL&days_since=20")
                 .build();
 
         mClient.newCall(request).enqueue(new Callback() {
@@ -51,6 +51,7 @@ public class TerminaNetwork {
                     System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
                 }
                 String responseString = response.body().string();
+                System.out.println(responseString);
                 ArrayList<Option> options = (ArrayList<Option>) LoganSquare.parseList(responseString, Option.class);
             }
         });
