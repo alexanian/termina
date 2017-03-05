@@ -31,6 +31,7 @@ function _getReadableDate(date) {
 function _createAlertElement(alertText) {
     return [
         "<div class='text-warning'>",
+            "<i class='fa fa-warning'></i>",
             alertText,
         "</div>"
     ].join("");
@@ -45,43 +46,56 @@ function _createRestrictionAlertElement(warning)
 {
     if (!warning) return "";
 
-    return _createAlertElement([
-        "<h3>Restrictions</h3>",
-        warning.display_text
-    ].join(""));
+    return [
+        "<div class='text-warning'>",
+            "<i class='fa fa-warning'></i><strong>Restrictions</strong><br/>",
+            warning.display_text,
+        "</div>"
+    ].join("");
+}
+
+function _displayAgeWarningForType(type) {
+  var ageIndependentOptions = ["parenthood", "adoption"];
+  return !ageIndependentOptions.includes(type)
 }
 
 function _createOptionElement(option, copy, warning, id) {
-    var financialInfo = "";
-    if(copy && copy.cost && copy.cost.length > 0)
-      financialInfo = "<h3>Financial Information</h3>" + copy.cost;
-    var hiddenSection = "<div class='hidden-section hiddenSection" + id + " hidden'>" +
-                _createRestrictionAlertElement(warning) +
-                financialInfo + "<h3>Resources</h3>" + copy.info_link + "</div>";
+  var financialInfo = "";
+  if(copy && copy.cost && copy.cost.length > 0)
+    financialInfo = "<h3>Financial Information</h3>" + copy.cost;
 
-    var learnMoreToggle = "<a href='#' class='expandOption'  data-target='.hiddenSection"+id+"'> Learn more...</a>";
 
-    var typeToIconMap = {
-                          "medication":"medkit",
-                          "surgical":"user-md",
-                          "surgical_travel":"user-md",
-                          "later_care":"user-md",
-                          "parenthood":"users",
-                          "adoption":"child"
-                        };
-    var optionIcon = typeToIconMap[option.type] || "adjust";
+  var ageAlert = "";
+  var hiddenSection = "<div class='hidden-section hiddenSection" + id + " hidden'>";
+  if(_displayAgeWarningForType(option.type)) {
+    hiddenSection += _createRestrictionAlertElement(warning);
+    ageAlert = _createOptionAlertElement(warning);
+  }
+  hiddenSection += financialInfo + "<h3>Resources</h3>" + copy.info_link + "</div>";
 
-    return [
-        "<div class='panel panel-default'>",
-            "<div class='panel-body'>",
-                "<h2>", "<i class='fa fa-" + optionIcon + "'></i> ", _getReadableType(copy.type), "</h2>",
-                _createOptionAlertElement(warning),
-                copy.description,
-                learnMoreToggle,
-                hiddenSection,
-            "</div>",
-        "</div>"
-    ].join("");
+  var learnMoreToggle = "<a href='#' class='expandOption' data-target='.hiddenSection" + id + "'> Learn more...</a>";
+
+  var typeToIconMap = {
+                        "medication":"medkit",
+                        "surgical":"user-md",
+                        "surgical_travel":"user-md",
+                        "later_care":"user-md",
+                        "parenthood":"users",
+                        "adoption":"child"
+                      };
+  var optionIcon = typeToIconMap[option.type] || "adjust";
+
+  return [
+      "<div class='panel panel-default'>",
+          "<div class='panel-body'>",
+              "<h2>", "<i class='fa fa-" + optionIcon + "'></i> ", _getReadableType(copy.type), "</h2>",
+              ageAlert,
+              copy.description,
+              learnMoreToggle,
+              hiddenSection,
+          "</div>",
+      "</div>"
+  ].join("");
 }
 
 function _createFirstTrimesterWarningElement(date, daysSince) {
@@ -109,6 +123,23 @@ function updateFirstTrimesterWarning(date, daysSince) {
 }
 
 function updateOptions(options, warning, optionsCopy) {
+<<<<<<< Updated upstream
+  var availableElements = [];
+  var unavailableElements = [];
+  for (var i = 0; i < options.length; i++) {
+    if(options[i].available)
+      availableElements.push(_createOptionElement(options[i],
+            optionsCopy[options[i]['type']], warning, i));
+    else
+      unavailableElements.push(_createOptionElement(options[i],
+            optionsCopy[options[i]['type']], warning));
+  }
+  var pluralizedCopy = (unavailableElements.length > 1)? "these options are" : "this option is"
+    var splitText = "<h1><div>Based on your information, " + pluralizedCopy + " not available</div></h1>";
+  $("#js-available-options-display").empty().append(availableElements);
+  if(unavailableElements.length > 0)
+    $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
+=======
     var availableElements = [];
     var unavailableElements = [];
     for (var i = 0; i < options.length; i++) {
@@ -119,13 +150,15 @@ function updateOptions(options, warning, optionsCopy) {
         unavailableElements.push(_createOptionElement(options[i],
               optionsCopy[options[i]['type']], warning));
     }
+    $("#js-available-options-display, #js-unavailable-options-display").empty()
     var pluralizedCopy = (unavailableElements.length > 1)? "these options are" : "this option is"
     var splitText = "<h1><div>Based on your information, " + pluralizedCopy + " not available</div></h1>";
-    $("#js-available-options-display").empty().append(availableElements);
+    $("#js-available-options-display").append(availableElements);
     if(unavailableElements.length > 0)
-      $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
+      $("#js-unavailable-options-display").append(splitText).append(unavailableElements);
+>>>>>>> Stashed changes
 
-    $("#js-page-link").text(getURL());
+  $("#js-page-link").text(getURL());
 }
 
 function getURL() {
