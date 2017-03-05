@@ -37,7 +37,7 @@ function _createAlertElement(alertText) {
 }
 
 function _createOptionAlertElement(warning) {
-    if (!warning) return "";     
+    if (!warning) return "";
     return _createAlertElement("Restrictions may apply");
 }
 
@@ -53,7 +53,7 @@ function _createRestrictionAlertElement(warning)
 
 function _createOptionElement(option, copy, warning, id) {
     var financialInfo = "";
-    if(copy.cost && copy.cost.length > 0)
+    if(copy && copy.cost && copy.cost.length > 0)
       financialInfo = "<h3>Financial Information</h3>" + copy.cost;
     var hiddenSection = "<div class='hidden-section hiddenSection" + id + " hidden'>" +
                 _createRestrictionAlertElement(warning) +
