@@ -14,27 +14,56 @@
       }
 
       @media screen and (min-width: 769px) {
-        .section-get-started {
+        .section-get-started  {
           position: relative;
+          color: white;
+          background-color: #800099 ;
+          padding: 5% 10% 5% 10%;
         }
-        .section-get-started .btn {
+
+       .section-get-started .btn {
           display: none;
         }
 
-        .get-started {
+       .get-started {
           padding-left: 10em;
           padding-right: 10em;
+          color: white;
         }
 
-        .arrow-down {
+       .get-started h1 {
+          font-size: 4em;
+        }
+
+       .get-started__disclaimer {
+          margin-top: 10%;
+          margin-bottom: 5%;
+          margin-right: 15%;
+        }
+
+       .get-started__disclaimer__body {
+          margin-top: 5%;
+        }
+
+       .btn {
+          background-color: #800099 ;
+          border: 1px solid white;
+          border-radius: 20px;
+        }
+
+       .btn .btn-primary {
+          background-color: red;
+        }
+
+       .arrow-down {
           width: 0;
           height: 0;
-          border-left: 50px solid transparent;
-          border-right: 50px solid transparent;
+          border-left: 25px solid transparent;
+          border-right: 25px solid transparent;
 
-          border-top: 50px solid #eee;
+         border-top: 25px solid #800099 ;
           position: absolute;
-          bottom: -50px;
+          bottom: -25px;
           right: 50%;
         }
         .section-options-form p {
@@ -50,28 +79,34 @@
           margin-top: 60px;
         }
 
-        .options-form__item--initial {
+       .options-form__item--initial {
           opacity: 0.5;
           /* not the best; a disabled on the input might be better. for a real thing, this also means that broken JS won't ever re-enable */
           pointer-events: none;
         }
 
-        .show-options {
+       .show-options {
           position: relative;
           top: 4em;
         }
       }
 
-      /* Mobile */
-      @media screen and (max-width: 768px) {
+     /* Mobile */
+
+
+
+     @media screen and (max-width: 768px) {
         p {
           color: #999;
         }
 
-        /* splash screen */
+       /* splash screen */
         .section-get-started {
           position: relative;
           height: 95vh;
+          color: white;
+          background-color: #800099 ;
+          padding: 10% 15% 10% 15%;
         }
         .arrow-down {
           width: 0;
@@ -79,39 +114,58 @@
           border-left: 5vh solid transparent;
           border-right: 5vh solid transparent;
 
-          border-top: 5vh solid #eee;
+         border-top: 5vh solid #800099 ;
           position: absolute;
           bottom: -4vh;
           left: 40%;
         }
 
-        .get-started__disclaimer {
-          margin-top: 1vh;
+       .get-started {
+          color: white;
+          padding: 10% 8% 10% 8%;
         }
 
-        .get-started__start {
+       .get-started__disclaimer {
+          margin-top: 20%;
+        }
+
+       .get-started__disclaimer__body {
+          margin-top: 30px;
+          color: white;
+          font-size: 0.8em;
+        }
+
+       .get-started__start {
           position: absolute;
           bottom: 5vh;
           /* hackety hack */
-          width: 93%;
+          width: 80%;
         }
 
-        .get-started__start .btn {
+       .get-started__start .btn {
           width: 100%;
+          background-color: #800099 ;
+          border: 1px solid white;
+          border-radius: 20px;
+          font-size: 1.5em;
         }
 
-        /* options form */
+       .get-started__start .btn:active,
+       .get-started__start .btn:focus {
+          background-color: #4C005A !important;
+          border-color: #26002d !important;
+          outline: none !important;
+       }
+
+       /* options form */
         .section-options-form {
           min-height: 95vh;
-        }
-        .options-form {
-          margin-top: 5vh;
         }
         .options-form__item--initial {
           display: none;
         }
 
-        /* show options button */
+       /* show options button */
         .show-options {
           margin-top: 2vh;
           height: 6vh;
@@ -119,6 +173,10 @@
         }
         .show-options .btn {
           width: 100%;
+        }
+
+       #js-section-options-form {
+          margin-top: 60px;
         }
       }
     </style>
@@ -135,41 +193,29 @@
     <![endif]-->
   </head>
   <body>
-    <div class="section-get-started jumbotron container-fluid">
+    <div class="section-get-started container-fluid">
       <div class="get-started">
-          <h1>Discover your pregnancy options</h1>
+        <h1>Discover your pregnancy options</h1>
 
-          <div class="get-started__disclaimer">
-            <div class="row">
-              <div class="col-xs-12">
-                <p>Welcome! We are here to help.</p>
+        <div class="get-started__disclaimer">
+          <h4>Did you know?</h4>
 
-                <p><strong>Did you know?</strong><br/>
+          <div class="get-started__disclaimer__body">About half of all women in the U.S. have an unplanned pregnancy at some point in their lives. About 4 out of 10 women with unplanned pregnancies decide to have abortions.
 
-                About half of all women in the U.S. have an unplanned pregnancy at some point in their lives. About 4 out of 10 women with unplanned pregnancies decide to have abortions.</p>
+            <p>&nbsp;</p>
 
-                <p>&nbsp;</p>
+            Disclaimer: Information on this website is not medical advice and shouldn't be used instead of advice from a licensed healthcare professional.</div>
+        </div>
 
-                <h6>Disclaimer: We are sex educators, not doctors! Information on this website is not intended to be medical advice and should not be used instead of advice from a licensed healthcare professional.</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="get-started__start">
-            <button id="js-start" class="btn btn-primary">Get Started</button>
-          </div>
+        <div class="get-started__start">
+          <button id="js-start" class="btn btn-primary">Get Started</button>
+        </div>
       </div>
       <div class="arrow-down"></div>
     </div>
 
     <div id="js-section-options-form" class="section-options-form container-fluid">
       <div class="options-form">
-        <div class="row">
-          <div class="col-xs-12">
-            <h1>Pregnancy Options</h1>
-          </div>
-        </div>
-
         <div class="row">
           <div class="col-xs-12">
             <div class="options-form__contents">
