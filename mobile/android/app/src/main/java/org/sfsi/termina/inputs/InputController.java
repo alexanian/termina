@@ -30,8 +30,10 @@ public class InputController extends Controller implements DatePickerDialog.OnDa
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-        String rangeStart = monthOfYear + "/" + dayOfMonth + "/" + year;
-        String rangeEnd = monthOfYearEnd + "/" + dayOfMonthEnd + "/" + yearEnd;
+        int displayMonthOfYear = monthOfYear + 1;
+        int displayMonthOfYearEnd = monthOfYearEnd + 1;
+        String rangeStart = displayMonthOfYear + "/" + dayOfMonth + "/" + year;
+        String rangeEnd = displayMonthOfYearEnd + "/" + dayOfMonthEnd + "/" + yearEnd;
         mInputView.mLastPeriodEditText.setText(rangeStart + " - " + rangeEnd);
         try {
             Date rangeStartDate = mFormat.parse(rangeStart);
