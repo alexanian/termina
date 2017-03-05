@@ -10,6 +10,11 @@
     <style>
       /* global styles */
 
+      .dropdown {
+        background-color: white;
+        min-height: 34px;
+      }
+
       a {
         color: #800099 !important;
         font-weight: bold;
@@ -355,7 +360,7 @@
                       <div class="form-group">
                         <label for="state">Where do you live?</label>
                         <span class="help-block" id="help-state">Access to abortion and abortion laws vary by state.</span>
-                        <select name="state" id="state" aria-describedby="help-state">
+                        <select name="state" class="dropdown" id="state" aria-describedby="help-state">
                           <option selected disabled value="none">Choose state:</option>
                           <option value="AL">Alabama</option>
                           <option value="AK">Alaska</option>
@@ -418,7 +423,7 @@
                           <div class="form-group">
                             <label for="age">How old are you?</label>
                             <span class="help-block" id="help-age">Your age may determine if you need parental consent for an abortion.</span>
-                            <select name="age" id="age" aria-describedby="help-age">
+                            <select name="age" class="dropdown" id="age" aria-describedby="help-age">
                                 <option selected value="18">18 &amp; over</option>
                                 <option value="17">17</option>
                                 <option value="16">16</option>
