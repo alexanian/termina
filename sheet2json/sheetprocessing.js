@@ -97,7 +97,7 @@ function _pullAndStoreProcedureOptions() {
                 };
                 return singleOption;  
               }
-          );;
+          );
           console.log("Pulled this many procedure options:" + globalData.options.length);
       })
 }
@@ -117,8 +117,8 @@ function _pullAndStoreParentalConsent() {
               (curr, ix) => {   
                 return {
                     state: curr[0],
-                    exists: (curr[1] === 'T'?true:false,
-                    up_to_age: ( Number.isInteger(parseInt(curr[2]) ) ? parseInt(curr[2]) : null, 
+                    exists: (curr[1] === 'T')?true:false,
+                    up_to_age: ( Number.isInteger(parseInt(curr[2])) ) ? parseInt(curr[2]) : null, 
                     consent_type: curr[3],
                     display_text: curr[4]
                 };
@@ -130,5 +130,6 @@ function _pullAndStoreParentalConsent() {
 
 module.exports = {
     pullAndStoreLongCopy: _pullAndStoreLongCopy,
-    pullAndStoreProcedureOptions: _pullAndStoreProcedureOptions    
+    pullAndStoreProcedureOptions: _pullAndStoreProcedureOptions,
+    pullAndStoreParentalConsent: _pullAndStoreParentalConsent
 };
