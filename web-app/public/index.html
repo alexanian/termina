@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Learn Your Pregnancy Options</title>
-
-    <!-- Bootstrap -->
-    <link href="./vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./vendor/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
-
     <style>
       /* global styles */
       input, select {
@@ -52,6 +47,7 @@
         .options-form {
           padding-left: 20px;
           padding-right: 20px;
+          margin-top: 60px;
         }
 
         .options-form__item--initial {
@@ -72,7 +68,7 @@
           color: #999;
         }
 
-        /* splash screen */  
+        /* splash screen */
         .section-get-started {
           position: relative;
           height: 95vh;
@@ -90,7 +86,7 @@
         }
 
         .get-started__disclaimer {
-          margin-top: 10vh;
+          margin-top: 1vh;
         }
 
         .get-started__start {
@@ -113,11 +109,20 @@
         }
 
         /* show options button */
+        .show-options {
+          margin-top: 2vh;
+          height: 6vh;
+          margin-bottom: 2vh;
+        }
         .show-options .btn {
           width: 100%;
         }
       }
     </style>
+
+    <!-- Bootstrap -->
+    <link href="./vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -129,16 +134,20 @@
   <body>
     <div class="section-get-started jumbotron container-fluid">
       <div class="get-started">
-          <h1>Learn your pregnancy options.</h1>
+          <h1>Discover your pregnancy options</h1>
 
           <div class="get-started__disclaimer">
             <div class="row">
               <div class="col-xs-12">
-                <p>
-                  We're here to help.<br />
-                  We're a non-profit based in SF called SFSI.
-                </p>
-                <p>We're not medical professionals</p>
+                <p>Welcome! We are here to help.</p>
+
+                <p><strong>Did you know?</strong><br/>
+
+                About half of all women in the U.S. have an unplanned pregnancy at some point in their lives. About 4 out of 10 women with unplanned pregnancies decide to have abortions.</p>
+
+                <p>&nbsp;</p>
+
+                <h6>Disclaimer: We are sex educators, not doctors! Information on this website is not intended to be medical advice and should not be used instead of advice from a licensed healthcare professional.</h6>
               </div>
             </div>
           </div>
@@ -161,14 +170,14 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="options-form__contents">
-              <p>To give you the most accurate information, tell us a bit about yourself. Your information is always secure and never saved.</p>
 
               <form id="js-options-form">
                   <div class="row">
                     <div class="col-sm-4 options-form__item">
                       <div class="form-group">
-                        <label for="last-period-date">When was the first day of your last period?</label>
+                        <label for="last-period-date">When was the <em>first day</em> of your last period?</label>
                         <span class="help-block" id="help-last-period-date">If you're not sure, make your best guess.</span>
+                        <p><small>This date is used to give you the most accurate options specific to your situation.</small></p>
 
                         <div class="input-group date" data-provide="datepicker">
                           <input type="text" id="date" class="form-control">
@@ -182,8 +191,9 @@
                     <div class="col-sm-3 options-form__item">
                       <div class="form-group">
                         <label for="state">Where do you live?</label>
-                        <span class="help-block" id="help-state">Laws vary by state.</span>
+                        <span class="help-block" id="help-state">Access to abortion and abortion laws vary by state.</span>
                         <select name="state" id="state" aria-describedby="help-state">
+                          <option selected disabled value="none">Choose state:</option>
                           <option value="AL">Alabama</option>
                           <option value="AK">Alaska</option>
                           <option value="AZ">Arizona</option>
@@ -242,7 +252,7 @@
                     <div class="col-sm-3 options-form__item">
                       <div class="form-group">
                         <label for="age">How old are you?</label>
-                        <span class="help-block" id="help-age">Your age can determine what options are available.</span>
+                        <span class="help-block" id="help-age">Your age may determine if you need parental consent for an abortion.</span>
                         <input type="number" id="age" name="age" aria-describedby="help-age" />
                       </div>
                   </div>
@@ -257,13 +267,12 @@
             </div>
         </div>
         </div>
-
       </div>
     </div>
 
     <div class="section-options-display container-fluid" id="js-section-options-display" style="display: none">
       <div class="options-display">
-        <h1>Based on your information, here are your options.</h1>
+        <h1>Here are your options:</h1>
         <div id="js-options-display"></div>
       </div>
     </div>
