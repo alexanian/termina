@@ -60,10 +60,21 @@ function _createOptionElement(option, copy, warning, id) {
                 financialInfo + "<h3>Resources</h3>" + copy.info_link + "</div>";
 
     var learnMoreToggle = "<a href='#' class='expandOption'  data-target='.hiddenSection"+id+"'> Learn more...</a>";
+
+    var typeToIconMap = {
+                          "medication":"medkit",
+                          "surgical":"user-md",
+                          "surgical_travel":"user-md",
+                          "later_care":"user-md",
+                          "parenthood":"users",
+                          "adoption":"child"
+                        };
+    var optionIcon = typeToIconMap[option.type] || "adjust";
+
     return [
         "<div class='panel panel-default'>",
             "<div class='panel-body'>",
-                "<h2>", _getReadableType(copy.type), "</h2>",
+                "<h2>", "<i class='fa fa-" + optionIcon + "'></i> ", _getReadableType(copy.type), "</h2>",
                 _createOptionAlertElement(warning),
                 copy.description,
                 learnMoreToggle,
@@ -73,13 +84,13 @@ function _createOptionElement(option, copy, warning, id) {
     ].join("");
 }
 
-function _createFirstTrimesterWarningElement(date, daysSince) {    
+function _createFirstTrimesterWarningElement(date, daysSince) {
     var daysInFirstTrimester = 90;
     if (daysSince > daysInFirstTrimester) return "";
-    
+
     var endOfTrimesterDate = new Date();
     endOfTrimesterDate.setDate(date.getDate() + daysInFirstTrimester);
-    
+
     return [
         "<div id='first-trimester-warning'>",
         "Abortion care will be easiest for you to access before your first trimester ends ",
