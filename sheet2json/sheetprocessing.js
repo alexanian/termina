@@ -30,45 +30,37 @@ function _pullLongCopy(successCallback) {
 }
 
 function _convertLongCopyToJson(rawObject){
-    let headers = rawObject.shift();
-    let rows = rawObject.map(_convertLongCopyRow);
-    let copyObject = {};
-    rows.forEach(function(rowArray) {
-      copyObject[rowArray[0]] = rowArray[1];
-    });
-    return copyObject;
 }
 
-function _convertLongCopyRow(rawRow){
-    const keys = ['title', 'description', 'cost', 'common', 'info_link'];
-    let type = rawRow.shift();
-    let rowJson = {};
-    rawRow.forEach((value, index) => {
-      rowJson[keys[index]] = value;
-    })
-    return [type, rowJson];
-}
-
-var tempPrintOut = function(rows){
-    if (rows.length == 0) {
-            console.log('No data found.');
-        } else {
-            console.log('1st column, 2nd column');
-            for (var i = 0; i < rows.length; i++) {
-                var row = rows[i];
-                // Print columns A and B, which correspond to indices 0 and 1.
-                console.log('%s, %s', row[0], row[1]);
-            }
-        }
-};
 
 function _pullAndStoreLongCopy(){
     _pullLongCopy(
         (response) => {
-            console.log("--- Pulled Long Text Copy ---");
+            console.log("--- Pulled Option Copy ---");
+
+
             var rows = response.values;
-            tempPrintOut(rows);
-            globalData.optionCopy = _convertLongCopyToJson(rows);
+            rows.shift(); //first line is header line
+
+            let copyObject = {};
+            let i = 0;
+            var result = rows.map(
+                (curr, ix) => {
+                    let type = curr.shift();
+                    let row = {
+                        type: curr[0],
+                        description: curr[1],
+                        cost: curr[2],
+                        common: curr[3],
+                        info_link: curr[4]
+                    };
+                    copyObject[type] = row;
+                    i++;
+                }
+            )
+
+            globalData.optionCopy = copyObject;
+            console.log("Pulled this many pieces of option copy:" + i);
         }
     );
 };
@@ -81,7 +73,6 @@ function _pullProcedureOptions(successCallback) {
 function _pullAndStoreProcedureOptions() {
     _pullProcedureOptions((response) => {
           console.log("--- Pulled Procedure Option Data ---");
-        
           var rows = response.values;
           rows.shift(); //first line is header line - toss it
 
