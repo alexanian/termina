@@ -12,6 +12,7 @@ import org.androidannotations.annotations.EViewGroup;
 
 @EViewGroup(R.layout.input_view)
 public class InputView extends FrameLayout {
+    /* package */ InputController mController;
 
     public InputView(Context context) {
         super(context);
@@ -23,5 +24,11 @@ public class InputView extends FrameLayout {
 
     public InputView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    static public InputView newInstance(final Context context, InputController controller) {
+        InputView view = InputView_.build(context);
+        view.mController = controller;
+        return view;
     }
 }

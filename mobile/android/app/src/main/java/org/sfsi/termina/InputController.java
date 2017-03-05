@@ -12,9 +12,12 @@ import com.bluelinelabs.conductor.Controller;
  */
 
 public class InputController extends Controller {
+    /* package */ InputView mInputView;
+
     @NonNull
     @Override
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
-        return null;
+        mInputView = InputView.newInstance(getActivity(), this);
+        return mInputView;
     }
 }
