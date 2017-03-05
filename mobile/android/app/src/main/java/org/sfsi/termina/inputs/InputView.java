@@ -1,13 +1,16 @@
 package org.sfsi.termina.inputs;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -25,15 +28,18 @@ import org.sfsi.termina.TerminaNetwork;
 import java.util.Calendar;
 
 @EViewGroup(R.layout.input_view)
-public class InputView extends ScrollView implements AdapterView.OnItemSelectedListener {
+public class InputView extends ScrollView {
     /* package */ InputController mController;
     /* package */ ArrayAdapter<CharSequence> mAdapter;
 
     @ViewById(R.id.last_period_edit_text)
     EditText mLastPeriodEditText;
 
+    @ViewById(R.id.state_input)
+    Button mStateButton;
+
     @ViewById(R.id.age_edit_text)
-    EditText mAgeEditText;
+    Button mAgeButton;
 
     @ViewById(R.id.fab_next)
     FloatingActionButton mButtonNext;
@@ -51,17 +57,45 @@ public class InputView extends ScrollView implements AdapterView.OnItemSelectedL
     }
 
     static public InputView newInstance(final Context context, InputController controller) {
-        InputView view = InputView_.build(context);
-        view.mController = controller;
+        final InputView inputView = InputView_.build(context);
+        inputView.mController = controller;
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.state_input);
-        view.mAdapter = ArrayAdapter.createFromResource(context,
-                R.array.input_states_array, android.R.layout.simple_spinner_item);
-        view.mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(view.mAdapter);
-        spinner.setOnItemSelectedListener(view);
+        inputView.mAgeButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                final CharSequence ages[] = view.getContext().getResources().getStringArray(R.array.ages_array);
 
-        return view;
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("Pick your age");
+                builder.setItems(ages, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputView.mAgeButton.setText(ages[which]);
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        inputView.mStateButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                final CharSequence states[] = view.getContext().getResources().getStringArray(R.array.input_states_array);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("Pick your age");
+                builder.setItems(states, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputView.mStateButton.setText(states[which]);
+                        inputView.mController.mState = states[which].toString();
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        return inputView;
     }
 
     @Click(R.id.fab_next)
@@ -79,7 +113,7 @@ public class InputView extends ScrollView implements AdapterView.OnItemSelectedL
             }
         };
         try {
-            TerminaNetwork.getInstance().requestOptions(mController.mDaysSince, mController.mState, Integer.parseInt(mAgeEditText.getText().toString()), callback);
+            TerminaNetwork.getInstance().requestOptions(mController.mDaysSince, mController.mState, parseAge(mAgeButton.getText().toString()), callback);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -109,12 +143,20 @@ public class InputView extends ScrollView implements AdapterView.OnItemSelectedL
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        mController.mState = mAdapter.getItem(i).toString();
-    }
-
-    @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         // TODO: Error message
+    }
+
+    private int parseAge(String ageText) {
+        switch (ageText) {
+            case "18 & over":
+                return 18;
+            case "17":
+                return 17;
+            case "16":
+                return 16;
+            default:
+                return 15;
+        }
     }
 }

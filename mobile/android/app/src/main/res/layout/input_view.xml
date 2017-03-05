@@ -58,11 +58,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/input_state_question"/>
 
-            <Spinner
+            <Button
                 android:id="@+id/state_input"
                 android:layout_marginTop="@dimen/margin_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:hint="Select State"
                 android:minWidth="@dimen/spinner_min_width"/>
 
             <TextView
@@ -81,11 +82,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/input_age_details"/>
 
-            <EditText
+            <Button
                 android:id="@+id/age_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Age"/>
+                android:hint="Select Age"
+                android:minWidth="@dimen/spinner_min_width"/>
         </LinearLayout>
     </ScrollView>
 
