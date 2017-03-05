@@ -5,7 +5,35 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/black</item>
     </style>
 
+    <style name="Termina">
+    </style>
+
+    <style name="Termina.Text">
+    </style>
+
+    <style name="Termina.Text.Heading" parent="Termina.Text">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="Termina.Text.Title" parent="Termina.Text">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Termina.Text.SubTitle" parent="Termina.Text">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Termina.Text.Question" parent="Termina.Text">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Termina.Text.Disclaimer" parent="Termina.Text.Title">
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>

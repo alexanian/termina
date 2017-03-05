@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Termina</string>
+
+    <!-- Intro -->
+    <string name="first_page_header">Learn your pregnancy options</string>
+    <string name="first_page_title">We\'re here to help. We\'re a non-profit based in SF called SFSI.</string>
+    <string name="we_no_doctor_header">We\'re not medical professionals</string>
+    <string name="we_no_doctor_title">Disclaimer</string>
+    <string name="we_no_doctor_disclaimer">
+        All content found on the app, including: text, images, audio, or other formats were created
+        for informational purposes only. Offerings for continuing education credits are clearly
+        identified and the appropriate target audience is identified. The Content is not intended to
+        be a substitute for professional medical advice, diagnosis, or treatment.
+        Always seek the advice of your physician or other qualified health provider with any questions
+        you may have regarding a medical condition. Never disregard professional medical advice or
+        delay in seeking it because of something you have read on this app.\n\n
+
+        If you think you may have a medical emergency, call your doctor, go to the emergency department,
+        or call 911 immediately. SFSI does not recommend or endorse any specific tests, physicians,
+        products, procedures, opinions, or other information that may be mentioned on the app.
+        Reliance on any information provided by the app is solely at your own risk.\n\n
+
+        The app may contain health- or medical-related materials or discussions regarding sexually
+        explicit disease states. If you find these materials offensive, you may not want to use our app.
+        The app and its Content are provided on an "as is" basis.\n\n
+
+        Links to educational content not created by SFSI are taken at your own risk. SFSI is not
+        responsible for the claims of external websites and education companies.</string>
 </resources>
