@@ -54,13 +54,20 @@ function _createOptionElement(option, copy, warning) {
 }
 
 function updateOptions(options, warning, optionsCopy) {
-    var optionElements = [];
+    var availableElements = [];
+    var unavailableElements = [];
     for (var i = 0; i < options.length; i++) {
-        optionElements.push(_createOptionElement(options[i],
-                                                 optionsCopy[options[i]['type']],
-                                                 warning));
+      if(options[i].available)
+        availableElements.push(_createOptionElement(options[i],
+              optionsCopy[options[i]['type']], warning));
+      else
+        unavailableElements.push(_createOptionElement(options[i],
+              optionsCopy[options[i]['type']], warning));
     }
-    $("#js-options-display").empty().append(optionElements);
+    var pluralizedCopy = (unavailableElements.length > 1)? "these options are" : "this option is"
+    var splitText = "<h1><div>Based on your information, " + pluralizedCopy + " not available</div></h1>";
+    $("#js-available-options-display").empty().append(availableElements);
+    $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
 }
 
   function showOptions(e) {
@@ -71,11 +78,10 @@ function updateOptions(options, warning, optionsCopy) {
     var oneDay = 24*60*60*1000;
     var today = new Date();
     var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
-    
     var optionsCopy = e.data;
 
-    data += "&days_since=";
-    
+    data += "&days_since=" + daysSince;
+
     $.getJSON("http://localhost:3000/options?", data)
     .then(function(response) {
         updateOptions(response.options, response.age_warning, optionsCopy);
