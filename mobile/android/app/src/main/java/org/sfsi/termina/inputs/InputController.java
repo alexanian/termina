@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.WindowManager;
 import com.bluelinelabs.conductor.Controller;
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
@@ -25,6 +26,7 @@ public class InputController extends Controller implements DatePickerDialog.OnDa
     @Override
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         mInputView = InputView.newInstance(getActivity(), this);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         return mInputView;
     }
 
@@ -33,8 +35,7 @@ public class InputController extends Controller implements DatePickerDialog.OnDa
         int displayMonthOfYear = monthOfYear + 1;
         int displayMonthOfYearEnd = monthOfYearEnd + 1;
         String rangeStart = displayMonthOfYear + "/" + dayOfMonth + "/" + year;
-        String rangeEnd = displayMonthOfYearEnd + "/" + dayOfMonthEnd + "/" + yearEnd;
-        mInputView.mLastPeriodEditText.setText(rangeStart + " - " + rangeEnd);
+        mInputView.mLastPeriodEditText.setText(rangeStart);
         try {
             Date rangeStartDate = mFormat.parse(rangeStart);
             long duration = System.currentTimeMillis() - rangeStartDate.getTime();

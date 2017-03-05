@@ -14,7 +14,7 @@
 
             <TextView
                 android:id="@+id/input_header"
-                style="@style/Termina.Text.Title"
+                style="@style/Termina.Text.Title.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/input_header"/>
@@ -22,6 +22,7 @@
             <TextView
                 android:id="@+id/input_description"
                 style="@style/Termina.Text.Contextual"
+                android:layout_marginTop="@dimen/margin_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/input_description"/>
@@ -29,6 +30,7 @@
             <TextView
                 android:id="@+id/input_period_question"
                 style="@style/Termina.Text.Question"
+                android:layout_marginTop="@dimen/margin_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/input_period_question"/>
@@ -36,6 +38,7 @@
             <TextView
                 android:id="@+id/input_period_details"
                 style="@style/Termina.Text.Contextual"
+                android:layout_marginTop="@dimen/margin_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/input_period_details"/>
@@ -50,12 +53,14 @@
             <TextView
                 android:id="@+id/input_state_question"
                 style="@style/Termina.Text.Question"
+                android:layout_marginTop="@dimen/margin_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/input_state_question"/>
 
             <Spinner
                 android:id="@+id/state_input"
+                android:layout_marginTop="@dimen/margin_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="@dimen/spinner_min_width"/>
@@ -63,6 +68,7 @@
             <TextView
                 android:id="@+id/input_age_question"
                 style="@style/Termina.Text.Question"
+                android:layout_marginTop="@dimen/margin_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/input_age_question"/>
@@ -70,6 +76,7 @@
             <TextView
                 android:id="@+id/input_age_details"
                 style="@style/Termina.Text.Contextual"
+                android:layout_marginTop="@dimen/margin_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/input_age_details"/>

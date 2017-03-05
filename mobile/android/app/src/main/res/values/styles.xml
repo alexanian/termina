@@ -27,13 +27,24 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="Termina.Text.Title.Bold" parent="Termina.Text.Title">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Termina.Text.SubTitle" parent="Termina.Text">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorPrimaryLight</item>
     </style>
 
+    <style name="Termina.Text.SubTitle.Bold" parent="Termina.Text.SubTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Termina.Text.Question" parent="Termina.Text">
         <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Termina.Text.Contextual">
@@ -46,6 +57,11 @@
     </style>
 
     <style name="Termina.Text.Card" parent="Termina.Text.Title">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Termina.Text.Card.SubDetail" parent="Termina.Text.SubTitle">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textStyle">bold</item>
     </style>

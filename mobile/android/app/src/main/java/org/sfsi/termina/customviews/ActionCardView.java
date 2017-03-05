@@ -2,18 +2,21 @@ package org.sfsi.termina.customviews;
 
 import android.content.Context;
 import android.support.percent.PercentRelativeLayout;
+import android.text.Html;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.sfsi.termina.R;
 import org.sfsi.termina.models.OptionDetails;
 import org.sfsi.termina.models.OptionDetailsResponse;
+import org.sfsi.termina.utils.StringUtils;
 
 /**
  * Created by Sean on 3/4/17.
@@ -42,6 +45,27 @@ public class ActionCardView extends PercentRelativeLayout {
     @ViewById(R.id.tv_learn_more)
     protected TextView mLearnMoreTextView;
 
+    @ViewById(R.id.details_layout)
+    protected LinearLayout mDetailsLayout;
+
+    @ViewById(R.id.inner_restriction_layout)
+    protected LinearLayout mInnerRestrictionLayout;
+
+    @ViewById(R.id.tv_restrictions_detail)
+    protected TextView mRestrictionsDetailTextView;
+
+    @ViewById(R.id.inner_financial_layout)
+    protected LinearLayout mInnerFinancialLayout;
+
+    @ViewById(R.id.tv_financial_detail)
+    protected TextView mFinancialDetailTextView;
+
+    @ViewById(R.id.inner_resources_layout)
+    protected LinearLayout mInnerResourcesLayout;
+
+    @ViewById(R.id.tv_resources_detail)
+    protected TextView mResourcesDetailTextView;
+
     public ActionCardView(final Context context) {
         super(context);
     }
@@ -69,6 +93,8 @@ public class ActionCardView extends PercentRelativeLayout {
         boolean mIsAvailable = true;
         boolean mDoesExpire = false;
         int mNumWeeksSinceExpired = 0;
+
+        boolean mIsShowingDetails = false;
 
         public Builder(Context context) {
             mContext = context;
@@ -167,49 +193,87 @@ public class ActionCardView extends PercentRelativeLayout {
 
         public ActionCardView build() {
             LayoutInflater inflater = LayoutInflater.from(mContext);
-            final ActionCardView_ view = (ActionCardView_) inflater.inflate(R.layout.action_card_item, null, false);
+            final ActionCardView_ cardView = (ActionCardView_) inflater.inflate(R.layout.action_card_item, null, false);
 
             if (mActionType != null) {
                 switch (mActionType) {
                     case MEDICATION:
-                        view.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.med_green));
+                        cardView.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.med_green));
                         break;
                     case SURGICAL:
-                        view.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.sur_blue));
+                        cardView.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.sur_blue));
                         break;
                     case CONTINUE:
-                        view.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.con_orange));
+                        cardView.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.con_orange));
                         break;
                 }
             }
 
             if (!TextUtils.isEmpty(mTitle)) {
-                view.mTitleTextView.setText(mTitle);
+                cardView.mTitleTextView.setText(mTitle);
             }
 
             if (mActionType == ActionType.MEDICATION && !mIsAvailable && mNumWeeksSinceExpired > 0) {
-                view.setBackgroundResource(R.drawable.card_rectangle_red);
-                view.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
-                view.mSubtitleTextView.setTextColor(mContext.getResources().getColor(R.color.red));
-                view.mSubtitleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icn_error_red, 0, 0, 0);
-                view.mSubtitleTextView.setCompoundDrawablePadding((int) mContext.getResources().getDimension(R.dimen.margin_4));
-                view.mSubtitleTextView.setText(mContext.getResources().getString(R.string.action_card_subtitle_not_available_from, mNumWeeksSinceExpired));
-            } else if (mAgeWarningApplies) {
-                if (mActionType != ActionType.PARENTHOOD && mActionType != ActionType.ADOPTION) {
-                    view.mSubtitleTextView.setTextColor(mContext.getResources().getColor(R.color.red));
-                    view.mSubtitleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icn_error_red, 0, 0, 0);
-                    view.mSubtitleTextView.setCompoundDrawablePadding((int) mContext.getResources().getDimension(R.dimen.margin_4));
-                    view.mSubtitleTextView.setText(mContext.getResources().getString(R.string.action_card_restriction));
-                }
+                cardView.setBackgroundResource(R.drawable.card_rectangle_red);
+                cardView.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
+                cardView.mSubtitleTextView.setTextColor(mContext.getResources().getColor(R.color.red));
+                cardView.mSubtitleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icn_error_red, 0, 0, 0);
+                cardView.mSubtitleTextView.setCompoundDrawablePadding((int) mContext.getResources().getDimension(R.dimen.margin_4));
+                cardView.mSubtitleTextView.setText(mContext.getResources().getString(R.string.action_card_subtitle_not_available_from, mNumWeeksSinceExpired));
+            } else if (mAgeWarningApplies && (mActionType != ActionType.PARENTHOOD && mActionType != ActionType.ADOPTION)) {
+                cardView.mSubtitleTextView.setTextColor(mContext.getResources().getColor(R.color.red));
+                cardView.mSubtitleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icn_error_red, 0, 0, 0);
+                cardView.mSubtitleTextView.setCompoundDrawablePadding((int) mContext.getResources().getDimension(R.dimen.margin_4));
+                cardView.mSubtitleTextView.setText(mContext.getResources().getString(R.string.action_card_restriction));
             } else {
-                view.mSubtitleTextView.setVisibility(View.GONE);
+                cardView.mSubtitleTextView.setVisibility(View.GONE);
             }
 
             if (!TextUtils.isEmpty(mBody)) {
-                view.mBodyTextView.setText(mBody);
+                cardView.mBodyTextView.setText(mBody);
             }
 
-            return view;
+            mIsShowingDetails = false;
+            cardView.mDetailsLayout.setVisibility(View.GONE);
+            cardView.mLearnMoreTextView.setText(mContext.getResources().getString(R.string.action_card_learn_more));
+
+            cardView.mLearnMoreTextView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    if (mIsShowingDetails) {
+                        mIsShowingDetails = false;
+                        cardView.mDetailsLayout.setVisibility(View.GONE);
+                        cardView.mLearnMoreTextView.setText(mContext.getResources().getString(R.string.action_card_learn_more));
+                    } else {
+                        mIsShowingDetails = true;
+                        cardView.mDetailsLayout.setVisibility(View.VISIBLE);
+                        cardView.mLearnMoreTextView.setText(mContext.getResources().getString(R.string.action_card_learn_less));
+
+                        if (mAgeWarningApplies && (mActionType != ActionType.PARENTHOOD && mActionType != ActionType.ADOPTION)) {
+                            cardView.mInnerRestrictionLayout.setVisibility(View.VISIBLE);
+                            cardView.mRestrictionsDetailTextView.setText(mAgeWarning);
+                        } else {
+                            cardView.mInnerRestrictionLayout.setVisibility(View.GONE);
+                        }
+
+                        if (!TextUtils.isEmpty(mCost)) {
+                            cardView.mInnerFinancialLayout.setVisibility(View.VISIBLE);
+                            cardView.mFinancialDetailTextView.setText(mCost);
+                        } else {
+                            cardView.mInnerFinancialLayout.setVisibility(View.GONE);
+                        }
+
+                        if (!TextUtils.isEmpty(mInfoLink)) {
+                            cardView.mInnerResourcesLayout.setVisibility(View.VISIBLE);
+                            StringUtils.setTextViewHTML(mContext, cardView.mResourcesDetailTextView, mInfoLink);
+                        } else {
+                            cardView.mInnerResourcesLayout.setVisibility(View.GONE);
+                        }
+                    }
+                }
+            });
+
+            return cardView;
         }
     }
 

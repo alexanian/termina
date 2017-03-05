@@ -93,6 +93,9 @@
 
 
     <!-- Action Cards -->
+    <string name="action_card_restrictions">Restrictions</string>
+    <string name="action_card_financial">Financial Information</string>
+    <string name="action_card_resources">Resources</string>
     <string name="action_card_restriction">Restrictions may apply</string>
     <string name="action_card_subtitle_available_until" context="%1 - Put date in String">Available until approx. %1$s</string>
     <string name="action_card_subtitle_not_available_from" context="%1 - Put number of weeks in int">This is not available after %1$d weeks.</string>
