@@ -21,7 +21,7 @@ public class MasterActivity extends AppCompatActivity {
         ViewGroup container = (ViewGroup)findViewById(R.id.controller_container);
 
         try {
-            TerminaNetwork.getInstance().requestCopy();
+            TerminaNetwork.getInstance().requestOptionDetails();
         } catch (Exception e) {
             e.printStackTrace();
         }

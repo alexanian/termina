@@ -1,11 +1,9 @@
 package org.sfsi.termina;
 
-import android.util.Log;
-
 import com.bluelinelabs.logansquare.LoganSquare;
 
 import org.sfsi.termina.models.AgeWarning;
-import org.sfsi.termina.models.CopyResponse;
+import org.sfsi.termina.models.OptionDetailsResponse;
 import org.sfsi.termina.models.Option;
 import org.sfsi.termina.models.OptionsResponse;
 
@@ -25,10 +23,10 @@ public class TerminaNetwork {
     private final String mUrl = "https://tranquil-retreat-70199.herokuapp.com";
 
     private OptionsResponse mOptionsResponse;
-    private CopyResponse mCopyResponse;
-    private int mDays;
-    private String mState;
-    private int mAge;
+    private OptionDetailsResponse mOptionDetailsResponse;
+    public int mDays;
+    public String mState;
+    public int mAge;
 
     public static synchronized TerminaNetwork getInstance() {
         if (sTerminaNetwork == null) {
@@ -69,7 +67,7 @@ public class TerminaNetwork {
         });
     }
 
-    public void requestCopy() throws Exception {
+    public void requestOptionDetails() throws Exception {
         Request request = new Request.Builder()
                 .url(mUrl + "/options/copy")
                 .build();
@@ -88,13 +86,17 @@ public class TerminaNetwork {
                 }
                 String responseString = response.body().string();
                 System.out.println(responseString);
-                mCopyResponse = LoganSquare.parse(responseString, CopyResponse.class);
+                mOptionDetailsResponse = LoganSquare.parse(responseString, OptionDetailsResponse.class);
             }
         });
     }
 
     public ArrayList<Option> getOptions() {
         return mOptionsResponse.options;
+    }
+
+    public OptionDetailsResponse getOptionDetailsResponse() {
+        return mOptionDetailsResponse;
     }
 
     public AgeWarning getAgeWarning() {

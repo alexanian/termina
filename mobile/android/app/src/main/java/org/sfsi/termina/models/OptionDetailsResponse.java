@@ -8,7 +8,7 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
  */
 
 @JsonObject
-public class CopyResponse {
+public class OptionDetailsResponse {
     @JsonField
     public OptionDetails medication;
 

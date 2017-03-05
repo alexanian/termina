@@ -59,6 +59,7 @@ public class InputView extends ScrollView implements AdapterView.OnItemSelectedL
                 R.array.input_states_array, android.R.layout.simple_spinner_item);
         view.mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(view.mAdapter);
+        spinner.setOnItemSelectedListener(view);
 
         return view;
     }

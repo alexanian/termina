@@ -5,12 +5,15 @@ import android.support.percent.PercentRelativeLayout;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.sfsi.termina.R;
+import org.sfsi.termina.models.OptionDetails;
+import org.sfsi.termina.models.OptionDetailsResponse;
 
 /**
  * Created by Sean on 3/4/17.
@@ -18,7 +21,14 @@ import org.sfsi.termina.R;
 
 @EViewGroup(R.layout.action_card_layout)
 public class ActionCardView extends PercentRelativeLayout {
-    public enum ActionType { MEDICATION, SURGICAL, CONTINUE }
+    public enum ActionType {
+        MEDICATION,
+        SURGICAL,
+        SURGICAL_TRAVEL,
+        LATER_CARE,
+        PARENTHOOD,
+        ADOPTION,
+        CONTINUE }
 
     @ViewById(R.id.tv_title)
     protected TextView mTitleTextView;
@@ -44,17 +54,76 @@ public class ActionCardView extends PercentRelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public class Builder {
+    public static class Builder {
+        Context mContext;
+
         ActionType mActionType;
         String mTitle;
         String mBody;
         String mExpDate;
+        String mCost;
+        String mCommon;
+        String mInfoLink;
         boolean mIsAvailable = true;
         boolean mDoesExpire = false;
-        int mNumWeeksTilExpire = 0;
+        int mNumWeeksSinceExpired = 0;
 
-        public Builder setTitleStyle(ActionType type) {
-            mActionType = type;
+        public Builder(Context context) {
+            mContext = context;
+        }
+
+        public Builder setActionType(String type, OptionDetailsResponse optionDetailsResponse) {
+            switch (type) {
+                case "medication":
+                    mActionType = ActionType.MEDICATION;
+                    mTitle = optionDetailsResponse.medication.type;
+                    mBody = optionDetailsResponse.medication.description;
+                    mCost = optionDetailsResponse.medication.cost;
+                    mCommon = optionDetailsResponse.medication.common;
+                    mInfoLink = optionDetailsResponse.medication.info_link;
+                    break;
+                case "surgical":
+                    mActionType = ActionType.SURGICAL;
+                    mTitle = optionDetailsResponse.surgical.type;
+                    mBody = optionDetailsResponse.surgical.description;
+                    mCost = optionDetailsResponse.surgical.cost;
+                    mCommon = optionDetailsResponse.surgical.common;
+                    mInfoLink = optionDetailsResponse.surgical.info_link;
+                    break;
+                case "surgical_travel":
+                    mActionType = ActionType.SURGICAL_TRAVEL;
+                    mTitle = optionDetailsResponse.surgical_travel.type;
+                    mBody = optionDetailsResponse.surgical_travel.description;
+                    mCost = optionDetailsResponse.surgical_travel.cost;
+                    mCommon = optionDetailsResponse.surgical_travel.common;
+                    mInfoLink = optionDetailsResponse.surgical_travel.info_link;
+                    break;
+                case "later_care":
+                    mActionType = ActionType.LATER_CARE;
+                    mTitle = optionDetailsResponse.later_care.type;
+                    mBody = optionDetailsResponse.later_care.description;
+                    mCost = optionDetailsResponse.later_care.cost;
+                    mCommon = optionDetailsResponse.later_care.common;
+                    mInfoLink = optionDetailsResponse.later_care.info_link;
+                    break;
+                case "parenthood":
+                    mActionType = ActionType.PARENTHOOD;
+                    mTitle = optionDetailsResponse.parenthood.type;
+                    mBody = optionDetailsResponse.parenthood.description;
+                    mCost = optionDetailsResponse.parenthood.cost;
+                    mCommon = optionDetailsResponse.parenthood.common;
+                    mInfoLink = optionDetailsResponse.parenthood.info_link;
+                    break;
+                case "adoption":
+                    mActionType = ActionType.ADOPTION;
+                    mTitle = optionDetailsResponse.adoption.type;
+                    mBody = optionDetailsResponse.adoption.description;
+                    mCost = optionDetailsResponse.adoption.cost;
+                    mCommon = optionDetailsResponse.adoption.common;
+                    mInfoLink = optionDetailsResponse.adoption.info_link;
+                    break;
+
+            }
             return this;
         }
 
@@ -83,59 +152,76 @@ public class ActionCardView extends PercentRelativeLayout {
             return this;
         }
 
-        public Builder setNumWeeksTilExpire(int numWeeksTilExpire) {
-            mNumWeeksTilExpire = numWeeksTilExpire;
+        public Builder setNumWeeksSinceExpired(int numWeeksSinceExpired) {
+            mNumWeeksSinceExpired = numWeeksSinceExpired;
             return this;
         }
 
-        public void build() {
+        public ActionCardView build() {
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            final ActionCardView_ view = (ActionCardView_) inflater.inflate(R.layout.action_card_item, null, false);
+
             if (mActionType != null) {
                 switch (mActionType) {
                     case MEDICATION:
-                        mTitleTextView.setTextColor(getResources().getColor(R.color.med_green));
+                        view.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.med_green));
                         break;
                     case SURGICAL:
-                        mTitleTextView.setTextColor(getResources().getColor(R.color.sur_blue));
+                        view.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.sur_blue));
                         break;
                     case CONTINUE:
-                        mTitleTextView.setTextColor(getResources().getColor(R.color.con_orange));
+                        view.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.con_orange));
                         break;
                 }
             }
 
             if (!TextUtils.isEmpty(mTitle)) {
-                mTitleTextView.setText(mTitle);
+                view.mTitleTextView.setText(mTitle);
             }
 
-            if (!mIsAvailable && mNumWeeksTilExpire > 0) {
-                mSubtitleTextView.setText(getResources().getString(R.string.action_card_subtitle_not_available_from, mNumWeeksTilExpire));
+            if (!mIsAvailable && mNumWeeksSinceExpired > 0) {
+                view.setBackgroundResource(R.drawable.card_rectangle_red);
+                view.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
+                view.mSubtitleTextView.setTextColor(mContext.getResources().getColor(R.color.red));
+                view.mSubtitleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icn_error_red, 0, 0, 0);
+                view.mSubtitleTextView.setCompoundDrawablePadding((int) mContext.getResources().getDimension(R.dimen.margin_4));
+                view.mSubtitleTextView.setText(mContext.getResources().getString(R.string.action_card_subtitle_not_available_from, mNumWeeksSinceExpired));
+            } else {
+                view.mSubtitleTextView.setVisibility(View.GONE);
             }
 
-            if (mDoesExpire && TextUtils.isEmpty(mExpDate)) {
-                mSubtitleTextView.setText(getResources().getString(R.string.action_card_subtitle_available_until, mExpDate));
-            }
+//            if (mDoesExpire && TextUtils.isEmpty(mExpDate)) {
+//                view.mSubtitleTextView.setVisibility(View.VISIBLE);
+//                view.mSubtitleTextView.setText(mContext.getResources().getString(R.string.action_card_subtitle_available_until, mExpDate));
+//            } else {
+//                view.mSubtitleTextView.setVisibility(View.GONE);
+//            }
 
             if (!TextUtils.isEmpty(mBody)) {
-                mBodyTextView.setText(mBody);
+                view.mBodyTextView.setText(mBody);
             }
 
-            final ViewTreeObserver vto = mBodyTextView.getViewTreeObserver();
+            final ViewTreeObserver vto = view.mBodyTextView.getViewTreeObserver();
             vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    Layout layout = mBodyTextView.getLayout();
+                    Layout layout = view.mBodyTextView.getLayout();
                     if (layout!=null) {
                         int lines = layout.getLineCount();
                         if (lines > 0) {
                             if (layout.getEllipsisCount(lines - 1) > 0) {
-                                mLearnMoreTextView.setVisibility(View.VISIBLE);
+                                view.mLearnMoreTextView.setVisibility(View.VISIBLE);
                             }
                         }
                     }
 
-                    vto.removeOnGlobalLayoutListener(this);
+                    if (vto.isAlive()) {
+                        vto.removeOnGlobalLayoutListener(this);
+                    }
                 }
             });
+
+            return view;
         }
     }
 
