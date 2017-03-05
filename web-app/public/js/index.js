@@ -88,7 +88,7 @@
     return [
       "<div class='panel panel-default'>",
       "<div class='panel-body'>",
-      "<h2>", "<i class='fa fa-" + optionIcon + "'></i> ", _getReadableType(copy.type), "</h2>",
+      "<h3>", "<i class='fa fa-" + optionIcon + "'></i> ", _getReadableType(copy.type), "</h3>",
       ageAlert,
       copy.description,
       learnMoreToggle,
@@ -103,7 +103,7 @@
     if (daysSince > daysInFirstTrimester) return "";
 
     var endOfTrimesterDate = new Date();
-    endOfTrimesterDate.setDate(date.getDate() + daysInFirstTrimester);
+    endOfTrimesterDate.setDate((date.getDate() - daysSince) + daysInFirstTrimester);
 
     return [
       "<div id='first-trimester-warning'>",
@@ -135,7 +135,7 @@
     }
     $("#js-available-options-display, #js-unavailable-options-display").empty()
     var pluralizedCopy = (unavailableElements.length > 1)? "these options are" : "this option is"
-    var splitText = "<h1><div>Based on your information, " + pluralizedCopy + " not available:</div></h1>";
+    var splitText = "<h2><div>Based on your information, " + pluralizedCopy + " not available:</div></h2>";
     $("#js-available-options-display").append(availableElements);
     if(unavailableElements.length > 0)
       $("#js-unavailable-options-display").append(splitText).append(unavailableElements);
