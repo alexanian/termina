@@ -27,6 +27,17 @@
         Links to educational content not created by SFSI are taken at your own risk. SFSI is not
         responsible for the claims of external websites and education companies.</string>
 
+    <!-- Input -->
+    <string name="input_header">Pregnancy Options</string>
+    <string name="input_description">To give you the most accurate information, tell us a bit about yourself. Your information is always secure and never saved.</string>
+    <string name="input_period_question">When was the first day of your last period?</string>
+    <string name="input_period_details">If you\'re not sure, you can select a range of possible days, up to one week.</string>
+    <string name="input_state_question">Where do you live?</string>
+    <string name="input_state_details">Laws vary by state.</string>
+    <string name="input_age_question">How old are you?</string>
+    <string name="input_age_details">Your age can determine what options are available.</string>
+    <string name="input_show_options">Show My Options</string>
+
     <!-- Action Cards -->
     <string name="action_card_subtitle_available_until" context="%1 - Put date in String">Available until approx. %1$s</string>
     <string name="action_card_subtitle_not_available_from" context="%1 - Put number of weeks in int">This is not available after %1$d weeks.</string>

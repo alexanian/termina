@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
@@ -21,7 +23,7 @@ import java.util.Calendar;
  */
 
 @EViewGroup(R.layout.input_view)
-public class InputView extends FrameLayout {
+public class InputView extends ScrollView {
     /* package */ InputController mController;
 
     @ViewById(R.id.last_period_edit_text)

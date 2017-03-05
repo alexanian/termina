@@ -1,26 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-    <EditText
-        android:id="@+id/last_period_edit_text"
-        android:layout_width="wrap_content"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select a date range"
-        android:focusable="false"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/age_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Age"/>
+        <TextView
+            android:id="@+id/input_header"
+            style="@style/Termina.Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_header"/>
 
-    <EditText
-        android:id="@+id/state_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="State"/>
+        <TextView
+            android:id="@+id/input_description"
+            style="@style/Termina.Text.Contextual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_description"/>
 
+        <TextView
+            android:id="@+id/input_period_question"
+            style="@style/Termina.Text.Question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_period_question"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/input_period_details"
+            style="@style/Termina.Text.Contextual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_period_details"/>
+
+        <EditText
+            android:id="@+id/last_period_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:hint="Select a date range"/>
+
+        <TextView
+            android:id="@+id/input_state_question"
+            style="@style/Termina.Text.Question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_state_question"/>
+
+        <TextView
+            android:id="@+id/input_state_details"
+            style="@style/Termina.Text.Contextual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_state_details"/>
+
+        <EditText
+            android:id="@+id/state_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="State"/>
+
+        <TextView
+            android:id="@+id/input_age_question"
+            style="@style/Termina.Text.Question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_age_question"/>
+
+        <TextView
+            android:id="@+id/input_age_details"
+            style="@style/Termina.Text.Contextual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_age_details"/>
+
+        <EditText
+            android:id="@+id/age_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Age"/>
+    </LinearLayout>
+</ScrollView>
