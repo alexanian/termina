@@ -28,28 +28,31 @@ function _createOptionAlertElement(warning) {
 
 function _createRestrictionAlertElement(warning)
 {
-    if (!warning) return ""; 
-    
+    if (!warning) return "";
+
     return _createAlertElement([
         "<h3>Restrictions</h3>",
         warning.display_text
     ].join(""));
 }
 
-function _createOptionElement(option, copy, warning) {
+function _createOptionElement(option, copy, warning, id) {
     var financialInfo = "";
-    if(copy.cost.length > 0)
+    if(copy.cost && copy.cost.length > 0)
       financialInfo = "<h3>Financial Information</h3>" + copy.cost;
+    var hiddenSection = "<div class='hiddenSection" + id + " hidden'>" + "<br/><br/>" +
+                _createRestrictionAlertElement(warning) +
+                financialInfo + "<h3>Resources</h3>" + copy.info_link + "</div>";
+
+    var learnMoreToggle = "<a href='#' class='expandOption'  data-target='.hiddenSection"+id+"'> Learn more...</a>";
     return [
         "<div class='panel panel-default'>",
             "<div class='panel-body'>",
                 "<h2>", _getReadableType(copy.type), "</h2>",
                 _createOptionAlertElement(warning),
-                copy.description, "<br/><br/>",
-                _createRestrictionAlertElement(warning),
-                financialInfo,
-                "<h3>Resources</h3>",
-                copy.info_link,
+                copy.description,
+                learnMoreToggle,
+                hiddenSection,
             "</div>",
         "</div>"
     ].join("");
@@ -61,7 +64,7 @@ function updateOptions(options, warning, optionsCopy) {
     for (var i = 0; i < options.length; i++) {
       if(options[i].available)
         availableElements.push(_createOptionElement(options[i],
-              optionsCopy[options[i]['type']], warning));
+              optionsCopy[options[i]['type']], warning, i));
       else
         unavailableElements.push(_createOptionElement(options[i],
               optionsCopy[options[i]['type']], warning));
@@ -87,7 +90,13 @@ function updateOptions(options, warning, optionsCopy) {
 
     $.getJSON("http://localhost:3000/options?", data)
     .then(function(response) {
-        updateOptions(response.options, response.age_warning, optionsCopy);
+      updateOptions(response.options, response.age_warning, optionsCopy);
+      $('.expandOption').on('click', function(e){
+        e.preventDefault();
+        $(e.target).hide();
+        var hiddenSection = $(e.target).data('target');
+        $(hiddenSection).toggleClass('hidden');
+      });
     });
 
     $(e.target).text("Refresh My Options");
