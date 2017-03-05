@@ -55,7 +55,7 @@ function _createOptionElement(option, copy, warning, id) {
     var financialInfo = "";
     if(copy.cost && copy.cost.length > 0)
       financialInfo = "<h3>Financial Information</h3>" + copy.cost;
-    var hiddenSection = "<div class='hiddenSection" + id + " hidden'>" + "<br/><br/>" +
+    var hiddenSection = "<div class='hidden-section hiddenSection" + id + " hidden'>" +
                 _createRestrictionAlertElement(warning) +
                 financialInfo + "<h3>Resources</h3>" + copy.info_link + "</div>";
 
