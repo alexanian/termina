@@ -131,7 +131,7 @@ function showOptions(optionsCopy) {
 
   var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
   data += "&days_since=" + daysSince;
-  $.getJSON("http://localhost:3000/options?", data)
+  $.getJSON("/options?", data)
   .then(function(response) {
       updateFirstTrimesterWarning(date, daysSince);
       updateOptions(response.options, response.age_warning, optionsCopy);
