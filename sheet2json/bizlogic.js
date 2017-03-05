@@ -5,8 +5,10 @@ var optionIsAvailable = function(option, userState, userDaysSince) {
 }
 
 var filterAvailableOptions = function(baseOptions, userState, userDaysSince) {
-	var allTypes = baseOptions.map(function(x) { return x.type});
+	var allTypes = baseOptions.map(function(x) { return x.type });
 	var optionsToReturn = [];
+
+	// For every set of rules, return 1 set of option data, and whether it's available or not.
 	allTypes.forEach(function(type) {
 		var optionsForType = baseOptions.filter(function(option) { return option.type == type});
 		var availableOptions = optionsForType.filter(function(option) { return optionIsAvailable(option, userState, userDaysSince)});
