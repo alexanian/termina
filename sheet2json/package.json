@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "start": "node server.js",
   "author": "p@pstehlik.com",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.15.0",
     "fbgraph": "^1.4.1",
     "google-auth-library": "^0.10.0",
     "googleapis": "^16.1.0"
