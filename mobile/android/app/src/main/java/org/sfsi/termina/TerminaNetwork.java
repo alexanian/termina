@@ -22,6 +22,8 @@ public class TerminaNetwork {
     private static TerminaNetwork sTerminaNetwork;
     private final OkHttpClient mClient;
 
+    private ArrayList<Option> mOptions;
+
     public static synchronized TerminaNetwork getInstance() {
         if (sTerminaNetwork == null) {
             sTerminaNetwork = new TerminaNetwork();
@@ -52,8 +54,12 @@ public class TerminaNetwork {
                 }
                 String responseString = response.body().string();
                 System.out.println(responseString);
-                ArrayList<Option> options = (ArrayList<Option>) LoganSquare.parseList(responseString, Option.class);
+                mOptions = (ArrayList<Option>) LoganSquare.parseList(responseString, Option.class);
             }
         });
+    }
+
+    public ArrayList<Option> getOptions() {
+        return mOptions;
     }
 }

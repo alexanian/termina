@@ -10,7 +10,6 @@ import com.bluelinelabs.conductor.RouterTransaction;
 
 public class MasterActivity extends AppCompatActivity {
     private Router router;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

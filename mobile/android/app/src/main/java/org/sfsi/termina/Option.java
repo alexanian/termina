@@ -20,4 +20,9 @@ public class Option {
 
     @JsonField
     public boolean available;
+
+    @Override
+    public String toString() {
+        return "type: " + type + ", min: " + min + ", max: " + max + ", available: " + available;
+    }
 }
