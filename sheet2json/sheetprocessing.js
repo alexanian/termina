@@ -100,7 +100,7 @@ function _pullAndStoreProcedureOptions() {
                 return singleOption;  
               }
           );
-          globalData.options = optionsList;
+          globalData.options = result;
           console.log("Pulled this many procedure options:" + globalData.options);
       })
 }
