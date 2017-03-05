@@ -39,7 +39,7 @@ dependencies {
 
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
 
-    //intro
+    // intro
     compile 'agency.tango.android:material-intro-screen:0.0.5'
 
     // Conductor UI Framework
