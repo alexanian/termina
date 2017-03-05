@@ -2,9 +2,11 @@ package org.sfsi.termina.customviews;
 
 import android.content.Context;
 import android.support.percent.PercentRelativeLayout;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -16,6 +18,8 @@ import org.sfsi.termina.R;
 
 @EViewGroup(R.layout.action_card_layout)
 public class ActionCardView extends PercentRelativeLayout {
+    public enum ActionType { MEDICATION, SURGICAL, CONTINUE }
+
     @ViewById(R.id.tv_title)
     protected TextView mTitleTextView;
 
@@ -41,6 +45,7 @@ public class ActionCardView extends PercentRelativeLayout {
     }
 
     public class Builder {
+        ActionType mActionType;
         String mTitle;
         String mBody;
         String mExpDate;
@@ -48,7 +53,12 @@ public class ActionCardView extends PercentRelativeLayout {
         boolean mDoesExpire = false;
         int mNumWeeksTilExpire = 0;
 
-        public Builder setTitle(String title){
+        public Builder setTitleStyle(ActionType type) {
+            mActionType = type;
+            return this;
+        }
+
+        public Builder setTitle(String title) {
             mTitle = title;
             return this;
         }
@@ -79,6 +89,20 @@ public class ActionCardView extends PercentRelativeLayout {
         }
 
         public void build() {
+            if (mActionType != null) {
+                switch (mActionType) {
+                    case MEDICATION:
+                        mTitleTextView.setTextColor(getResources().getColor(R.color.med_green));
+                        break;
+                    case SURGICAL:
+                        mTitleTextView.setTextColor(getResources().getColor(R.color.sur_blue));
+                        break;
+                    case CONTINUE:
+                        mTitleTextView.setTextColor(getResources().getColor(R.color.con_orange));
+                        break;
+                }
+            }
+
             if (!TextUtils.isEmpty(mTitle)) {
                 mTitleTextView.setText(mTitle);
             }
@@ -95,9 +119,23 @@ public class ActionCardView extends PercentRelativeLayout {
                 mBodyTextView.setText(mBody);
             }
 
-            if (mBodyTextView.getLineCount() > 4) {
-                mLearnMoreTextView.setVisibility(View.VISIBLE);
-            }
+            final ViewTreeObserver vto = mBodyTextView.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    Layout layout = mBodyTextView.getLayout();
+                    if (layout!=null) {
+                        int lines = layout.getLineCount();
+                        if (lines > 0) {
+                            if (layout.getEllipsisCount(lines - 1) > 0) {
+                                mLearnMoreTextView.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+
+                    vto.removeOnGlobalLayoutListener(this);
+                }
+            });
         }
     }
 
