@@ -1,7 +1,7 @@
 (function($) {
 function startForm() {
     $("html, body").animate({
-        scrollTop: $("#js-page-form").offset().top
+        scrollTop: $("#js-section-options-form").offset().top
     });
 }
 
@@ -18,7 +18,7 @@ function showOptions(e) {
 
 function init() {
     $("#js-start").click(startForm);
-    $("#js-form").submit(showOptions);
+    $("#js-options-form").submit(showOptions);
 
     $('.input-daterange').each(function() {
       $(this).datepicker('setStartDate', '01/01/2017');
