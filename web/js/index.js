@@ -32,7 +32,7 @@ function _createOptionElement(option, copy) {
     ].join("");
 }
 
-function updateOptions(options, optionsCopy) {
+function updateOptions(options, warning, optionsCopy) {
     var optionElements = [];
     console.log(optionsCopy);
     for (var i = 0; i < options.length; i++) {
@@ -59,7 +59,7 @@ function updateOptions(options, optionsCopy) {
 
     $.getJSON("http://localhost:3000/options?", data)
     .then(function(response) {
-        updateOptions(response, optionsCopy);
+        updateOptions(response.options, response.age_warning, optionsCopy);
     });
 
     $("#js-section-options-display").show();
