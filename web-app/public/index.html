@@ -253,7 +253,12 @@
                       <div class="form-group">
                         <label for="age">How old are you?</label>
                         <span class="help-block" id="help-age">Your age may determine if you need parental consent for an abortion.</span>
-                        <input type="number" id="age" name="age" aria-describedby="help-age" />
+                        <select name="age" id="age" aria-describedby="help-age">
+                            <option selected value="18">18 &amp; over</option>
+                            <option value="17">17</option>
+                            <option value="16">16</option>
+                            <option value="15">15 &amp; under</option>
+                        </select>
                       </div>
                   </div>
 
