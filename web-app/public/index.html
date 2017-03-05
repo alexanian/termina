@@ -109,10 +109,12 @@
             <div class="form-group">
               <label for="last-period-date">When was the first day of your last period?</label>
               <span class="help-block" id="help-last-period-date">If you're not sure, you can select a range of possible days, up to one week.</span>
-              <div class="input-group input-daterange">
-                <input type="text" id="start-date" class="form-control">
-                <div class="input-group-addon">to</div>
-                <input type="text" id="end-date" class="form-control">
+
+              <div class="input-group date" data-provide="datepicker">
+                <input type="text" id="date" class="form-control">
+                <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-th"></span>
+                </div>
               </div>
             </div>
 

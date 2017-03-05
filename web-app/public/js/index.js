@@ -45,18 +45,15 @@ function updateOptions(options, warning, optionsCopy) {
   function showOptions(e) {
     e.preventDefault();
     var data = $('form').serialize();
-    var startDate = $('#start-date').datepicker('getDate');
-    var endDate = $('#end-date').datepicker('getDate');
+    var date = $('#date').datepicker('getDate');
     var oneDay = 24*60*60*1000;
     var today = new Date();
 
-    //Keeping the max around just in case
-    var min = Math.round(Math.abs((today.getTime() - endDate.getTime())/(oneDay)));
-    var max = Math.round(Math.abs((today.getTime() - startDate.getTime())/(oneDay)));
+    var daysSince = Math.round(Math.abs((today.getTime() - date.getTime())/(oneDay)));
 
     var optionsCopy = e.data;
 
-    data += "&days_since=" + min;
+    data += "&days_since=" + daysSince;
 
     $.getJSON("http://localhost:3000/options?", data)
     .then(function(response) {
@@ -77,10 +74,12 @@ function init() {
 
     $("#js-start").click(startForm);
 
-    $('.input-daterange').each(function() {
-      $(this).datepicker({startDate: '-2m', endDate: '+0d'});
-      $(this).datepicker('setStartDate', '01/01/2017');
-      $(this).datepicker('clearDates');
+    $('.input-group').datepicker({
+      format: 'mm/dd/yyyy',
+      autclose: 'true',
+      endDate: '+0d'
+    }).on('change', function(){
+      $('.datepicker').hide();
     });
 }
 
