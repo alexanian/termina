@@ -16,6 +16,12 @@ app.get('/options', function(req, res) {
 
 	// Parse Query
 	var baseOptions = globalData.options;
+<<<<<<< Updated upstream
+=======
+  var parentalRules = globalData.parentalConsentRules;
+	console.log('global data');
+	console.log(baseOptions)
+>>>>>>> Stashed changes
 	var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
 	var userAge = parseInt(query.age);
@@ -24,10 +30,10 @@ app.get('/options', function(req, res) {
 
 	// Array of options to return to the user
 	var optionsToReturn = bizLogic.filterAvailableOptions(baseOptions, userState, userDaysSince);
-	// var ageWarnings = bizLogic.filterAgeWarnings(bizLogic.ageWarnings, userState, userAge);
+	var parentalRule = bizLogic.filterParentalRules(parentalRules, userState, userAge);
 	res.send({
 		'options': optionsToReturn,
-		// 'ageWarnings': ageWarnings
+		'age_warning': parentalRule
 	});
 })
 

@@ -39,13 +39,14 @@ var filterAvailableOptions = function(baseOptions, userState, userDaysSince) {
 	return optionsToReturn;
 }
 
-var filterAgeWarnings = function(ageWarnings, userState, userAge) {
-	console.log("AGE WARNINGS")
-	console.log(ageWarnings[0])
-	return [];
+var filterParentalRules = function(parentalRules, userState, userAge) {
+  var rule = parentalRules.find(function(element) {
+    return element.state == userState && userAge <= element.up_to_age;
+  });
+  return rule ? rule.display_text : null;
 }
 
 module.exports = {
 	'filterAvailableOptions': filterAvailableOptions,
-	'filterAgeWarnings': filterAgeWarnings
+	'filterParentalRules': filterParentalRules
 }
