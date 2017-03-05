@@ -21,6 +21,9 @@ public class TerminaNetwork {
     private final OkHttpClient mClient;
 
     private OptionsResponse mOptionsResponse;
+    private int mDays;
+    private String mState;
+    private int mAge;
 
     public static synchronized TerminaNetwork getInstance() {
         if (sTerminaNetwork == null) {
@@ -33,9 +36,12 @@ public class TerminaNetwork {
         mClient = new OkHttpClient();
     }
 
-    public void run() throws Exception {
+    public void requestOptions(int days, String state, int age, final Runnable callback) throws Exception {
+        mDays = days;
+        mState = state;
+        mAge = age;
         Request request = new Request.Builder()
-                .url("https://peaceful-peak-13670.herokuapp.com/options?age=14&state=AL&days_since=20")
+                .url("https://peaceful-peak-13670.herokuapp.com/options?age=" + age + "&state=" + state + "&days_since=" + days)
                 .build();
 
         mClient.newCall(request).enqueue(new Callback() {
@@ -53,6 +59,7 @@ public class TerminaNetwork {
                 String responseString = response.body().string();
                 System.out.println(responseString);
                 mOptionsResponse = LoganSquare.parse(responseString, OptionsResponse.class);
+                callback.run();
             }
         });
     }

@@ -25,12 +25,6 @@ public class InputController extends Controller implements DatePickerDialog.OnDa
     @Override
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         mInputView = InputView.newInstance(getActivity(), this);
-
-        try {
-            TerminaNetwork.getInstance().run();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return mInputView;
     }
 

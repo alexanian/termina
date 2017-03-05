@@ -17,6 +17,7 @@ import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.Calendar;
@@ -62,7 +63,23 @@ public class InputView extends ScrollView implements AdapterView.OnItemSelectedL
 
     @Click(R.id.fab_next)
     protected void nextButtonClicked() {
-        mController.getRouter().pushController(RouterTransaction.with(new ActionCardController()));
+        Runnable callback = new Runnable() {
+            @Override
+            public void run() {
+                // TODO: Check if attached
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mController.getRouter().pushController(RouterTransaction.with(new ActionCardController()));
+                    }
+                });
+            }
+        };
+        try {
+            TerminaNetwork.getInstance().requestOptions(mController.mDaysSince, mController.mState, Integer.parseInt(mAgeEditText.getText().toString()), callback);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Click(R.id.last_period_edit_text)
