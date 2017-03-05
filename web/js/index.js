@@ -33,6 +33,7 @@ function _createOptionElement(option) {
 
 function updateOptions(options) {
     var optionElements = [];
+    console.log(options);
     for (var i = 0; i < options.length; i++) {
         optionElements.push(_createOptionElement(options[i]));
     }
@@ -46,6 +47,7 @@ function showOptions(e) {
     {
         data: data
     }).then(function(response) {
+        updateOptions(response.options);
         console.log("response")
     });
 
