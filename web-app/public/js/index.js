@@ -92,7 +92,10 @@ function updateOptions(options, warning, optionsCopy) {
     scrollTo("#js-section-options-display");
   }
 
-var NUM_EXPECTED_FIELDS = 3;
+function showNextField(e) {
+    $(e.target).closest(".options-form__item").next().removeClass('options-form__item--initial');
+}
+
 function init() {
     var optionsCopy;
     var optionsCopy = $.getJSON("http://localhost:3000/options/copy").then(function(response) {
@@ -101,27 +104,16 @@ function init() {
 
     $("#js-start").click(startForm);
 
-    $(".options-form select, .options-form input").on("change", function () {
-        var count = 0;
-        if ($('#date').datepicker('getDate')) {
-            count += 1;
-        }
+    $(".options-form__item:not(:first-child)").addClass('options-form__item--initial');
 
-        var elements = $("form").serializeArray();
-        for (var i = 0; i < elements.length; i++) {
-            if (elements[i].value) {
-                count+=1;
-            }
-        }
-
-        $("#js-show-options").attr("disabled", count !== NUM_EXPECTED_FIELDS);
-    });
+    $(".options-form select, .options-form input")
+        .on("change", showNextField);
 
     $('.input-group').datepicker({
       format: 'mm/dd/yyyy',
       autclose: 'true',
       endDate: '+0d'
-    }).on('change', function(){
+    }).on('change', function(e){
       $('.datepicker').hide();
     });
 }
