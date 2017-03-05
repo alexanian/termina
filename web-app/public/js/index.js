@@ -69,7 +69,8 @@ function updateOptions(options, warning, optionsCopy) {
     var pluralizedCopy = (unavailableElements.length > 1)? "these options are" : "this option is"
     var splitText = "<h1><div>Based on your information, " + pluralizedCopy + " not available</div></h1>";
     $("#js-available-options-display").empty().append(availableElements);
-    $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
+    if(unavailableElements.length > 0)
+      $("#js-unavailable-options-display").empty().append(splitText).append(unavailableElements);
 }
 
   function showOptions(e) {
