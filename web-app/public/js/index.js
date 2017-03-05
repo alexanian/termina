@@ -200,7 +200,7 @@ function init() {
       $('.datepicker').hide();
     });
 
-    var optionsCopy = $.getJSON("http://localhost:3000/options/copy").then(function(response) {
+    var optionsCopy = $.getJSON("/options/copy").then(function(response) {
         initFormFromURL();
         if ($('form').serializeArray().length === 2 && $("#date").datepicker('getDate')) {
             showOptions(response);
