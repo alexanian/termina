@@ -1,4 +1,4 @@
-package org.sfsi.termina;
+package org.sfsi.termina.inputs;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,8 +17,11 @@ import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.sfsi.termina.options.ActionCardController;
+import org.sfsi.termina.inputs.InputView_;
+import org.sfsi.termina.R;
+import org.sfsi.termina.TerminaNetwork;
 
 import java.util.Calendar;
 

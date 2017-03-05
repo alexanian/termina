@@ -1,4 +1,4 @@
-package org.sfsi.termina;
+package org.sfsi.termina.options;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.bluelinelabs.conductor.Controller;
 
+import org.sfsi.termina.R;
+import org.sfsi.termina.TerminaNetwork;
 import org.sfsi.termina.models.Option;
 
 import java.util.ArrayList;

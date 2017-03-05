@@ -1,4 +1,4 @@
-package org.sfsi.termina;
+package org.sfsi.termina.inputs;
 
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;

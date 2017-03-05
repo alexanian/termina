@@ -8,6 +8,8 @@ import com.bluelinelabs.conductor.Conductor;
 import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.RouterTransaction;
 
+import org.sfsi.termina.inputs.InputController;
+
 public class MasterActivity extends AppCompatActivity {
     private Router router;
     @Override
