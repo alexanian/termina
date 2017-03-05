@@ -19,8 +19,8 @@ var filterAvailableOptions = function(baseOptions, userState, userDaysSince) {
 		}
 		optionsToReturn.push({
 			'type': optionData.type,
-			'min': optionData.min_pregnancy_length,
-			'maxPregnancyLength': optionData.max_pregnancy_length,
+			'min': optionData.min_days_lmp,
+			'max': optionData.max_days_lmp,
 			'available': isAvailable,
 		})
 	});
