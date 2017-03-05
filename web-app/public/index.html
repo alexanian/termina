@@ -66,8 +66,8 @@
 
       .page-link {
         background-color: white;
-        border: 1px solid #333;
-        border-radius: 1em;
+        border: 1px solid #ddd;
+        border-radius: 4px;
         display: inline-block;
         font-size: 1.5rem;
         -webkit-user-select: all; /* Covers Blink-land & Firefox (yup) */
@@ -79,6 +79,31 @@
       .section-options-display {
         background-color: #EDEDED;
       }
+
+      /* Special snowflake case to make options line up. */
+      .options-form__item .help-block {
+        min-height: 40px;
+      }
+
+      @media screen and (max-width: 1300px) {
+        .options-form__item label {
+          min-height: 40px;
+        }
+      }
+
+      @media screen and (max-width: 1300px) {
+        .options-form__item .help-block  {
+          min-height: 60px;
+        }
+      }
+
+      @media screen and (max-width: 769px) {
+        .options-form__item .help-block,
+        .options-form__item label  {
+          min-height: initial;
+        }
+      }
+      /* Special snowflake ends */
 
       @media screen and (min-width: 769px) {
         .section-get-started  {
@@ -423,7 +448,7 @@
         <div id="js-available-options-display"></div>
         <div id="js-unavailable-options-display"></div>
         <div class="row">
-          <div class="col-xs-4 col-xs-offset-4 text-center page-link-container">
+          <div class="col-md-4 col-md-offset-4 text-center page-link-container">
             <h5>Save this link to view your results later</h5>
             <div id="js-page-link" class="page-link"></div>
           </div>
