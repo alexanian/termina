@@ -1,9 +1,9 @@
 (function($) {
-function startForm() {
+  function startForm() {
     $("html, body").animate({
-        scrollTop: $("#js-section-options-form").offset().top
+      scrollTop: $("#js-section-options-form").offset().top
     });
-}
+  }
 
 function _getAvailability(available) {
     if (available) {
@@ -41,15 +41,24 @@ function updateOptions(options, optionsCopy) {
     $("#js-options-display").empty().append(optionElements);
 }
 
-function showOptions(e) {
+  function showOptions(e) {
     e.preventDefault();
     var data = $(e.target).serialize();
+    var startDate = $('#start-date').datepicker('getDate');
+    var endDate = $('#end-date').datepicker('getDate');
+    var oneDay = 24*60*60*1000;
+    var today = new Date();
+
+    //Keeping the max around just in case
+    var min = Math.round(Math.abs((today.getTime() - endDate.getTime())/(oneDay)));
+    var max = Math.round(Math.abs((today.getTime() - startDate.getTime())/(oneDay)));
+
     var optionsCopy = e.data;
 
-    $.getJSON("http://localhost:3000/options",
-    {
-        data: data
-    }).then(function(response) {
+    data += "&days_since=" + min;
+
+    $.getJSON("http://localhost:3000/options?", data)
+    .then(function(response) {
         updateOptions(response.options, optionsCopy);
     });
 
@@ -57,8 +66,7 @@ function showOptions(e) {
     $("html, body").animate({
         scrollTop: $("#js-section-options-display").offset().top - 200
     });
-
-}
+  }
 
 function init() {
     var optionsCopy;
@@ -69,6 +77,7 @@ function init() {
     $("#js-start").click(startForm);
 
     $('.input-daterange').each(function() {
+      $(this).datepicker({startDate: '-2m', endDate: '+0d'});
       $(this).datepicker('setStartDate', '01/01/2017');
       $(this).datepicker('clearDates');
     });
