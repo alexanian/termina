@@ -104,6 +104,9 @@
         .section-options-form {
           min-height: 95vh;
         }
+        .options-form {
+          margin-top: 5vh;
+        }
         .options-form__item--initial {
           display: none;
         }
@@ -173,7 +176,7 @@
 
               <form id="js-options-form">
                   <div class="row">
-                    <div class="col-sm-4 options-form__item">
+                    <div class="col-sm-3 options-form__item">
                       <div class="form-group">
                         <label for="last-period-date">When was the <em>first day</em> of your last period?</label>
                         <span class="help-block" id="help-last-period-date">If you're not sure, make your best guess.</span>
@@ -249,23 +252,26 @@
                       </div>
                     </div>
 
-                    <div class="col-sm-3 options-form__item">
-                      <div class="form-group">
-                        <label for="age">How old are you?</label>
-                        <span class="help-block" id="help-age">Your age may determine if you need parental consent for an abortion.</span>
-                        <select name="age" id="age" aria-describedby="help-age">
-                            <option selected value="18">18 &amp; over</option>
-                            <option value="17">17</option>
-                            <option value="16">16</option>
-                            <option value="15">15 &amp; under</option>
-                        </select>
+                    <div class="col-sm-6 options-form__item">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="age">How old are you?</label>
+                            <span class="help-block" id="help-age">Your age may determine if you need parental consent for an abortion.</span>
+                            <select name="age" id="age" aria-describedby="help-age">
+                                <option selected value="18">18 &amp; over</option>
+                                <option value="17">17</option>
+                                <option value="16">16</option>
+                                <option value="15">15 &amp; under</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="show-options">
+                            <button id="js-show-options" type="button" class="btn btn-primary">Show My Options</button>
+                          </div>
+                        </div>
                       </div>
-                  </div>
-
-                  <div class="col-sm-2 options-form__item">
-                    <div class="show-options">
-                      <button id="js-show-options" type="button" class="btn btn-primary">Show My Options</button>
-                    </div>
                   </div>
                 </div>
               </form>
@@ -280,7 +286,6 @@
         <h1>Here are your options:</h1>
         <div id="js-available-options-display"></div>
         <div id="js-unavailable-options-display"></div>
-        <div id="js-options-display"></div>
       </div>
     </div>
 
