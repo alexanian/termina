@@ -4,17 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-import org.sfsi.termina.InputView_;
 
 import java.util.Calendar;
 
@@ -23,11 +24,15 @@ import java.util.Calendar;
  */
 
 @EViewGroup(R.layout.input_view)
-public class InputView extends ScrollView {
+public class InputView extends ScrollView implements AdapterView.OnItemSelectedListener {
     /* package */ InputController mController;
+    /* package */ ArrayAdapter<CharSequence> mAdapter;
 
     @ViewById(R.id.last_period_edit_text)
     EditText mLastPeriodEditText;
+
+    @ViewById(R.id.age_edit_text)
+    EditText mAgeEditText;
 
     public InputView(Context context) {
         super(context);
@@ -44,6 +49,13 @@ public class InputView extends ScrollView {
     static public InputView newInstance(final Context context, InputController controller) {
         InputView view = InputView_.build(context);
         view.mController = controller;
+
+        Spinner spinner = (Spinner) view.findViewById(R.id.state_input);
+        view.mAdapter = ArrayAdapter.createFromResource(context,
+                R.array.input_states_array, android.R.layout.simple_spinner_item);
+        view.mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(view.mAdapter);
+
         return view;
     }
 
@@ -67,5 +79,15 @@ public class InputView extends ScrollView {
             context = ((ContextWrapper)context).getBaseContext();
         }
         return null;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        mController.mState = mAdapter.getItem(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        // TODO: Error message
     }
 }

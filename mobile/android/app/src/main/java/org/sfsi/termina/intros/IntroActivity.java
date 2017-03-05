@@ -14,7 +14,6 @@ public class IntroActivity extends MaterialIntroActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         addSlide(new FirstIntroFragment());
 
         addSlide(new WeNoDoctorFragment());
