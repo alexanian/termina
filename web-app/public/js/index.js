@@ -52,11 +52,12 @@ function updateOptions(options, warning, optionsCopy) {
         updateOptions(response.options, response.age_warning, optionsCopy);
     });
 
-    $(e.target).text("Refresh My Options")
+    $(e.target).text("Refresh My Options");
     $("#js-section-options-display").show();
     scrollTo("#js-section-options-display");
   }
 
+var NUM_EXPECTED_FIELDS = 3;
 function init() {
     var optionsCopy;
     var optionsCopy = $.getJSON("http://localhost:3000/options/copy").then(function(response) {
@@ -64,6 +65,22 @@ function init() {
     });
 
     $("#js-start").click(startForm);
+
+    $(".options-form select, .options-form input").on("change", function () {
+        var count = 0;
+        if ($('#date').datepicker('getDate')) {
+            count += 1;
+        }
+
+        var elements = $("form").serializeArray();
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].value) {
+                count+=1;
+            }
+        }
+
+        $("#js-show-options").attr("disabled", count !== NUM_EXPECTED_FIELDS);
+    });
 
     $('.input-group').datepicker({
       format: 'mm/dd/yyyy',
