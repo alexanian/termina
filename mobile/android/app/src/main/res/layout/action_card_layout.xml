@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/margin_12"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="@dimen/margin_12">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/tv_title_layout">
+        <TextView
+            style="@style/Termina.Icon"
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/margin_20" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Termina.Text.Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_20"
+            tools:text="title"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        style="@style/Termina.Text.Contextual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title_layout"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginEnd="@dimen/margin_20"
+        tools:text="Available until approx. Jan 3rd"/>
+
+    <TextView
+        android:id="@+id/tv_body"
+        style="@style/Termina.Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_subtitle"
+        android:maxLines="4"
+        android:ellipsize="end"
+        android:layout_marginTop="12dp"
+        tools:text="supeadsfasdfaoisdfjoiadsjfoiaj asoidfja osdaosjdf oasidf oasjdfaoisdf jaosdf ijaoijdsf oajsdfioajsdfoij aoiejfoiajdf ansdiosdjfa oida asdf
+        aoisdjfo iajsdfaoisda sdfasdffjaoisdfjr long text where it should cut off"/>
+
+    <LinearLayout
+        android:id="@+id/details_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/tv_body">
+        
+        <LinearLayout
+            android:id="@+id/inner_restriction_layout"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/Termina.Text.SubTitle.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_4"
+                android:textColor="@color/red"
+                android:text="@string/action_card_restrictions"
+                android:drawableStart="@drawable/icn_error_red"/>
+
+            <TextView
+                android:id="@+id/tv_restrictions_detail"
+                style="@style/Termina.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_4"
+                android:textColor="@color/red"
+                tools:text="sorry there is a restriction"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inner_financial_layout"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/Termina.Text.Card.SubDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/action_card_financial"
+                />
+
+            <TextView
+                android:id="@+id/tv_financial_detail"
+                style="@style/Termina.Text"
+                android:layout_marginTop="@dimen/margin_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="cost up to $200"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inner_resources_layout"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/Termina.Text.Card.SubDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/action_card_resources"
+                />
+
+            <TextView
+                android:id="@+id/tv_resources_detail"
+                style="@style/Termina.Text"
+                android:layout_marginTop="@dimen/margin_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_learn_more"
+        style="@style/Termina.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/details_layout"
+        android:textColor="@color/colorPrimary"
+        android:visibility="visible"
+        android:text="@string/action_card_learn_more"/>
+
+</android.support.percent.PercentRelativeLayout>

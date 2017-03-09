@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Termina.Text.Heading"
+        app:layout_widthPercent="80%"
+        app:layout_marginLeftPercent="10%"
+        app:layout_marginTopPercent="15%"
+        android:text="@string/first_page_header"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_header"
+        style="@style/Termina.Text.Title"
+        app:layout_widthPercent="80%"
+        app:layout_marginLeftPercent="10%"
+        app:layout_marginTopPercent="10%"
+        android:text="@string/first_page_title"/>
+
+</android.support.percent.PercentRelativeLayout>

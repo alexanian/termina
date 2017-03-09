@@ -5,7 +5,81 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/black</item>
     </style>
 
+    <style name="Termina">
+    </style>
+
+    <style name="Termina.Text">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="Termina.Text.Heading" parent="Termina.Text">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="Termina.Text.Title" parent="Termina.Text">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Termina.Text.Title.Bold" parent="Termina.Text.Title">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Termina.Text.SubTitle" parent="Termina.Text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+    </style>
+
+    <style name="Termina.Text.SubTitle.Bold" parent="Termina.Text.SubTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Termina.Text.Question" parent="Termina.Text">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Termina.Text.Contextual">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+    </style>
+
+    <style name="Termina.Text.Disclaimer" parent="Termina.Text.Title">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Termina.Text.Card" parent="Termina.Text.Title">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Termina.Text.Card.SubDetail" parent="Termina.Text.SubTitle">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Termina.Text.Card.Medication" parent="Termina.Text.Card">
+        <item name="android:textColor">@color/med_green</item>
+    </style>
+
+    <style name="Termina.Text.Card.Surgical" parent="Termina.Text.Card">
+        <item name="android:textColor">@color/sur_blue</item>
+    </style>
+
+    <style name="Termina.Text.Card.Continue" parent="Termina.Text.Card">
+        <item name="android:textColor">@color/con_orange</item>
+    </style>
+
+    <style name="Termina.Icon">
+        <item name="android:textSize">32sp</item>
+        <item name="fontPath">fonts/fontawesome-webfont.ttf</item>
+    </style>
 </resources>
