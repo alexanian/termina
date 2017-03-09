@@ -1,5 +1,6 @@
 module.exports = {
     options: {},
     optionCopy: {},
-    parentalConsentRules: []
+    parentalConsentRules: [],
+    maintanence: true
 };

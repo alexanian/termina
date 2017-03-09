@@ -13,7 +13,7 @@ app.get('/options', function(req, res) {
 
 	// Parse Query
 	var baseOptions = globalData.options;
-  var parentalRules = globalData.parentalConsentRules;
+  	var parentalRules = globalData.parentalConsentRules;
 	console.log('global data');
 	console.log(baseOptions)
 	var url_parts = url.parse(req.url, true);
@@ -38,6 +38,10 @@ app.get('/options/copy', function(req, res) {
 app.get('/parentalConsent', function(req, res) {
   res.send(globalData.parentalConsentRules);
 })
+
+app.get('/maintanence', function(req, res)) {
+	res.send(globalData.status);
+}
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
