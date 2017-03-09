@@ -1,14 +1,12 @@
 package org.sfsi.termina.customviews;
 
 import android.content.Context;
-import android.support.percent.PercentRelativeLayout;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -21,7 +19,7 @@ import org.sfsi.termina.utils.StringUtils;
  */
 
 @EViewGroup(R.layout.action_card_layout)
-public class ActionCardView extends PercentRelativeLayout {
+public class ActionCardView extends RelativeLayout {
     public enum ActionType {
         MEDICATION,
         SURGICAL,
@@ -230,7 +228,7 @@ public class ActionCardView extends PercentRelativeLayout {
             }
 
             if (mActionType == ActionType.MEDICATION && !mIsAvailable && mNumWeeksSinceExpired > 0) {
-                cardView.setBackgroundResource(R.drawable.card_rectangle_red);
+                cardView.getChildAt(0).setBackgroundResource(R.drawable.card_rectangle_red);
                 cardView.mTitleTextView.setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
                 cardView.mSubtitleTextView.setTextColor(mContext.getResources().getColor(R.color.red));
                 cardView.mSubtitleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icn_error_red, 0, 0, 0);

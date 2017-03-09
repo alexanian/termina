@@ -1,14 +1,13 @@
 package org.sfsi.termina.options;
 
 import android.support.annotation.NonNull;
-import android.support.percent.PercentRelativeLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import com.bluelinelabs.conductor.Controller;
 
-import org.androidannotations.annotations.InstanceState;
 import org.sfsi.termina.R;
 import org.sfsi.termina.TerminaNetwork;
 import org.sfsi.termina.customviews.ActionCardView;
@@ -51,9 +50,8 @@ public class OptionsController extends Controller {
                 }
 
                 ActionCardView view = builder.build();
-                view.setLayoutParams(new PercentRelativeLayout.LayoutParams(PercentRelativeLayout.LayoutParams.WRAP_CONTENT, PercentRelativeLayout.LayoutParams.WRAP_CONTENT));
-                ((ViewGroup.MarginLayoutParams) view.getLayoutParams()).topMargin = (int) getResources().getDimension(R.dimen.margin_8);
-                ((ViewGroup.MarginLayoutParams) view.getLayoutParams()).bottomMargin = (int) getResources().getDimension(R.dimen.margin_8);
+                //RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                //layoutParams.setMargins(0, (int) getResources().getDimension(R.dimen.margin_20), 0, (int) getResources().getDimension(R.dimen.margin_20));
 
                 ((ViewGroup) ((ViewGroup) mOptionsView.getChildAt(0)).getChildAt(0)).addView(view); //lol hackathon
             }
