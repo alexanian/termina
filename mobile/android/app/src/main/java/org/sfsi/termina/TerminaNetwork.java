@@ -2,6 +2,7 @@ package org.sfsi.termina;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 
+import org.androidannotations.annotations.InstanceState;
 import org.sfsi.termina.models.AgeWarning;
 import org.sfsi.termina.models.OptionDetailsResponse;
 import org.sfsi.termina.models.Option;
@@ -24,6 +25,7 @@ public class TerminaNetwork {
 
     private OptionsResponse mOptionsResponse;
     private OptionDetailsResponse mOptionDetailsResponse;
+
     public int mDays;
     public String mState;
     public int mAge;
@@ -92,7 +94,11 @@ public class TerminaNetwork {
     }
 
     public ArrayList<Option> getOptions() {
-        return mOptionsResponse.options;
+        if (mOptionsResponse != null) {
+            return mOptionsResponse.options;
+        } else {
+            return null;
+        }
     }
 
     public OptionDetailsResponse getOptionDetailsResponse() {

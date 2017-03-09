@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Termina.Text.Heading"
-        app:layout_widthPercent="55%"
+        app:layout_widthPercent="80%"
         app:layout_marginLeftPercent="10%"
         app:layout_marginTopPercent="15%"
         android:text="@string/first_page_header"/>
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_header"
         style="@style/Termina.Text.Title"
-        app:layout_widthPercent="60%"
+        app:layout_widthPercent="80%"
         app:layout_marginLeftPercent="10%"
         app:layout_marginTopPercent="10%"
         android:text="@string/first_page_title"/>

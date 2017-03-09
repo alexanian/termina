@@ -8,16 +8,13 @@ import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 
 import com.bluelinelabs.conductor.RouterTransaction;
-import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -32,13 +29,13 @@ public class InputView extends ScrollView {
     /* package */ InputController mController;
     /* package */ ArrayAdapter<CharSequence> mAdapter;
 
-    @ViewById(R.id.last_period_edit_text)
-    EditText mLastPeriodEditText;
+    @ViewById(R.id.last_period_button)
+    Button mLastPeriodButton;
 
     @ViewById(R.id.state_input)
     Button mStateButton;
 
-    @ViewById(R.id.age_edit_text)
+    @ViewById(R.id.age_button)
     Button mAgeButton;
 
     @ViewById(R.id.fab_next)
@@ -71,6 +68,7 @@ public class InputView extends ScrollView {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         inputView.mAgeButton.setText(ages[which]);
+                        inputView.mController.mAge = ages[which].toString();
                     }
                 });
                 builder.show();
@@ -119,7 +117,7 @@ public class InputView extends ScrollView {
         }
     }
 
-    @Click(R.id.last_period_edit_text)
+    @Click(R.id.last_period_button)
     protected void lastPeriodInputClicked() {
         DatePickerDialog dpd = DatePickerDialog.newInstance(
                 mController,
@@ -140,11 +138,6 @@ public class InputView extends ScrollView {
             context = ((ContextWrapper)context).getBaseContext();
         }
         return null;
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        // TODO: Error message
     }
 
     private int parseAge(String ageText) {

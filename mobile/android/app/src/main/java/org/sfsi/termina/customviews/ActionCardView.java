@@ -260,10 +260,16 @@ public class ActionCardView extends PercentRelativeLayout {
                         mIsShowingDetails = false;
                         cardView.mDetailsLayout.setVisibility(View.GONE);
                         cardView.mLearnMoreTextView.setText(mContext.getResources().getString(R.string.action_card_learn_more));
+
+                        cardView.mBodyTextView.setMaxLines(4);
+                        cardView.mBodyTextView.setEllipsize(TextUtils.TruncateAt.END);
                     } else {
                         mIsShowingDetails = true;
                         cardView.mDetailsLayout.setVisibility(View.VISIBLE);
                         cardView.mLearnMoreTextView.setText(mContext.getResources().getString(R.string.action_card_learn_less));
+
+                        cardView.mBodyTextView.setMaxLines(Integer.MAX_VALUE);
+                        cardView.mBodyTextView.setEllipsize(null);
 
                         if (mAgeWarningApplies && (mActionType != ActionType.PARENTHOOD && mActionType != ActionType.ADOPTION)) {
                             cardView.mInnerRestrictionLayout.setVisibility(View.VISIBLE);
@@ -274,7 +280,7 @@ public class ActionCardView extends PercentRelativeLayout {
 
                         if (!TextUtils.isEmpty(mCost)) {
                             cardView.mInnerFinancialLayout.setVisibility(View.VISIBLE);
-                            cardView.mFinancialDetailTextView.setText(mCost);
+                            StringUtils.setTextViewHTML(mContext, cardView.mFinancialDetailTextView, mCost);
                         } else {
                             cardView.mInnerFinancialLayout.setVisibility(View.GONE);
                         }

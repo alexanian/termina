@@ -2,15 +2,10 @@ package org.sfsi.termina.options;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.sfsi.termina.R;
-import org.sfsi.termina.inputs.InputController;
-import org.sfsi.termina.inputs.InputView;
-import org.sfsi.termina.inputs.InputView_;
 
 /**
  * Created by Alex Korzec on 3/5/17.

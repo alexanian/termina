@@ -2,7 +2,7 @@
     <string name="app_name">Termina</string>
 
     <!-- Intro -->
-    <string name="first_page_header">Learn your pregnancy options</string>
+    <string name="first_page_header">Discover your pregnancy options</string>
     <string name="first_page_title">We\'re here to help. We\'re a non-profit based in SF called SFSI.</string>
     <string name="we_no_doctor_header">We\'re not medical professionals</string>
     <string name="we_no_doctor_title">Disclaimer</string>
@@ -31,7 +31,7 @@
     <string name="input_header">Pregnancy Options</string>
     <string name="input_description">To give you the most accurate information, tell us a bit about yourself. Your information is always secure and never saved.</string>
     <string name="input_period_question">When was the first day of your last period?</string>
-    <string name="input_period_details">If you\'re not sure, you can select a range of possible days, up to one week.</string>
+    <string name="input_period_details">If you\'re not sure, select the closest day you can best remember.</string>
     <string name="input_state_question">Where do you live?</string>
     <string name="input_state_details">Laws vary by state.</string>
     <string name="input_age_question">How old are you?</string>

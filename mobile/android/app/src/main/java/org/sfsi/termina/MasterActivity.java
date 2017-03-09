@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewGroup;
 
+import android.widget.RelativeLayout;
 import com.bluelinelabs.conductor.Conductor;
 import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.RouterTransaction;
@@ -27,7 +28,7 @@ public class MasterActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_master);
 
-        ViewGroup container = (ViewGroup)findViewById(R.id.controller_container);
+        ViewGroup container = (ViewGroup) findViewById(R.id.controller_container);
 
         try {
             TerminaNetwork.getInstance().requestOptionDetails();
@@ -36,6 +37,7 @@ public class MasterActivity extends AppCompatActivity {
         }
 
         router = Conductor.attachRouter(this, container, savedInstanceState);
+
         if (!router.hasRootController()) {
             router.setRoot(RouterTransaction.with(new InputController()));
         }

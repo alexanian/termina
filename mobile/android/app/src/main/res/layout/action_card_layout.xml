@@ -37,7 +37,7 @@
         style="@style/Termina.Text.Contextual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title"
+        android:layout_below="@+id/tv_title_layout"
         android:gravity="center_vertical"
         android:textColor="@color/colorPrimaryDark"
         android:layout_marginEnd="@dimen/margin_20"
@@ -153,14 +153,5 @@
         android:textColor="@color/colorPrimary"
         android:visibility="visible"
         android:text="@string/action_card_learn_more"/>
-
-    <TextView
-        android:id="@+id/tv_title"
-        style="@style/Termina.Text.Card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="title"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"/>
 
 </android.support.percent.PercentRelativeLayout>
