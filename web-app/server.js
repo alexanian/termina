@@ -39,7 +39,7 @@ app.get('/parentalConsent', function(req, res) {
   res.send(globalData.parentalConsentRules);
 })
 
-app.get('/maintanence', function(req, res)) {
+app.get('/status', function(req, res)) {
 	res.send(globalData.status);
 }
 
