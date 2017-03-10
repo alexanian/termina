@@ -209,7 +209,12 @@
     }
   }
 
-  function init() {
+function init() {
+    var optionsCopy;
+    var optionsCopy = $.getJSON("/options/copy").then(function(response) {
+        $("#js-show-options").click(response, showOptions);
+    });
+
     $("#js-start").click(startForm);
     $("#js-page-link").on("click", "input", function() {
       this.setSelectionRange(0, this.value.length);

@@ -6,6 +6,9 @@ var globalData = require('./globaldata');
 var url = require('url');
 var bizLogic = require('./bizlogic');
 
+// set default port
+app.set('port', process.env.PORT || 3000)
+
 app.use(cors());
 app.use(express.static('public'));
 
@@ -39,10 +42,10 @@ app.get('/parentalConsent', function(req, res) {
   res.send(globalData.parentalConsentRules);
 })
 
-app.get('/status', function(req, res)) {
+app.get('/status', function(req, res) {
 	res.send(globalData.status);
-}
+})
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+app.listen(app.get('port'), function () {
+  console.log('Example app listening on port ' + app.get('port') + '!');
 })
